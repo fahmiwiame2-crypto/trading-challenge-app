@@ -29,6 +29,33 @@ def get_challenge_stats():
         UserChallenge.challenge_status != 'pending'
     ).order_by(desc(UserChallenge.created_at)).all()
     past_challenges = [c.to_dict() for c in past_challenges_db]
+    
+    # If user has NO active challenge, return $0 balance (must pay first)
+    if not active_challenge:
+        return jsonify({
+            "status": "PENDING",
+            "balance": 0,
+            "initial_capital": 0,
+            "equity": 0,
+            "profit": 0, 
+            "profit_percent": 0,
+            "drawdown": 0,
+            "trades": [],
+            "open_positions": [],
+            "win_rate": 0,
+            "best_trade": 0,
+            "avg_trade": 0,
+            "weekly_performance": [],
+            "risk_params": {
+                'max_daily_loss': 5.0,
+                'max_total_loss': 10.0,
+                'profit_target': 10.0
+            },
+            "past_challenges": past_challenges,
+            "active_challenge": None,
+            "needs_payment": True,
+            "message": "Veuillez acheter un challenge pour commencer le trading"
+        })
 
     # 4. Fetch Trades (Closed & Open)
     closed_trades = Trade.query.filter_by(user_id=user.id, status='CLOSED').order_by(desc(Trade.close_timestamp)).all()
