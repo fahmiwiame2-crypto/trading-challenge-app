@@ -858,7 +858,7 @@ const Community = () => {
 
                             {/* Tabs */}
                             <div className="flex space-x-2 mt-4 flex-wrap gap-2">
-                                {['feed', 'strategies', 'experts', 'friends', 'chat', 'groups'].map(tab => (
+                                {['feed', 'strategies', 'experts', 'friends', 'chat', 'groupchat', 'groups'].map(tab => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab)}
@@ -867,7 +867,7 @@ const Community = () => {
                                             : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
                                             }`}
                                     >
-                                        {tab === 'feed' ? '📢 Feed' : tab === 'strategies' ? '📊 Stratégies' : tab === 'experts' ? '🎓 Experts' : tab === 'friends' ? '👥 Amis' : tab === 'chat' ? '💬 Chat Traders' : '👥 Groupes'}
+                                        {tab === 'feed' ? '📢 Feed' : tab === 'strategies' ? '📊 Stratégies' : tab === 'experts' ? '🎓 Experts' : tab === 'friends' ? '👥 Amis' : tab === 'chat' ? '💬 Chat Traders' : tab === 'groupchat' ? '💬 Chat de Groupe' : '👥 Groupes'}
                                     </button>
                                 ))}
                             </div>
@@ -1408,6 +1408,168 @@ const Community = () => {
                                                 )}
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Group Chat Tab */}
+                            {activeTab === 'groupchat' && (
+                                <div className="space-y-6">
+                                    <div className="glass-glow rounded-2xl p-6">
+                                        <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
+                                            <MessageCircle className="w-5 h-5 text-cyan-400" />
+                                            <span>💬 Chat de Groupe</span>
+                                        </h2>
+                                        <p className="text-slate-400 text-sm mb-6">Discutez avec les membres de vos groupes</p>
+
+                                        {joinedGroups.length === 0 ? (
+                                            <div className="text-center py-12">
+                                                <Users className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                                                <p className="text-slate-400 font-bold mb-2">Aucun groupe rejoint</p>
+                                                <p className="text-slate-500 text-sm mb-4">Rejoignez un groupe pour commencer à discuter</p>
+                                                <button
+                                                    onClick={() => setActiveTab('groups')}
+                                                    className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
+                                                >
+                                                    Voir les groupes
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                                {/* Left: My Groups */}
+                                                <div>
+                                                    <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">Mes Groupes ({joinedGroups.length})</h3>
+                                                    <div className="space-y-3 max-h-[400px] overflow-y-auto">
+                                                        {joinedGroups.map((group) => (
+                                                            <div
+                                                                key={group.id}
+                                                                onClick={() => openGroupChat(group)}
+                                                                className={`bg-white/5 rounded-xl p-4 border transition-all cursor-pointer ${selectedGroupChat?.id === group.id
+                                                                    ? 'border-cyan-500/50 bg-cyan-500/20'
+                                                                    : 'border-white/10 hover:border-cyan-500/30'
+                                                                    }`}
+                                                            >
+                                                                <div className="flex items-start space-x-3">
+                                                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${group.color} flex items-center justify-center text-2xl`}>
+                                                                        {group.icon}
+                                                                    </div>
+                                                                    <div className="flex-1">
+                                                                        <h3 className="font-bold text-white">{group.name}</h3>
+                                                                        <p className="text-xs text-slate-400 mb-2">{group.desc}</p>
+                                                                        <div className="flex items-center justify-between">
+                                                                            <span className="text-xs text-cyan-400">{group.members} membres</span>
+                                                                            {group.unread > 0 && (
+                                                                                <span className="px-2 py-0.5 bg-cyan-500 text-white rounded-full text-xs font-bold">
+                                                                                    {group.unread}
+                                                                                </span>
+                                                                            )}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                {/* Right: Group Chat */}
+                                                <div className="bg-white/5 rounded-xl border border-white/10 flex flex-col h-[500px]">
+                                                    {selectedGroupChat ? (
+                                                        <>
+                                                            {/* Chat Header */}
+                                                            <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                                                                <div className="flex items-center space-x-3">
+                                                                    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${selectedGroupChat.color} flex items-center justify-center text-lg`}>
+                                                                        {selectedGroupChat.icon}
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="font-bold text-white">{selectedGroupChat.name}</p>
+                                                                        <p className="text-xs text-slate-400">{selectedGroupChat.members} membres actifs</p>
+                                                                    </div>
+                                                                </div>
+                                                                <button
+                                                                    onClick={() => setSelectedGroupChat(null)}
+                                                                    className="p-2 hover:bg-white/10 rounded-lg transition-all"
+                                                                >
+                                                                    <X className="w-4 h-4 text-slate-400" />
+                                                                </button>
+                                                            </div>
+
+                                                            {/* Messages */}
+                                                            <div className="flex-1 p-4 overflow-y-auto space-y-3">
+                                                                {groupChatMessages.map((msg) => (
+                                                                    <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
+                                                                        <div className={`max-w-[80%] px-4 py-2 rounded-2xl ${msg.sender === 'me' ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white' : msg.sender === 'system' ? 'bg-yellow-500/20 text-yellow-300 text-center w-full' : 'bg-white/10 text-white'}`}>
+                                                                            {msg.sender !== 'me' && msg.sender !== 'system' && (
+                                                                                <p className="text-[10px] text-cyan-400 font-bold mb-1">{msg.user}</p>
+                                                                            )}
+                                                                            <p className="text-sm">{msg.text}</p>
+                                                                            <p className="text-[10px] opacity-60 mt-1">{msg.time}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+
+                                                            {/* Input */}
+                                                            <div className="p-4 border-t border-white/10">
+                                                                <div className="flex space-x-2">
+                                                                    <input
+                                                                        type="text"
+                                                                        value={groupChatInput}
+                                                                        onChange={(e) => setGroupChatInput(e.target.value)}
+                                                                        onKeyPress={(e) => {
+                                                                            if (e.key === 'Enter' && groupChatInput.trim()) {
+                                                                                setGroupChatMessages([...groupChatMessages, {
+                                                                                    id: Date.now(),
+                                                                                    sender: 'me',
+                                                                                    user: 'Vous',
+                                                                                    text: groupChatInput,
+                                                                                    time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+                                                                                }]);
+                                                                                setGroupChatInput('');
+                                                                                setTimeout(() => {
+                                                                                    setGroupChatMessages(prev => [...prev, {
+                                                                                        id: Date.now(),
+                                                                                        sender: 'other',
+                                                                                        user: 'TraderPro',
+                                                                                        text: "Bonne remarque ! Je suis d'accord avec toi 👍",
+                                                                                        time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+                                                                                    }]);
+                                                                                }, 1500);
+                                                                            }
+                                                                        }}
+                                                                        placeholder="Message au groupe..."
+                                                                        className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-500"
+                                                                    />
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            if (groupChatInput.trim()) {
+                                                                                setGroupChatMessages([...groupChatMessages, {
+                                                                                    id: Date.now(),
+                                                                                    sender: 'me',
+                                                                                    user: 'Vous',
+                                                                                    text: groupChatInput,
+                                                                                    time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+                                                                                }]);
+                                                                                setGroupChatInput('');
+                                                                            }
+                                                                        }}
+                                                                        className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl hover:shadow-lg transition-all"
+                                                                    >
+                                                                        <Send className="w-4 h-4" />
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    ) : (
+                                                        <div className="flex-1 flex items-center justify-center flex-col text-center p-6">
+                                                            <Users className="w-16 h-16 text-slate-600 mb-4" />
+                                                            <p className="text-slate-400 font-bold">Sélectionnez un groupe</p>
+                                                            <p className="text-slate-500 text-sm">Cliquez sur un groupe pour discuter avec ses membres</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             )}
