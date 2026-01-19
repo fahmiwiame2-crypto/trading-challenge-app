@@ -64,6 +64,10 @@ def create_app():
     from .routes.leaderboard import leaderboard_bp
     app.register_blueprint(leaderboard_bp, url_prefix='/api/leaderboard')
     
+    # Seed endpoint (à supprimer après utilisation)
+    from .routes.seed import seed_bp
+    app.register_blueprint(seed_bp, url_prefix='/api/seed')
+    
     with app.app_context():
         db.create_all()
     
