@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
+import { useLanguage } from '../context/LanguageContext';
 import { toast } from 'sonner';
 import {
     Users, MessageSquare, Share2, GraduationCap, Send, Search, Star, Hash,
@@ -8,6 +9,7 @@ import {
 } from 'lucide-react';
 
 const Community = () => {
+    const { t, language } = useLanguage();
     const [message, setMessage] = useState('');
     const [activeTab, setActiveTab] = useState('feed');
     const [showGroupModal, setShowGroupModal] = useState(false);
