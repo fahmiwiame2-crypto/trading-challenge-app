@@ -64,13 +64,6 @@ const TradingChart = ({ ticker = 'BTC-USD' }) => {
                     hotlist: false,
                     calendar: false,
                     toolbar_bg: "#0f0716",
-                    theme: "dark",
-                    style: "1",
-                    locale: "fr",
-                    enable_publishing: false,
-                    allow_symbol_change: true,
-                    // Hide volume if it distracts? No, keep it but maybe minimal.
-                    hide_side_toolbar: false, // Keep drawing tools, efficient.
                     // Custom overrides to match TradeSense theme
                     overrides: {
                         "mainSeriesProperties.candleStyle.upColor": "#10b981", // Emerald

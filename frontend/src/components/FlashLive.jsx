@@ -15,7 +15,6 @@ const FlashLive = () => {
             'FOREX': '💱',
             'STOCKS': '📈',
             'Crypto': '🚀',
-            'BVC': '📊',
             'Forex': '💱',
             'Stocks': '📈',
             'Eco': '🏦',
