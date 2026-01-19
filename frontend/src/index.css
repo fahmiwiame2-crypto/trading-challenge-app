@@ -228,6 +228,97 @@
     background-color: hsl(210 40% 98%);
   }
 
+  /* Light mode - Override dark backgrounds */
+  .light .bg-\\[\\#0a0f1a\\],
+  .light .bg-\\[\\#0a0f1a\\]\\/40,
+  .light .bg-\\[\\#0a0f1a\\]\\/60,
+  .light .bg-\\[\\#0a0f1a\\]\\/80 {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: hsl(214 32% 88%) !important;
+  }
+
+  /* Light mode - Dark slate backgrounds */
+  .light .bg-slate-900,
+  .light .bg-slate-900\\/50 {
+    background-color: hsl(210 40% 98%) !important;
+  }
+
+  /* Light mode - Body background */
+  .light body {
+    background-color: hsl(210 40% 96%) !important;
+  }
+
+  /* Light mode - Cyan/Blue text colors */
+  .light .text-cyan-400,
+  .light .text-cyan-300 {
+    color: hsl(195 85% 35%) !important;
+  }
+
+  .light .text-blue-400 {
+    color: hsl(220 70% 45%) !important;
+  }
+
+  /* Light mode - Emerald text */
+  .light .text-emerald-400 {
+    color: hsl(142 71% 35%) !important;
+  }
+
+  /* Light mode - Red text */
+  .light .text-red-400 {
+    color: hsl(0 84% 50%) !important;
+  }
+
+  /* Light mode - Amber text */
+  .light .text-amber-400 {
+    color: hsl(38 92% 45%) !important;
+  }
+
+  /* Light mode - Border overrides */
+  .light .border-cyan-500\\/10,
+  .light .border-cyan-500\\/20,
+  .light .border-cyan-500\\/30 {
+    border-color: hsl(195 85% 85%) !important;
+  }
+
+  /* Light mode - Background gradients */
+  .light .from-cyan-500\\/10,
+  .light .from-cyan-500\\/5 {
+    --tw-gradient-from: hsl(195 85% 95%) !important;
+  }
+
+  .light .to-blue-500\\/10,
+  .light .to-transparent {
+    --tw-gradient-to: transparent !important;
+  }
+
+  /* Light mode - Shadow overrides */
+  .light .shadow-cyan-500\\/20,
+  .light .shadow-cyan-600\\/20,
+  .light .shadow-cyan-600\\/30 {
+    --tw-shadow-color: hsl(195 85% 85% / 0.3);
+    --tw-shadow: var(--tw-shadow-colored);
+  }
+
+  /* Light mode - Muted text */
+  .light .text-muted-foreground {
+    color: hsl(215 16% 40%) !important;
+  }
+
+  /* Light mode - Card backgrounds */
+  .light .bg-card {
+    background-color: hsl(0 0% 100%) !important;
+  }
+
+  /* Light mode - Backdrop blur containers */
+  .light .backdrop-blur-xl {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* Light mode - Transparent backgrounds */
+  .light .bg-transparent {
+    background-color: hsl(210 40% 96%) !important;
+  }
+
   * {
     @apply border-border;
   }
