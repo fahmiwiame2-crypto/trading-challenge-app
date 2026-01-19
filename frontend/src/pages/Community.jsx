@@ -2037,7 +2037,7 @@ const Community = () => {
             {
                 showCourseModal && selectedCourse && (
                     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-                        <div className="glass-glow bg-[#0a0f1a] border border-white/10 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl shadow-cyan-500/20 my-8">
+                        <div className="glass-glow bg-[#0a0f1a] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl shadow-cyan-500/20 m-4">
                             {/* Header */}
                             <div className="bg-gradient-to-r from-cyan-500 to-blue-600 p-6 relative">
                                 <button
@@ -2058,7 +2058,7 @@ const Community = () => {
                             </div>
 
                             {/* Content */}
-                            <div className="p-6">
+                            <div className="p-6 overflow-y-auto flex-1">
                                 <p className="text-slate-300 mb-6">{selectedCourse.description}</p>
 
                                 {/* Stats */}
@@ -2090,7 +2090,7 @@ const Community = () => {
                                         <BookOpen className="w-5 h-5 text-cyan-400" />
                                         <span>Programme du cours</span>
                                     </h3>
-                                    <div className="space-y-2 max-h-60 overflow-y-auto pr-2">
+                                    <div className="space-y-2 overflow-y-auto pr-2 flex-1 min-h-0">
                                         {selectedCourse.lessonsList.map((lesson, index) => (
                                             <div
                                                 key={index}
