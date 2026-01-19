@@ -673,10 +673,10 @@ const Community = () => {
     };
 
     const features = [
-        { icon: MessageCircle, title: 'Discuter', desc: 'Échangez avec des traders', color: 'from-cyan-500 to-blue-500', tab: 'feed' },
-        { icon: BookOpen, title: 'Stratégies', desc: 'Partagez vos méthodes', color: 'from-cyan-600 to-teal-600', tab: 'strategies' },
-        { icon: GraduationCap, title: 'Experts', desc: 'Apprenez des meilleurs', color: 'from-blue-600 to-indigo-600', tab: 'experts' },
-        { icon: Target, title: 'Croissance', desc: 'Atteignez vos objectifs', color: 'from-emerald-500 to-cyan-500', tab: 'friends' },
+        { icon: MessageCircle, title: t('community_feature_discuss'), desc: t('community_feature_discuss_desc'), color: 'from-cyan-500 to-blue-500', tab: 'feed' },
+        { icon: BookOpen, title: t('community_feature_strategies'), desc: t('community_feature_strategies_desc'), color: 'from-cyan-600 to-teal-600', tab: 'strategies' },
+        { icon: GraduationCap, title: t('community_feature_experts'), desc: t('community_feature_experts_desc'), color: 'from-blue-600 to-indigo-600', tab: 'experts' },
+        { icon: Target, title: t('community_feature_growth'), desc: t('community_feature_growth_desc'), color: 'from-emerald-500 to-cyan-500', tab: 'friends' },
     ];
 
     return (
@@ -692,10 +692,10 @@ const Community = () => {
                             <div className="flex items-center justify-between mb-6">
                                 <div>
                                     <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                                        Zone Communautaire
+                                        {t('community_title')}
                                     </h1>
                                     <p className="text-slate-400 text-sm mt-1">
-                                        Construisez un réseau solide autour de votre croissance
+                                        {t('community_subtitle')}
                                     </p>
                                 </div>
                                 <div className="flex -space-x-2">
@@ -738,7 +738,13 @@ const Community = () => {
                                             : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
                                             }`}
                                     >
-                                        {tab === 'feed' ? '📢 Feed' : tab === 'strategies' ? '📊 Stratégies' : tab === 'experts' ? '🎓 Experts' : tab === 'friends' ? '👥 Amis' : tab === 'chat' ? '💬 Chat Traders' : tab === 'groupchat' ? '💬 Chat de Groupe' : '👥 Groupes'}
+                                        {tab === 'feed' ? `📢 ${t('community_tab_feed')}` :
+                                            tab === 'strategies' ? `📊 ${t('community_tab_strategies')}` :
+                                                tab === 'experts' ? `🎓 ${t('community_tab_experts')}` :
+                                                    tab === 'friends' ? `👥 ${t('community_tab_friends')}` :
+                                                        tab === 'chat' ? `💬 ${t('community_tab_chat')}` :
+                                                            tab === 'groupchat' ? `💬 ${t('community_tab_groupchat')}` :
+                                                                `👥 ${t('community_tab_groups')}`}
                                     </button>
                                 ))}
                             </div>
@@ -753,7 +759,7 @@ const Community = () => {
                                         <div className="flex space-x-4">
                                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center font-bold text-lg shadow-lg shadow-cyan-500/30">WI</div>
                                             <textarea
-                                                placeholder="Partagez votre analyse, stratégie ou posez une question..."
+                                                placeholder={t('community_placeholder_post')}
                                                 className="flex-1 bg-white/[0.02] border border-white/5 rounded-xl p-3 text-white placeholder-slate-500 resize-none h-24 focus:outline-none focus:border-cyan-500/50"
                                                 value={message}
                                                 onChange={(e) => setMessage(e.target.value)}
@@ -779,7 +785,7 @@ const Community = () => {
                                                 disabled={!message.trim()}
                                                 className={`bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-2.5 rounded-xl font-bold text-sm flex items-center space-x-2 hover:shadow-lg hover:shadow-cyan-500/30 transition-all transform active:scale-95 ${!message.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                                             >
-                                                <span>Publier</span>
+                                                <span>{t('community_publish')}</span>
                                                 <Send className="w-4 h-4" />
                                             </button>
                                         </div>
@@ -821,7 +827,7 @@ const Community = () => {
                                                 </button>
                                                 <button className="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition-colors">
                                                     <Share2 className="w-5 h-5" />
-                                                    <span className="text-sm font-bold">Partager</span>
+                                                    <span className="text-sm font-bold">{t('common_share')}</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -1000,7 +1006,7 @@ const Community = () => {
                                     <div>
                                         <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                                             <Trophy className="w-5 h-5 text-cyan-400" />
-                                            <span>Nos Experts</span>
+                                            <span>{t('community_tab_experts')}</span>
                                         </h2>
                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             {expertProfiles.map(expert => (
@@ -1031,7 +1037,7 @@ const Community = () => {
                                                             : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/30'
                                                             }`}
                                                     >
-                                                        {expert.isFollowing ? 'Suivi' : 'Suivre'}
+                                                        {expert.isFollowing ? t('community_followed') : t('community_follow')}
                                                     </button>
                                                 </div>
                                             ))}
@@ -1045,7 +1051,7 @@ const Community = () => {
                                     <div>
                                         <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                                             <Users className="w-5 h-5 text-cyan-400" />
-                                            <span>Vos Amis Traders</span>
+                                            <span>{t('community_friends_title')}</span>
                                         </h2>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             {friends.map(friend => (
@@ -1078,7 +1084,7 @@ const Community = () => {
                                     <div>
                                         <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                                             <Zap className="w-5 h-5 text-cyan-400" />
-                                            <span>Traders Suggérés</span>
+                                            <span>{t('community_suggested_traders')}</span>
                                         </h2>
                                         <div className="space-y-3">
                                             {suggestedTraders.map(trader => (
@@ -1103,7 +1109,7 @@ const Community = () => {
                                                             }`}
                                                     >
                                                         <UserPlus className="w-4 h-4" />
-                                                        <span>{trader.isFollowing ? 'Suivi' : 'Suivre'}</span>
+                                                        <span>{trader.isFollowing ? t('community_followed') : t('community_follow')}</span>
                                                     </button>
                                                 </div>
                                             ))}
@@ -1118,16 +1124,16 @@ const Community = () => {
                                     <div className="glass-glow rounded-2xl p-6">
                                         <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                                             <MessageCircle className="w-5 h-5 text-cyan-400" />
-                                            <span>💬 Chat avec les Traders</span>
+                                            <span>💬 {t('community_chat_title')}</span>
                                         </h2>
-                                        <p className="text-slate-400 text-sm mb-6">Discutez en privé avec d'autres traders de la communauté</p>
+                                        <p className="text-slate-400 text-sm mb-6">{t('community_chat_subtitle')}</p>
 
                                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                             {/* Left: Trader List */}
                                             <div>
                                                 {/* Online Traders */}
                                                 <div className="mb-6">
-                                                    <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">Traders en ligne</h3>
+                                                    <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">{t('community_online_traders')}</h3>
                                                     <div className="space-y-2 max-h-[300px] overflow-y-auto">
                                                         {[
                                                             { id: 1, name: 'Alex_Trader', status: 'En ligne', winRate: '78%' },
@@ -1170,7 +1176,7 @@ const Community = () => {
                                                                     }}
                                                                     className="px-3 py-1.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-xs font-bold hover:shadow-lg transition-all"
                                                                 >
-                                                                    Discuter
+                                                                    {t('community_discuss')}
                                                                 </button>
                                                             </div>
                                                         ))}
@@ -1240,7 +1246,7 @@ const Community = () => {
                                                                             }, 1000);
                                                                         }
                                                                     }}
-                                                                    placeholder="Écrivez votre message..."
+                                                                    placeholder={t('community_type_message')}
                                                                     className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-500"
                                                                 />
                                                                 <button
@@ -1273,8 +1279,8 @@ const Community = () => {
                                                 ) : (
                                                     <div className="flex-1 flex items-center justify-center flex-col text-center p-6">
                                                         <MessageCircle className="w-16 h-16 text-slate-600 mb-4" />
-                                                        <p className="text-slate-400 font-bold">Sélectionnez un trader</p>
-                                                        <p className="text-slate-500 text-sm">Cliquez sur un trader pour commencer une conversation</p>
+                                                        <p className="text-slate-400 font-bold">{t('community_select_trader')}</p>
+                                                        <p className="text-slate-500 text-sm">{t('community_start_conversation')}</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -1289,27 +1295,27 @@ const Community = () => {
                                     <div className="glass-glow rounded-2xl p-6">
                                         <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
                                             <MessageCircle className="w-5 h-5 text-cyan-400" />
-                                            <span>💬 Chat de Groupe</span>
+                                            <span>💬 {t('community_groupchat_title')}</span>
                                         </h2>
-                                        <p className="text-slate-400 text-sm mb-6">Discutez avec les membres de vos groupes</p>
+                                        <p className="text-slate-400 text-sm mb-6">{t('community_groupchat_subtitle')}</p>
 
                                         {joinedGroups.length === 0 ? (
                                             <div className="text-center py-12">
                                                 <Users className="w-16 h-16 text-slate-600 mx-auto mb-4" />
-                                                <p className="text-slate-400 font-bold mb-2">Aucun groupe rejoint</p>
-                                                <p className="text-slate-500 text-sm mb-4">Rejoignez un groupe pour commencer à discuter</p>
+                                                <p className="text-slate-400 font-bold mb-2">{t('community_no_group')}</p>
+                                                <p className="text-slate-500 text-sm mb-4">{t('community_join_group_prompt')}</p>
                                                 <button
                                                     onClick={() => setActiveTab('groups')}
                                                     className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
                                                 >
-                                                    Voir les groupes
+                                                    {t('community_view_groups')}
                                                 </button>
                                             </div>
                                         ) : (
                                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                                 {/* Left: My Groups */}
                                                 <div>
-                                                    <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">Mes Groupes ({joinedGroups.length})</h3>
+                                                    <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">{t('community_my_groups')} ({joinedGroups.length})</h3>
                                                     <div className="space-y-3 max-h-[400px] overflow-y-auto">
                                                         {joinedGroups.map((group) => (
                                                             <div
@@ -1328,7 +1334,7 @@ const Community = () => {
                                                                         <h3 className="font-bold text-white">{group.name}</h3>
                                                                         <p className="text-xs text-slate-400 mb-2">{group.desc}</p>
                                                                         <div className="flex items-center justify-between">
-                                                                            <span className="text-xs text-cyan-400">{group.members} membres</span>
+                                                                            <span className="text-xs text-cyan-400">{group.members} {t('community_members_suffix')}</span>
                                                                             {group.unread > 0 && (
                                                                                 <span className="px-2 py-0.5 bg-cyan-500 text-white rounded-full text-xs font-bold">
                                                                                     {group.unread}
@@ -1354,7 +1360,7 @@ const Community = () => {
                                                                     </div>
                                                                     <div>
                                                                         <p className="font-bold text-white">{selectedGroupChat.name}</p>
-                                                                        <p className="text-xs text-slate-400">{selectedGroupChat.members} membres actifs</p>
+                                                                        <p className="text-xs text-slate-400">{selectedGroupChat.members} {t('community_members_active_suffix')}</p>
                                                                     </div>
                                                                 </div>
                                                                 <button
@@ -1408,7 +1414,8 @@ const Community = () => {
                                                                                 }, 1500);
                                                                             }
                                                                         }}
-                                                                        placeholder="Message au groupe..."
+
+                                                                        placeholder={t('community_msg_group_placeholder')}
                                                                         className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-500"
                                                                     />
                                                                     <button
@@ -1434,8 +1441,8 @@ const Community = () => {
                                                     ) : (
                                                         <div className="flex-1 flex items-center justify-center flex-col text-center p-6">
                                                             <Users className="w-16 h-16 text-slate-600 mb-4" />
-                                                            <p className="text-slate-400 font-bold">Sélectionnez un groupe</p>
-                                                            <p className="text-slate-500 text-sm">Cliquez sur un groupe pour discuter avec ses membres</p>
+                                                            <p className="text-slate-400 font-bold">{t('community_select_group')}</p>
+                                                            <p className="text-slate-500 text-sm">{t('community_select_group_desc')}</p>
                                                         </div>
                                                     )}
                                                 </div>
@@ -1452,21 +1459,21 @@ const Community = () => {
                                         <div className="flex items-center justify-between mb-6">
                                             <h2 className="text-xl font-bold flex items-center space-x-2">
                                                 <Users className="w-5 h-5 text-cyan-400" />
-                                                <span>👥 Groupes de Trading</span>
+                                                <span>👥 {t('community_trading_groups')}</span>
                                             </h2>
                                             <button
                                                 onClick={() => setShowCreateGroupModal(true)}
                                                 className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
                                             >
-                                                + Créer un groupe
+                                                {t('community_create_group')}
                                             </button>
                                         </div>
-                                        <p className="text-slate-400 text-sm mb-6">Rejoignez des groupes de discussion thématiques</p>
+                                        <p className="text-slate-400 text-sm mb-6">{t('community_groups_subtitle')}</p>
 
                                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                             {/* Left: Available Groups */}
                                             <div>
-                                                <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">Groupes Disponibles</h3>
+                                                <h3 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wider">{t('community_available_groups')}</h3>
                                                 <div className="space-y-3 max-h-[400px] overflow-y-auto">
                                                     {availableGroups.map((group) => {
                                                         const isJoined = joinedGroups.find(g => g.id === group.id);
@@ -1480,20 +1487,20 @@ const Community = () => {
                                                                         <h3 className="font-bold text-white">{group.name}</h3>
                                                                         <p className="text-xs text-slate-400 mb-2">{group.desc}</p>
                                                                         <div className="flex items-center justify-between">
-                                                                            <span className="text-xs text-cyan-400">{group.members.toLocaleString()} membres</span>
+                                                                            <span className="text-xs text-cyan-400">{group.members.toLocaleString()} {t('community_members_suffix')}</span>
                                                                             {isJoined ? (
                                                                                 <div className="flex space-x-2">
                                                                                     <button
                                                                                         onClick={() => openGroupChat(group)}
                                                                                         className="px-3 py-1 bg-cyan-500/30 text-cyan-400 rounded-lg text-xs font-bold hover:bg-cyan-500/50 transition-all"
                                                                                     >
-                                                                                        💬 Chat
+                                                                                        💬 {t('community_chat_short')}
                                                                                     </button>
                                                                                     <button
                                                                                         onClick={() => handleLeaveGroup(group.id)}
                                                                                         className="px-3 py-1 bg-red-500/20 text-red-400 rounded-lg text-xs font-bold hover:bg-red-500/30 transition-all"
                                                                                     >
-                                                                                        Quitter
+                                                                                        {t('community_leave')}
                                                                                     </button>
                                                                                 </div>
                                                                             ) : (
@@ -1501,7 +1508,7 @@ const Community = () => {
                                                                                     onClick={() => handleJoinNewGroup(group)}
                                                                                     className="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-lg text-xs font-bold hover:bg-cyan-500/30 transition-all"
                                                                                 >
-                                                                                    Rejoindre
+                                                                                    {t('community_join')}
                                                                                 </button>
                                                                             )}
                                                                         </div>
@@ -1525,7 +1532,7 @@ const Community = () => {
                                                                 </div>
                                                                 <div>
                                                                     <p className="font-bold text-white">{selectedGroupChat.name}</p>
-                                                                    <p className="text-xs text-slate-400">{selectedGroupChat.members} membres actifs</p>
+                                                                    <p className="text-xs text-slate-400">{selectedGroupChat.members} {t('community_members_active_suffix')}</p>
                                                                 </div>
                                                             </div>
                                                             <button
@@ -1579,7 +1586,8 @@ const Community = () => {
                                                                             }, 1500);
                                                                         }
                                                                     }}
-                                                                    placeholder="Message au groupe..."
+
+                                                                    placeholder={t('community_msg_group_placeholder')}
                                                                     className="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-2 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-500"
                                                                 />
                                                                 <button
@@ -1993,7 +2001,7 @@ const Community = () => {
                                         </div>
                                         <div>
                                             <p className="font-bold text-white">{selectedSession.expert}</p>
-                                            <p className="text-xs text-cyan-400">Expert vérifié</p>
+                                            <p className="text-xs text-cyan-400">{t('community_verified_expert')}</p>
                                         </div>
                                     </div>
                                     <div className="flex-1"></div>
@@ -2006,27 +2014,27 @@ const Community = () => {
                                 <div className="flex space-x-3">
                                     <button
                                         onClick={() => {
-                                            toast.success('Vous participez maintenant à la session!');
+                                            toast.success(t('community_session_joined'));
                                         }}
                                         className="flex-1 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl font-bold text-white flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
                                     >
                                         <Video className="w-5 h-5" />
-                                        <span>Participer au Live</span>
+                                        <span>{t('community_join_live')}</span>
                                     </button>
                                     <button
                                         onClick={() => {
-                                            toast.success('Question envoyée à l\'expert!');
+                                            toast.success(t('community_question_sent'));
                                         }}
                                         className="px-6 py-3 bg-cyan-500/20 border border-cyan-500/30 rounded-xl font-bold text-cyan-300 hover:text-white hover:border-cyan-500/50 transition-all flex items-center space-x-2"
                                     >
                                         <MessageCircle className="w-5 h-5" />
-                                        <span>Poser une question</span>
+                                        <span>{t('community_ask_question')}</span>
                                     </button>
                                     <button
                                         onClick={() => setShowLiveModal(false)}
                                         className="px-6 py-3 border border-slate-700 rounded-xl font-bold text-slate-400 hover:text-white hover:border-slate-600 transition-all"
                                     >
-                                        Fermer
+                                        {t('common_close')}
                                     </button>
                                 </div>
                             </div>
@@ -2054,7 +2062,7 @@ const Community = () => {
                                     </div>
                                     <div>
                                         <h2 className="text-2xl font-bold text-white">{selectedCourse.title}</h2>
-                                        <p className="text-white/80">Par {selectedCourse.expert}</p>
+                                        <p className="text-white/80">{t('community_by')} {selectedCourse.expert}</p>
                                     </div>
                                 </div>
                             </div>
@@ -2067,22 +2075,22 @@ const Community = () => {
                                 <div className="grid grid-cols-4 gap-3 mb-6">
                                     <div className="bg-cyan-500/10 rounded-xl p-3 text-center">
                                         <p className="text-cyan-400 text-lg font-bold">{selectedCourse.duration}</p>
-                                        <p className="text-slate-500 text-xs">Durée</p>
+                                        <p className="text-slate-500 text-xs">{t('community_duration')}</p>
                                     </div>
                                     <div className="bg-cyan-500/10 rounded-xl p-3 text-center">
                                         <p className="text-cyan-400 text-lg font-bold">{selectedCourse.lessons}</p>
-                                        <p className="text-slate-500 text-xs">Leçons</p>
+                                        <p className="text-slate-500 text-xs">{t('community_lessons')}</p>
                                     </div>
                                     <div className="bg-cyan-500/10 rounded-xl p-3 text-center">
                                         <p className="text-cyan-400 text-lg font-bold">{selectedCourse.students}</p>
-                                        <p className="text-slate-500 text-xs">Étudiants</p>
+                                        <p className="text-slate-500 text-xs">{t('community_students')}</p>
                                     </div>
                                     <div className="bg-cyan-500/10 rounded-xl p-3 text-center">
                                         <div className="flex items-center justify-center space-x-1">
                                             <Star className="w-4 h-4 text-cyan-400 fill-yellow-400" />
                                             <p className="text-cyan-400 text-lg font-bold">{selectedCourse.rating}</p>
                                         </div>
-                                        <p className="text-slate-500 text-xs">Note</p>
+                                        <p className="text-slate-500 text-xs">{t('community_rating')}</p>
                                     </div>
                                 </div>
 
@@ -2090,7 +2098,7 @@ const Community = () => {
                                 <div className="mb-6">
                                     <h3 className="text-lg font-bold text-white mb-3 flex items-center space-x-2">
                                         <BookOpen className="w-5 h-5 text-cyan-400" />
-                                        <span>Programme du cours</span>
+                                        <span>{t('community_course_program')}</span>
                                     </h3>
                                     <div className="space-y-2 overflow-y-auto pr-2 flex-1 min-h-0">
                                         {selectedCourse.lessonsList.map((lesson, index) => (
@@ -2103,7 +2111,7 @@ const Community = () => {
                                                 </div>
                                                 <span className="text-slate-300">{lesson.title}</span>
                                                 {enrolledCourses.includes(selectedCourse.id) && index === 0 && (
-                                                    <span className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-full ml-auto">En cours</span>
+                                                    <span className="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded-full ml-auto">{t('community_in_progress')}</span>
                                                 )}
                                             </div>
                                         ))}
@@ -2127,7 +2135,7 @@ const Community = () => {
                                         onClick={() => setShowCourseModal(false)}
                                         className="flex-1 py-3 border border-slate-700 rounded-xl font-bold text-slate-400 hover:text-white hover:border-slate-600 transition-all"
                                     >
-                                        Fermer
+                                        {t('common_close')}
                                     </button>
                                     <button
                                         onClick={() => handleEnrollCourse(selectedCourse.id)}
@@ -2137,7 +2145,7 @@ const Community = () => {
                                             }`}
                                     >
                                         <GraduationCap className="w-5 h-5" />
-                                        <span>{enrolledCourses.includes(selectedCourse.id) ? 'Continuer le cours' : 'S\'inscrire gratuitement'}</span>
+                                        <span>{enrolledCourses.includes(selectedCourse.id) ? t('community_continue_course') : t('community_enroll_free')}</span>
                                     </button>
                                 </div>
                             </div>
@@ -2161,7 +2169,7 @@ const Community = () => {
                                 </button>
                                 <div>
                                     <h2 className="font-bold text-white">{selectedCourse.title}</h2>
-                                    <p className="text-sm text-slate-400">Leçon {currentLessonIndex + 1} sur {selectedCourse.lessonsList.length}</p>
+                                    <p className="text-sm text-slate-400">{t('community_lessons')} {currentLessonIndex + 1} / {selectedCourse.lessonsList.length}</p>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-3">
@@ -2184,7 +2192,7 @@ const Community = () => {
                                 <div className="p-4">
                                     <h3 className="font-bold text-white mb-4 flex items-center space-x-2">
                                         <BookOpen className="w-5 h-5 text-cyan-400" />
-                                        <span>Contenu du cours</span>
+                                        <span>{t('community_course_content')}</span>
                                     </h3>
                                     <div className="space-y-2">
                                         {selectedCourse.lessonsList.map((lesson, index) => (
@@ -2240,7 +2248,7 @@ const Community = () => {
                                             rel="noopener noreferrer"
                                             className="text-xs text-cyan-400 hover:text-white flex items-center space-x-1"
                                         >
-                                            <span>Problème de lecture ? Regarder sur YouTube</span>
+                                            <span>{t('community_playback_issue')}</span>
                                             <Share2 className="w-3 h-3" />
                                         </a>
                                     </div>
@@ -2253,7 +2261,7 @@ const Community = () => {
                                                 <div className="flex items-start space-x-3">
                                                     <BookOpen className="w-6 h-6 text-cyan-400 mt-1 flex-shrink-0" />
                                                     <div>
-                                                        <h3 className="text-lg font-bold text-cyan-300 mb-3">Introduction</h3>
+                                                        <h3 className="text-lg font-bold text-cyan-300 mb-3">{t('community_intro')}</h3>
                                                         <p className="text-slate-300 leading-relaxed">
                                                             {selectedCourse.lessonsList[currentLessonIndex].writtenContent.introduction}
                                                         </p>
@@ -2283,7 +2291,7 @@ const Community = () => {
                                                 <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-xl p-6">
                                                     <h3 className="text-lg font-bold text-emerald-400 mb-4 flex items-center space-x-2">
                                                         <TrendingUp className="w-5 h-5" />
-                                                        <span>Exemple Pratique</span>
+                                                        <span>{t('community_practical_example')}</span>
                                                     </h3>
                                                     <p className="text-slate-300 leading-relaxed">
                                                         {selectedCourse.lessonsList[currentLessonIndex].writtenContent.examples}
@@ -2296,7 +2304,7 @@ const Community = () => {
                                                 <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
                                                     <h3 className="text-lg font-bold text-amber-400 mb-4 flex items-center space-x-2">
                                                         <AlertTriangle className="w-5 h-5" />
-                                                        <span>Erreurs Courantes à Éviter</span>
+                                                        <span>{t('community_common_mistakes')}</span>
                                                     </h3>
                                                     <ul className="space-y-3">
                                                         {selectedCourse.lessonsList[currentLessonIndex].writtenContent.mistakes.map((mistake, idx) => (
@@ -2314,7 +2322,7 @@ const Community = () => {
                                                 <div className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-6">
                                                     <h3 className="text-lg font-bold text-cyan-400 mb-4 flex items-center space-x-2">
                                                         <Zap className="w-5 h-5" />
-                                                        <span>Plan d'Action</span>
+                                                        <span>{t('community_action_plan')}</span>
                                                     </h3>
                                                     <ul className="space-y-3">
                                                         {selectedCourse.lessonsList[currentLessonIndex].writtenContent.actionSteps.map((step, idx) => (
@@ -2344,7 +2352,7 @@ const Community = () => {
                                         <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-6 mb-6">
                                             <h3 className="text-lg font-bold text-cyan-400 mb-3 flex items-center space-x-2">
                                                 <Target className="w-5 h-5" />
-                                                <span>Points Clés</span>
+                                                <span>{t('community_key_points')}</span>
                                             </h3>
                                             <ul className="space-y-2 text-slate-300">
                                                 {selectedCourse.lessonsList[currentLessonIndex].keyPoints ? (
@@ -2372,7 +2380,7 @@ const Community = () => {
                                         <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-6">
                                             <h3 className="text-lg font-bold text-cyan-400 mb-3 flex items-center space-x-2">
                                                 <Zap className="w-5 h-5" />
-                                                <span>Points clés à retenir</span>
+                                                <span>{t('community_key_takeaways')}</span>
                                             </h3>
                                             <p className="text-slate-300">
                                                 Cette leçon fait partie du cours "{selectedCourse.title}" par {selectedCourse.expert}.
@@ -2392,14 +2400,14 @@ const Community = () => {
                                                 }`}
                                         >
                                             <ChevronRight className="w-5 h-5 rotate-180" />
-                                            <span>Leçon précédente</span>
+                                            <span>{t('community_prev_lesson')}</span>
                                         </button>
 
                                         <button
                                             onClick={handleNextLesson}
                                             className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-bold text-white hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
                                         >
-                                            <span>{currentLessonIndex === selectedCourse.lessonsList.length - 1 ? 'Terminer le cours' : 'Leçon suivante'}</span>
+                                            <span>{currentLessonIndex === selectedCourse.lessonsList.length - 1 ? t('community_finish_course') : t('community_next_lesson')}</span>
                                             <ChevronRight className="w-5 h-5" />
                                         </button>
                                     </div>
@@ -2420,9 +2428,9 @@ const Community = () => {
                                 <div>
                                     <h2 className="text-2xl font-bold text-white flex items-center space-x-2">
                                         <Globe className="w-6 h-6 text-cyan-400" />
-                                        <span>Parcourir les Groupes</span>
+                                        <span>{t('community_browse_groups_title')}</span>
                                     </h2>
-                                    <p className="text-sm text-slate-400 mt-1">Rejoignez des communautés de traders passionnés</p>
+                                    <p className="text-sm text-slate-400 mt-1">{t('community_browse_groups_subtitle')}</p>
                                 </div>
                                 <button
                                     onClick={() => setShowBrowseGroupsModal(false)}
@@ -2459,7 +2467,7 @@ const Community = () => {
                                                 {group.active && (
                                                     <div className="flex items-center space-x-1 text-cyan-400 text-xs">
                                                         <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
-                                                        <span>Actif</span>
+                                                        <span>{t('community_active')}</span>
                                                     </div>
                                                 )}
                                             </div>
@@ -2474,7 +2482,7 @@ const Community = () => {
                                                 }}
                                                 className="w-full py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-sm font-bold text-white hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
                                             >
-                                                Voir le groupe
+                                                {t('community_view_group')}
                                             </button>
                                         </div>
                                     ))}
@@ -2519,8 +2527,8 @@ const Community = () => {
                                 {chatMessages.length === 0 ? (
                                     <div className="flex flex-col items-center justify-center h-full text-center">
                                         <MessageCircle className="w-16 h-16 text-cyan-400/30 mb-4" />
-                                        <p className="text-slate-400 text-lg">Aucun message pour le moment</p>
-                                        <p className="text-slate-500 text-sm">Commencez la conversation !</p>
+                                        <p className="text-slate-400 text-lg">{t('community_no_messages')}</p>
+                                        <p className="text-slate-500 text-sm">{t('community_start_conversation_short')}</p>
                                     </div>
                                 ) : (
                                     chatMessages.map((msg, index) => {
@@ -2556,7 +2564,7 @@ const Community = () => {
                                         value={newMessage}
                                         onChange={(e) => setNewMessage(e.target.value)}
                                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                                        placeholder="Tapez votre message..."
+                                        placeholder={t('community_msg_group_placeholder')}
                                         className="flex-1 bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50"
                                     />
                                     <button
@@ -2593,38 +2601,38 @@ const Community = () => {
                                     {newGroup.icon}
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-bold text-white">Créer un Groupe</h2>
-                                    <p className="text-white/70 text-sm">Rassemblez votre communauté</p>
+                                    <h2 className="text-xl font-bold text-white">{t('community_create_group_title')}</h2>
+                                    <p className="text-white/70 text-sm">{t('community_create_group_subtitle')}</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                             <div>
-                                <label className="block text-slate-400 text-sm mb-2">Nom du groupe *</label>
+                                <label className="block text-slate-400 text-sm mb-2">{t('community_group_name_label')}</label>
                                 <input
                                     type="text"
                                     value={newGroup.name}
                                     onChange={(e) => setNewGroup({ ...newGroup, name: e.target.value })}
                                     className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50"
-                                    placeholder="Ex: Trading Champions"
+                                    placeholder={t('community_group_name_placeholder')}
                                     maxLength={30}
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-slate-400 text-sm mb-2">Description *</label>
+                                <label className="block text-slate-400 text-sm mb-2">{t('community_group_desc_label')}</label>
                                 <textarea
                                     value={newGroup.desc}
                                     onChange={(e) => setNewGroup({ ...newGroup, desc: e.target.value })}
                                     className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 resize-none h-20"
-                                    placeholder="Décrivez votre groupe..."
+                                    placeholder={t('community_group_desc_placeholder')}
                                     maxLength={100}
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-slate-400 text-sm mb-2">Choisissez une icône</label>
+                                <label className="block text-slate-400 text-sm mb-2">{t('community_choose_icon')}</label>
                                 <div className="grid grid-cols-6 gap-2">
                                     {['👥', '💹', '🪙', '🥇', '📊', '🏆', '🎯', '💰', '📈', '🚀', '💎', '⚡'].map((icon) => (
                                         <button
@@ -2642,7 +2650,7 @@ const Community = () => {
                             </div>
 
                             <div>
-                                <label className="block text-slate-400 text-sm mb-2">Couleur du thème</label>
+                                <label className="block text-slate-400 text-sm mb-2">{t('community_theme_color')}</label>
                                 <div className="grid grid-cols-3 gap-2">
                                     {[
                                         { name: 'Cyan-Blue', value: 'from-cyan-500 to-blue-600' },
@@ -2665,14 +2673,14 @@ const Community = () => {
                             </div>
 
                             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                                <p className="text-xs text-slate-400 mb-2">Aperçu</p>
+                                <p className="text-xs text-slate-400 mb-2">{t('community_preview')}</p>
                                 <div className="flex items-center space-x-3">
                                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${newGroup.color} flex items-center justify-center text-2xl`}>
                                         {newGroup.icon}
                                     </div>
                                     <div>
-                                        <p className="font-bold text-white">{newGroup.name || 'Nom du groupe'}</p>
-                                        <p className="text-xs text-slate-400">{newGroup.desc || 'Description du groupe'}</p>
+                                        <p className="font-bold text-white">{newGroup.name || t('community_group_name_preview')}</p>
+                                        <p className="text-xs text-slate-400">{newGroup.desc || t('community_group_desc_preview')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -2685,12 +2693,12 @@ const Community = () => {
                                     }}
                                     className="flex-1 py-3 border border-slate-700 rounded-xl font-bold text-slate-400 hover:text-white hover:border-slate-600 transition-all"
                                 >
-                                    Annuler
+                                    {t('common_cancel')}
                                 </button>
                                 <button
                                     onClick={() => {
                                         if (!newGroup.name.trim() || !newGroup.desc.trim()) {
-                                            toast.error('Veuillez remplir tous les champs');
+                                            toast.error(t('community_fill_all_fields'));
                                             return;
                                         }
 
@@ -2705,7 +2713,7 @@ const Community = () => {
 
                                         handleJoinNewGroup(createdGroup);
 
-                                        toast.success(`Groupe "${newGroup.name}" créé avec succès ! 🎉`);
+                                        toast.success(t('community_group_created_success'));
                                         setShowCreateGroupModal(false);
                                         setNewGroup({ name: '', desc: '', icon: '👥', color: 'from-cyan-500 to-blue-600' });
                                     }}
@@ -2715,7 +2723,7 @@ const Community = () => {
                                         : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/30'
                                         }`}
                                 >
-                                    <span>Créer le Groupe</span>
+                                    <span>{t('community_create_group_btn')}</span>
                                 </button>
                             </div>
                         </div>

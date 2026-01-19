@@ -7,11 +7,13 @@ import { useCurrency } from '../context/CurrencyContext';
 import { Check, Zap, Crown, Rocket, TrendingUp, Shield, Award, CreditCard, X, Loader2, DollarSign } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const Pricing = () => {
     const navigate = useNavigate();
     const { currency, formatPrice } = useCurrency();
     const { user, refreshUser } = useAuth();
+    const { t, language } = useLanguage();
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('');
@@ -42,12 +44,12 @@ const Pricing = () => {
             color: 'from-cyan-600 to-blue-600',
             borderColor: 'border-white/5 hover:border-cyan-500/50',
             features: [
-                `Capital: ${formatPrice(5000)}`,
-                'Profit Split: 80%',
-                'Levier 1:100',
-                'Support Standard',
-                'Signaux IA Basiques',
-                'Accès Communauté',
+                `${t('pricing_capital')}: ${formatPrice(5000)}`,
+                `${t('pricing_profit_split')}: 80%`,
+                `${t('pricing_leverage')} 1:100`,
+                t('pricing_support_standard'),
+                t('pricing_ia_basic'),
+                t('pricing_community_access'),
             ],
             recommended: false,
         },
@@ -60,14 +62,14 @@ const Pricing = () => {
             color: 'from-cyan-500 to-emerald-500',
             borderColor: 'border-white/5 hover:border-cyan-500/50',
             features: [
-                `Capital: ${formatPrice(25000)}`,
-                'Profit Split: 85%',
-                'Levier 1:100',
-                'Support Prioritaire',
-                'Signaux IA Basiques',
-                'Accès Communauté',
-                'Webinaires Hebdomadaires',
-                'Analyse de Performance',
+                `${t('pricing_capital')}: ${formatPrice(25000)}`,
+                `${t('pricing_profit_split')}: 85%`,
+                `${t('pricing_leverage')} 1:100`,
+                t('pricing_support_priority'),
+                t('pricing_ia_basic'),
+                t('pricing_community_access'),
+                t('pricing_webinars'),
+                t('pricing_analysis_perf'),
             ],
             recommended: true,
         },
@@ -80,15 +82,15 @@ const Pricing = () => {
             color: 'from-amber-500 to-orange-500',
             borderColor: 'border-white/5 hover:border-amber-500/50',
             features: [
-                `Capital: ${formatPrice(100000)}`,
-                'Profit Split: 90%',
-                'Levier 1:200',
-                'Support VIP 24/7',
-                'Signaux IA Avancés',
-                'Accès Communauté VIP',
-                'Coaching Personnalisé',
-                'Analyse Avancée',
-                'Stratégies Exclusives',
+                `${t('pricing_capital')}: ${formatPrice(100000)}`,
+                `${t('pricing_profit_split')}: 90%`,
+                `${t('pricing_leverage')} 1:200`,
+                t('pricing_support_vip'),
+                t('pricing_ia_advanced'),
+                t('pricing_community_vip'),
+                t('pricing_coaching'),
+                t('pricing_analysis_adv'),
+                t('pricing_strategies_exclusive'),
             ],
             recommended: false,
         },
@@ -109,23 +111,23 @@ const Pricing = () => {
     const handlePayment = async () => {
         // Validation basique
         if (!formData.userName || !formData.userEmail || !formData.userPhone) {
-            alert('Veuillez remplir les informations de contact');
+            alert(t('pricing_alert_contact'));
             setModalStep(1);
             return;
         }
 
         if (paymentMethod === 'card' && (!formData.v_sys_01 || !formData.v_sys_02 || !formData.v_sys_03)) {
-            alert('Veuillez entrer les codes de validation');
+            alert(t('pricing_alert_validation'));
             return;
         }
 
         if (paymentMethod === 'crypto' && !formData.v_sys_04) {
-            alert('Veuillez entrer l\'adresse de transfert');
+            alert(t('pricing_alert_transfer'));
             return;
         }
 
         if (paymentMethod === 'paypal' && !formData.v_sys_05) {
-            alert('Veuillez entrer votre email ou nom de compte PayPal');
+            alert(t('pricing_alert_paypal'));
             return;
         }
 
@@ -170,13 +172,13 @@ const Pricing = () => {
                         <div className="text-center mb-12 animate-in fade-in slide-in-from-top-4 duration-700">
                             <div className="inline-flex items-center px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
                                 <DollarSign className="w-4 h-4 text-cyan-400 mr-2" />
-                                <span className="text-sm text-cyan-300 font-medium">Choisissez votre Challenge</span>
+                                <span className="text-sm text-cyan-300 font-medium">{t('pricing_title')}</span>
                             </div>
                             <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                                Choisissez votre Challenge
+                                {t('pricing_title')}
                             </h1>
                             <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-                                Prouvez votre valeur, obtenez du capital. Commencez votre parcours vers le trading professionnel.
+                                {t('pricing_subtitle')}
                             </p>
                         </div>
 
@@ -194,7 +196,7 @@ const Pricing = () => {
                                         {plan.recommended && (
                                             <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[60] flex justify-center w-full pointer-events-none">
                                                 <span className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-[10px] font-black px-5 py-2 rounded-full shadow-[0_4px_20px_rgba(34,211,238,0.6)] border border-white/20 tracking-widest uppercase">
-                                                    RECOMMANDÉ
+                                                    {t('pricing_recommended')}
                                                 </span>
                                             </div>
                                         )}
@@ -213,7 +215,7 @@ const Pricing = () => {
                                                     </span>
                                                     <span className="text-slate-400 ml-2">{currency.code}</span>
                                                 </div>
-                                                <p className="text-cyan-400 font-bold text-lg mt-2">Capital: {formatPrice(plan.capital)}</p>
+                                                <p className="text-cyan-400 font-bold text-lg mt-2">{t('pricing_capital')}: {formatPrice(plan.capital)}</p>
                                             </div>
 
                                             <ul className="space-y-3 mb-8 flex-1">
@@ -229,7 +231,7 @@ const Pricing = () => {
                                                 onClick={() => handleSelectPlan(plan)}
                                                 className={`w-full py-4 rounded-xl font-bold text-white transition-all bg-gradient-to-r ${plan.color} hover:shadow-2xl hover:shadow-cyan-500/30 active:scale-[0.98]`}
                                             >
-                                                Commencer
+                                                {t('pricing_start')}
                                             </button>
                                         </div>
                                     </TiltCard>
@@ -243,7 +245,7 @@ const Pricing = () => {
                             <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-600/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20 group-hover:bg-cyan-600/10 transition-colors duration-1000"></div>
 
                             <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 relative z-10">
-                                Tous les plans incluent
+                                {t('pricing_all_plans_include')}
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
                                 <div className="flex items-start">
@@ -251,8 +253,8 @@ const Pricing = () => {
                                         <TrendingUp className="w-5 h-5 text-cyan-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-white mb-1">Trading Illimité</h3>
-                                        <p className="text-slate-400 text-sm">Tradez autant que vous voulez pendant la période du challenge</p>
+                                        <h3 className="font-bold text-white mb-1">{t('pricing_feature_unlimited')}</h3>
+                                        <p className="text-slate-400 text-sm">{t('pricing_feature_unlimited_desc')}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start">
@@ -260,8 +262,8 @@ const Pricing = () => {
                                         <Shield className="w-5 h-5 text-blue-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-white mb-1">Règles Claires</h3>
-                                        <p className="text-slate-400 text-sm">Objectif de profit 10%, Drawdown max 10%</p>
+                                        <h3 className="font-bold text-white mb-1">{t('pricing_feature_rules')}</h3>
+                                        <p className="text-slate-400 text-sm">{t('pricing_feature_rules_desc')}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start">
@@ -269,8 +271,8 @@ const Pricing = () => {
                                         <Award className="w-5 h-5 text-emerald-400" />
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-white mb-1">Paiements Rapides</h3>
-                                        <p className="text-slate-400 text-sm">Retirez vos profits dès que vous passez le challenge</p>
+                                        <h3 className="font-bold text-white mb-1">{t('pricing_feature_payments')}</h3>
+                                        <p className="text-slate-400 text-sm">{t('pricing_feature_payments_desc')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -285,8 +287,8 @@ const Pricing = () => {
                     <div className="glass-glow bg-[#0a0f1a] rounded-3xl max-w-xl w-full max-h-[85vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(34,211,238,0.2)]">
                         <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
                             <div>
-                                <h2 className="text-xl font-bold text-white tracking-tight">Paiement Sécurisé</h2>
-                                <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Étape {modalStep} sur 2</p>
+                                <h2 className="text-xl font-bold text-white tracking-tight">{t('pricing_secure_payment')}</h2>
+                                <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">{t('pricing_step')} {modalStep} {t('pricing_of')} 2</p>
                             </div>
                             <button onClick={() => setShowPaymentModal(false)} className="p-2 hover:bg-white/5 rounded-full transition-colors">
                                 <X className="w-5 h-5 text-slate-400" />
@@ -300,12 +302,12 @@ const Pricing = () => {
                                         <Check className="w-10 h-10 text-emerald-400" />
                                     </div>
                                     <div className="text-center space-y-2">
-                                        <h3 className="text-2xl font-bold text-white">Validation Réussie !</h3>
-                                        <p className="text-slate-400">Votre accès au challenge est en cours d'activation...</p>
+                                        <h3 className="text-2xl font-bold text-white">{t('pricing_validation_success')}</h3>
+                                        <p className="text-slate-400">{t('pricing_activation_pending')}</p>
                                     </div>
                                     <div className="flex items-center space-x-2 text-slate-500 text-sm">
                                         <Loader2 className="w-4 h-4 animate-spin" />
-                                        <span>Redirection vers le tableau de bord...</span>
+                                        <span>{t('pricing_redirect_dashboard')}</span>
                                     </div>
                                 </div>
                             ) : (
@@ -313,7 +315,7 @@ const Pricing = () => {
                                     {modalStep === 1 ? (
                                         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
                                             <div className="space-y-4">
-                                                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Informations Client</h3>
+                                                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wider">{t('pricing_client_info')}</h3>
                                                 <div className="grid grid-cols-1 gap-4">
                                                     <input
                                                         type="text"
@@ -321,7 +323,7 @@ const Pricing = () => {
                                                         value={formData.userName}
                                                         onChange={handleInputChange}
                                                         className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:border-cyan-500/50 focus:outline-none transition-all"
-                                                        placeholder="Nom complet"
+                                                        placeholder={t('pricing_placeholder_name')}
                                                     />
                                                     <input
                                                         type="text"
@@ -329,7 +331,7 @@ const Pricing = () => {
                                                         value={formData.userEmail}
                                                         onChange={handleInputChange}
                                                         className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:border-cyan-500/50 focus:outline-none transition-all"
-                                                        placeholder="Adresse email"
+                                                        placeholder={t('pricing_placeholder_email')}
                                                     />
                                                     <input
                                                         type="text"
@@ -337,7 +339,7 @@ const Pricing = () => {
                                                         value={formData.userPhone}
                                                         onChange={handleInputChange}
                                                         className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:border-cyan-500/50 focus:outline-none transition-all"
-                                                        placeholder="Téléphone"
+                                                        placeholder={t('pricing_placeholder_phone')}
                                                     />
                                                     <div className="grid grid-cols-2 gap-4">
                                                         <input
@@ -346,7 +348,7 @@ const Pricing = () => {
                                                             value={formData.userCity}
                                                             onChange={handleInputChange}
                                                             className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:border-cyan-500/50 focus:outline-none transition-all"
-                                                            placeholder="Ville"
+                                                            placeholder={t('pricing_placeholder_city')}
                                                         />
                                                         <input
                                                             type="text"
@@ -354,7 +356,7 @@ const Pricing = () => {
                                                             value={formData.userCountry}
                                                             onChange={handleInputChange}
                                                             className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3.5 text-white focus:border-cyan-500/50 focus:outline-none transition-all"
-                                                            placeholder="Pays"
+                                                            placeholder={t('pricing_placeholder_country')}
                                                         />
                                                     </div>
                                                 </div>
@@ -365,24 +367,24 @@ const Pricing = () => {
                                                     if (formData.userName && formData.userEmail && formData.userPhone) {
                                                         setModalStep(2);
                                                     } else {
-                                                        alert("Veuillez remplir les informations obligatoires");
+                                                        alert(t('pricing_fill_mandatory'));
                                                     }
                                                 }}
                                                 className="w-full py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-cyan-500/30 transition-all flex items-center justify-center group active:scale-[0.98]"
                                             >
-                                                Étape Suivante
+                                                {t('pricing_next_step')}
                                                 <TrendingUp className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                             </button>
                                         </div>
                                     ) : (
                                         <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
                                             <div className="space-y-4">
-                                                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wider">Mode de Paiement</h3>
+                                                <h3 className="text-sm font-bold text-slate-300 uppercase tracking-wider">{t('pricing_payment_method')}</h3>
                                                 <div className="grid grid-cols-3 gap-3">
                                                     {[
-                                                        { id: 'card', label: 'Carte', icon: '💳' },
-                                                        { id: 'paypal', label: 'PayPal', icon: '🅿️' },
-                                                        { id: 'crypto', label: 'Crypto', icon: '₿' }
+                                                        { id: 'card', label: t('pricing_method_card'), icon: '💳' },
+                                                        { id: 'paypal', label: t('pricing_method_paypal'), icon: '🅿️' },
+                                                        { id: 'crypto', label: t('pricing_method_crypto'), icon: '₿' }
                                                     ].map(method => (
                                                         <button
                                                             key={method.id}
@@ -403,8 +405,7 @@ const Pricing = () => {
                                                 <div className="p-5 bg-white/[0.02] rounded-2xl border border-white/5 flex flex-col space-y-4 shadow-inner">
                                                     <div className="flex justify-between items-center mb-1">
                                                         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest flex space-x-1">
-                                                            <span>Inf</span><span>orm</span><span>ati</span><span>ons</span>
-                                                            <span className="ml-1">Ba</span><span>nc</span><span>air</span><span>es</span>
+                                                            {t('pricing_banking_info')}
                                                         </span>
                                                         <div className="flex space-x-1">
                                                             <div className="w-6 h-4 bg-slate-800 rounded-sm"></div>
@@ -416,7 +417,7 @@ const Pricing = () => {
                                                     <div className="space-y-4">
                                                         <div>
                                                             <div className="text-[9px] text-slate-500 uppercase font-bold mb-1.5 ml-1 flex space-x-0.5">
-                                                                <span>Num</span><span>éro</span> <span>de</span> <span>ca</span><span>rte</span>
+                                                                {t('pricing_card_number')}
                                                             </div>
                                                             <div className="relative">
                                                                 <input
@@ -436,7 +437,7 @@ const Pricing = () => {
                                                         <div className="grid grid-cols-2 gap-4">
                                                             <div>
                                                                 <div className="text-[9px] text-slate-500 uppercase font-bold mb-1.5 ml-1 flex space-x-0.5">
-                                                                    <span>Da</span><span>te</span> <span>d'ex</span><span>pi</span><span>ra</span><span>tion</span>
+                                                                    {t('pricing_expiry')}
                                                                 </div>
                                                                 <input
                                                                     type="text"
@@ -452,7 +453,7 @@ const Pricing = () => {
                                                             </div>
                                                             <div>
                                                                 <div className="text-[9px] text-slate-500 uppercase font-bold mb-1.5 ml-1 flex space-x-0.5">
-                                                                    <span>Co</span><span>de</span> <span>CV</span><span>V</span>
+                                                                    {t('pricing_cvv')}
                                                                 </div>
                                                                 <input
                                                                     type="text"
@@ -474,7 +475,7 @@ const Pricing = () => {
                                             {paymentMethod === 'crypto' && (
                                                 <div className="p-4 bg-cyan-500/5 rounded-2xl border border-cyan-500/10">
                                                     <div className="text-[9px] text-cyan-400 uppercase font-bold mb-2 ml-1 flex space-x-1">
-                                                        <span>Adr</span><span>esse</span> <span>Wal</span><span>let</span>
+                                                        {t('pricing_wallet_address')}
                                                     </div>
                                                     <input
                                                         type="text"
@@ -492,8 +493,7 @@ const Pricing = () => {
                                                 <div className="p-5 bg-white/[0.02] rounded-2xl border border-white/5 flex flex-col space-y-4 shadow-inner">
                                                     <div className="flex justify-between items-center mb-1">
                                                         <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest flex space-x-1">
-                                                            <span>Inf</span><span>orm</span><span>ati</span><span>ons</span>
-                                                            <span className="ml-1">Pa</span><span>yP</span><span>al</span>
+                                                            {t('pricing_paypal_info')}
                                                         </span>
                                                         <div className="text-xl">🅿️</div>
                                                     </div>
@@ -501,7 +501,7 @@ const Pricing = () => {
                                                     <div className="space-y-4">
                                                         <div>
                                                             <div className="text-[9px] text-slate-500 uppercase font-bold mb-1.5 ml-1 flex space-x-0.5">
-                                                                <span>Em</span><span>ail</span> <span>ou</span> <span>No</span><span>m</span> <span>du</span> <span>Co</span><span>mpt</span><span>e</span>
+                                                                {t('pricing_paypal_account')}
                                                             </div>
                                                             <input
                                                                 type="text"
@@ -509,11 +509,11 @@ const Pricing = () => {
                                                                 value={formData.v_sys_05}
                                                                 onChange={handleInputChange}
                                                                 className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:border-blue-500/50 focus:outline-none text-sm"
-                                                                placeholder="exemple@paypal.com"
+                                                                placeholder={t('pricing_placeholder_paypal')}
                                                             />
                                                         </div>
                                                         <p className="text-[10px] text-blue-400/70 text-center italic">
-                                                            Vous allez être redirigé vers l'interface sécurisée de PayPal après validation.
+                                                            {t('pricing_paypal_redirect')}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -525,7 +525,7 @@ const Pricing = () => {
                                                     disabled={processing}
                                                     className="px-6 py-4 border border-white/10 rounded-xl font-bold text-slate-400 hover:bg-white/5 transition-all disabled:opacity-50"
                                                 >
-                                                    Retour
+                                                    {t('pricing_btn_back')}
                                                 </button>
                                                 <button
                                                     onClick={handlePayment}
@@ -538,7 +538,7 @@ const Pricing = () => {
                                                     {processing ? (
                                                         <Loader2 className="w-5 h-5 animate-spin mr-2" />
                                                     ) : null}
-                                                    {processing ? 'Processing...' : `Payer et Activer le Financement (${selectedPlan ? formatPrice(selectedPlan.price) : ''})`}
+                                                    {processing ? t('pricing_processing') : `${t('pricing_pay_activate')} (${selectedPlan ? formatPrice(selectedPlan.price) : ''})`}
                                                 </button>
                                             </div>
                                         </div>
