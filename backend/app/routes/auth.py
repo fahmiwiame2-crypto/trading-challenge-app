@@ -129,10 +129,42 @@ def delete_account():
     if not user:
         return jsonify({"message": "User not found"}), 404
 
-    db.session.delete(user)
-    db.session.commit()
-    
-    return jsonify({"message": "User deleted successfully"})
+    try:
+        # Import all models with user_id foreign keys
+        from ..models import (
+            Trade, UserChallenge, Payment, UserProgress, 
+            UserLessonProgress, Certificate, QuizAnswer, 
+            ChatMessage, RiskAlert, UserBadge, UserXP, 
+            MessageReaction, Account, Transaction, Leaderboard
+        )
+        
+        # Delete all related records first (cascade delete)
+        Trade.query.filter_by(user_id=user.id).delete()
+        Payment.query.filter_by(user_id=user.id).delete()
+        UserChallenge.query.filter_by(user_id=user.id).delete()
+        UserProgress.query.filter_by(user_id=user.id).delete()
+        UserLessonProgress.query.filter_by(user_id=user.id).delete()
+        Certificate.query.filter_by(user_id=user.id).delete()
+        QuizAnswer.query.filter_by(user_id=user.id).delete()
+        ChatMessage.query.filter_by(user_id=user.id).delete()
+        RiskAlert.query.filter_by(user_id=user.id).delete()
+        UserBadge.query.filter_by(user_id=user.id).delete()
+        UserXP.query.filter_by(user_id=user.id).delete()
+        MessageReaction.query.filter_by(user_id=user.id).delete()
+        Account.query.filter_by(user_id=user.id).delete()
+        Transaction.query.filter_by(user_id=user.id).delete()
+        Leaderboard.query.filter_by(user_id=user.id).delete()
+        
+        # Now delete the user
+        db.session.delete(user)
+        db.session.commit()
+        
+        return jsonify({"message": "User deleted successfully"})
+    except Exception as e:
+        db.session.rollback()
+        print(f"Delete account error: {e}")
+        return jsonify({"message": f"Error deleting account: {str(e)}"}), 500
+
 
 import os
 from werkzeug.utils import secure_filename
