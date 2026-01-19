@@ -319,6 +319,71 @@
     background-color: hsl(210 40% 96%) !important;
   }
 
+  /* ===== AGGRESSIVE OVERRIDES FOR LIGHT MODE ===== */
+
+  /* Force all main containers to be light */
+  .light .flex.h-screen,
+  .light div[class*="bg-transparent"] {
+    background-color: hsl(210 40% 96%) !important;
+  }
+
+  /* Force sidebar to be white */
+  .light aside[class*="bg"],
+  .light div[class*="sidebar"],
+  .light .ml-64 {
+    background-color: hsl(0 0% 100%) !important;
+  }
+
+  /* Force gradient backgrounds to be light */
+  .light .bg-gradient-to-br,
+  .light .bg-gradient-to-r,
+  .light .bg-gradient-to-b {
+    background: linear-gradient(to bottom right, hsl(210 40% 98%), hsl(210 40% 96%)) !important;
+  }
+
+  /* Override any dark blue/purple backgrounds */
+  .light [style*="background"],
+  .light div[class*="from-purple"],
+  .light div[class*="from-blue"],
+  .light div[class*="to-indigo"] {
+    background: hsl(0 0% 100%) !important;
+  }
+
+  /* Nav link active state in light mode */
+  .light .nav-link.active {
+    background: linear-gradient(to right, hsl(195 85% 45%), hsl(220 70% 50%)) !important;
+    color: white !important;
+  }
+
+  /* Ensure all text is dark in light mode */
+  .light,
+  .light * {
+    color: hsl(222 47% 11%) !important;
+  }
+
+  /* But keep specific colored text */
+  .light .text-cyan-400,
+  .light .text-cyan-300,
+  .light .text-blue-400,
+  .light .text-emerald-400,
+  .light .text-red-400,
+  .light .text-amber-400,
+  .light [class*="text-cyan"],
+  .light [class*="text-blue"],
+  .light [class*="text-emerald"],
+  .light [class*="text-red"],
+  .light [class*="text-amber"],
+  .light .gradient-text {
+    color: hsl(195 85% 35%) !important;
+  }
+
+  /* White text stays white only on colored backgrounds */
+  .light .bg-gradient-to-r .text-white,
+  .light button .text-white,
+  .light .from-cyan-600 .text-white {
+    color: white !important;
+  }
+
   * {
     @apply border-border;
   }
