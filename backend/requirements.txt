@@ -1,0 +1,11 @@
+flask
+flask-cors
+flask-sqlalchemy
+yfinance
+beautifulsoup4
+requests
+pymysql
+python-dotenv
+cryptography
+gunicorn
+feedparser

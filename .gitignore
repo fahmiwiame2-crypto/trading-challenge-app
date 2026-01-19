@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Environment files (NEVER push these!)
+.env
+*.env
+.env.local
+.env.*.local
+
+# Build outputs
+frontend/dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Lock files (optional - you can keep these)
+# package-lock.json
+# bun.lockb

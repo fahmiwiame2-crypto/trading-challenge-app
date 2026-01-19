@@ -1,0 +1,138 @@
+========== MES LECONS POP ACADEMY ==========
+
+COURS: Introduction au Trading
+----------------------------------------
+
+[MODULE] Les Bases
+
+--- Qu'est-ce que le Forex ? ---
+Le Forex est le marché des changes...
+
+--- Comprendre les paires de devises ---
+Une paire de devises est la cotation de deux devises...
+
+[MODULE] Analyse Technique
+
+--- Chandeliers Japonais ---
+Les chandeliers japonais montrent l'ouverture, le haut, le bas et la fermeture...
+
+========================================
+
+COURS: Psychologie du Trader
+----------------------------------------
+
+[MODULE] Gestion des émotions
+
+--- Le FOMO ---
+Fear Of Missing Out...
+
+========================================
+
+COURS: Crypto Masterclass
+----------------------------------------
+
+[MODULE] Fondamentaux Blockchain
+
+--- Histoire du Bitcoin ---
+Contenu detaille pour la lecon 'Histoire du Bitcoin'. Ici nous apprenons les concepts cles...
+
+--- Proof of Work vs Proof of Stake ---
+Contenu detaille pour la lecon 'Proof of Work vs Proof of Stake'. Ici nous apprenons les concepts cles...
+
+--- Les Altcoins majeurs (ETH, SOL, ADA) ---
+Contenu detaille pour la lecon 'Les Altcoins majeurs (ETH, SOL, ADA)'. Ici nous apprenons les concepts cles...
+
+[MODULE] Securite Crypto
+
+--- Cold Wallets vs Hot Wallets ---
+Contenu detaille pour la lecon 'Cold Wallets vs Hot Wallets'. Ici nous apprenons les concepts cles...
+
+--- Eviter les Scams et Phishing ---
+Contenu detaille pour la lecon 'Eviter les Scams et Phishing'. Ici nous apprenons les concepts cles...
+
+--- Gerer ses cles privees ---
+Contenu detaille pour la lecon 'Gerer ses cles privees'. Ici nous apprenons les concepts cles...
+
+[MODULE] Trading Crypto
+
+--- Cycles de marche (Bull vs Bear) ---
+Contenu detaille pour la lecon 'Cycles de marche (Bull vs Bear)'. Ici nous apprenons les concepts cles...
+
+--- On-Chain Analysis ---
+Contenu detaille pour la lecon 'On-Chain Analysis'. Ici nous apprenons les concepts cles...
+
+--- DeFi et Yield Farming ---
+Contenu detaille pour la lecon 'DeFi et Yield Farming'. Ici nous apprenons les concepts cles...
+
+========================================
+
+COURS: Forex Pro Trader
+----------------------------------------
+
+[MODULE] Analyse Macro
+
+--- Taux d'interet et Banques Centrales ---
+Contenu detaille pour la lecon 'Taux d'interet et Banques Centrales'. Ici nous apprenons les concepts cles...
+
+--- Impact du NFP et CPI ---
+Contenu detaille pour la lecon 'Impact du NFP et CPI'. Ici nous apprenons les concepts cles...
+
+--- Correlations des devises ---
+Contenu detaille pour la lecon 'Correlations des devises'. Ici nous apprenons les concepts cles...
+
+[MODULE] Price Action Avance
+
+--- Zones de Supply & Demand ---
+Contenu detaille pour la lecon 'Zones de Supply & Demand'. Ici nous apprenons les concepts cles...
+
+--- Structures de marche (BOS, CHoCH) ---
+Contenu detaille pour la lecon 'Structures de marche (BOS, CHoCH)'. Ici nous apprenons les concepts cles...
+
+--- Liquidity Grabs ---
+Contenu detaille pour la lecon 'Liquidity Grabs'. Ici nous apprenons les concepts cles...
+
+========================================
+
+COURS: Psychologie & Risk Management
+----------------------------------------
+
+[MODULE] Mindset
+
+--- Discipline et Routine ---
+Contenu detaille pour la lecon 'Discipline et Routine'. Ici nous apprenons les concepts cles...
+
+--- Accepter les pertes ---
+Contenu detaille pour la lecon 'Accepter les pertes'. Ici nous apprenons les concepts cles...
+
+--- Le journal de trading ---
+Contenu detaille pour la lecon 'Le journal de trading'. Ici nous apprenons les concepts cles...
+
+[MODULE] Gestion du Risque
+
+--- Calcul de position (Lot Size) ---
+Contenu detaille pour la lecon 'Calcul de position (Lot Size)'. Ici nous apprenons les concepts cles...
+
+--- Ratio Risk/Reward ---
+Contenu detaille pour la lecon 'Ratio Risk/Reward'. Ici nous apprenons les concepts cles...
+
+--- Drawdown Management ---
+Contenu detaille pour la lecon 'Drawdown Management'. Ici nous apprenons les concepts cles...
+
+========================================
+
+COURS: Actions & Indices
+----------------------------------------
+
+[MODULE] Les Indices US
+
+--- S&P500 vs NASDAQ ---
+Contenu detaille pour la lecon 'S&P500 vs NASDAQ'. Ici nous apprenons les concepts cles...
+
+--- Heures d'ouverture et volatilite ---
+Contenu detaille pour la lecon 'Heures d'ouverture et volatilite'. Ici nous apprenons les concepts cles...
+
+--- Earnings Season ---
+Contenu detaille pour la lecon 'Earnings Season'. Ici nous apprenons les concepts cles...
+
+========================================
+

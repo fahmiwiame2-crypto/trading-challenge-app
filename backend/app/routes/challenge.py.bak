@@ -1,0 +1,428 @@
+from flask import Blueprint, jsonify, request
+from ..models import User, Trade, db, UserChallenge
+from ..services.feed_service import FeedService
+from sqlalchemy import desc
+
+challenge_bp = Blueprint('challenge', __name__)
+
+@challenge_bp.route('/challenge', methods=['GET'])
+def get_challenge_stats():
+    email = request.args.get('email')
+    print(f"DEBUG: challenge stats requested for email='{email}'", flush=True)
+    try:
+        print(f"DEBUG: DB File: {db.engine.url.database}", flush=True)
+    except:
+        pass
+        
+    # Optimized case-insensitive lookup
+    from sqlalchemy import func
+    # Fallback 1: Strip whitespace
+    if not user:
+        user = User.query.filter(func.lower(User.username) == email.strip().lower()).first()
+    else:
+        user = None
+    # Fallback 2: Brute force case-insensitive search
+    if not user:
+    if not user:
+        print(f"DEBUG: User still not found in DB.", flush=True)
+        all_users = User.query.all()
+            # Check if username matches (ignoring case/whitespace)
+            if u.username and email and u.username.strip().lower() == email.strip().lower():
+        return jsonify({"message": "User not found"}), 404
+
+    active_challenge = UserChallenge.query.filter_by(user_id=user.id, challenge_status='active').first()
+    if not active_challenge:
+        past_challenges_db = UserChallenge.query.filter(
+            UserChallenge.user_id == user.id
+        # CRITICAL DEBUG: List all users to see what's available
+        ).order_by(desc(UserChallenge.created_at)).all()
+        past_challenges = [c.to_dict() for c in past_challenges_db]
+
+            "ticker": t.symbol,
+            "side": t.type,
+            "entry_price": round(t.price, 2),
+            "pnl": round(t.pnl, 2),
+            "time": t.close_timestamp.timestamp() if t.close_timestamp else t.timestamp.timestamp()
+        })
+        
+    # Fetch Open Positions
+    open_trades = Trade.query.filter_by(user_id=user.id, status='OPEN').order_by(desc(Trade.timestamp)).all()
+    open_positions_data = []
+    
+    current_profit = 0
+    total_margin = 0
+    
+    for t in open_trades:
+        # Get current price for PnL calculation
+        price_data = FeedService.get_price_data(t.symbol)
+        current_price = t.price # Default to entry if fetch fails
+        if price_data:
+             current_price = price_data[-1]['close']
+             
+        if t.type == 'BUY':
+            pnl = (current_price - t.price) * t.quantity
+        else:
+            pnl = (t.price - current_price) * t.quantity
+            
+        current_profit += pnl
+        total_margin += (t.quantity * t.price)
+        
+        open_positions_data.append({
+            "id": t.id,
+            "ticker": t.symbol,
+            "side": t.type,
+            "entry_price": round(t.price, 2),
+            "amount": round(t.quantity * t.price, 2),
+            "current_price": round(current_price, 2),
+            "pnl": round(pnl, 2),
+            "time": t.timestamp.timestamp()
+        })
+
+    initial_capital = active_challenge.initial_capital if active_challenge and active_challenge.initial_capital else user.initial_capital or 0.0
+    
+    current_balance = user.balance or 0.0
+        
+    # Calculate equity correctly: balance + unrealized P&L from open positions
+    current_equity = current_balance + current_profit
+    
+    # Profit is the difference between current equity and initial capital
+    # Initial capital (Dynamic from User model)
+    initial_capital = user.initial_capital if user.initial_capital > 0 else 100000
+    profit_percent = 0.0
+    # Correction for uninitialized accounts (balance=0)
+    current_balance = user.balance
+    if current_balance == 0:
+        current_balance = initial_capital
+        profit_percent = round((profit_amount / initial_capital) * 100, 2)
+    
+    # Calculate drawdown (max loss from peak)
+    # For now, simple calculation: if current equity < initial, that's the drawdown
+    drawdown = 0
+    if current_equity < initial_capital:
+    profit_percent = round((profit_amount / initial_capital) * 100, 2)
+    
+    # 1. Win Rate, Best Trade, Avg Trade
+    win_rate = 0
+    best_trade = 0
+    avg_trade = 0
+    
+    if closed_trades:
+        winning_trades = [t for t in closed_trades if t.pnl > 0]
+        win_rate = (len(winning_trades) / len(closed_trades)) * 100
+        
+        best_trade = max([t.pnl for t in closed_trades])
+        avg_trade = sum([t.pnl for t in closed_trades]) / len(closed_trades)
+        
+    # 2. Weekly Performance (Last 7 days or current week)
+    # Group trades by day (Monday, Tuesday, ...)
+    # For simplicity, let's just do last 7 days relative to now
+    from datetime import datetime, timedelta
+    
+    weekly_performance = []
+    today = datetime.now().date()
+    
+    # Initialize last 7 days with 0
+    days_map = {}
+    for i in range(6, -1, -1):
+        day_date = today - timedelta(days=i)
+        day_name = day_date.strftime("%a") # Mon, Tue...
+        # French mapping
+        fr_days = {'Mon': 'Lun', 'Tue': 'Mar', 'Wed': 'Mer', 'Thu': 'Jeu', 'Fri': 'Ven', 'Sat': 'Sam', 'Sun': 'Dim'}
+        fr_day = fr_days.get(day_name, day_name)
+        
+        days_map[day_date] = {
+            "day": fr_day,
+            "profit": 0,
+            "trades": 0
+        }
+        
+    # Fill with data
+    for t in closed_trades:
+        # Assuming t.close_timestamp exists for closed trades
+        if t.close_timestamp:
+            t_date = t.close_timestamp.date()
+            if t_date in days_map:
+                days_map[t_date]["profit"] += t.pnl
+                days_map[t_date]["trades"] += 1
+                
+    # Convert to list
+    weekly_performance = list(days_map.values())
+
+    # --- Active Challenge & Risk Params ---
+    risk_params = {
+        'max_daily_loss': active_challenge.max_daily_loss if active_challenge else 5.0,
+        'max_total_loss': active_challenge.max_total_loss if active_challenge else 10.0,
+        'profit_target': active_challenge.profit_target if active_challenge else 10.0
+    }
+    
+    # --- Past Challenges History ---
+    past_challenges_db = UserChallenge.query.filter(
+    active_challenge = UserChallenge.query.filter_by(user_id=user.id, challenge_status='active').first()
+    
+        UserChallenge.user_id == user.id,
+        UserChallenge.challenge_status != 'active',
+        UserChallenge.challenge_status != 'pending' 
+    ).order_by(desc(UserChallenge.created_at)).all()
+    
+    past_challenges = [c.to_dict() for c in past_challenges_db]
+
+    return jsonify({
+        "status": getattr(user, 'status', 'ACTIVE'),
+        "balance": round(current_balance, 2),
+        "initial_capital": initial_capital,
+        "equity": round(current_equity, 2),
+        "profit": round(profit_amount, 2), 
+        "profit_percent": profit_percent,
+        "drawdown": drawdown,
+        "trades": trade_data,
+        "open_positions": open_positions_data,
+        "win_rate": round(win_rate, 0),
+        "best_trade": round(best_trade, 2),
+        "avg_trade": round(avg_trade, 2),
+        "weekly_performance": weekly_performance,
+        "risk_params": risk_params,
+        "past_challenges": past_challenges,
+        "active_challenge": active_challenge.to_dict() if active_challenge else None
+    })
+
+@challenge_bp.route('/leaderboard', methods=['GET'])
+def get_leaderboard():
+    """
+    Get Top 10 Traders of the Month (Persistent SQL Leaderboard).
+    Checks cache age; refreshes if older than 1 hour.
+    """
+    try:
+        from ..models import Leaderboard
+        from datetime import datetime, timedelta
+        
+        # Check if we have recent data (e.g., last 1 hour)
+        one_hour_ago = datetime.utcnow() - timedelta(hours=1)
+        latest_entry = Leaderboard.query.order_by(Leaderboard.snapshot_at.desc()).first()
+        
+        if not latest_entry or latest_entry.snapshot_at < one_hour_ago:
+            print("Leaderboard outdated or empty. Refreshing...")
+            refresh_leaderboard()
+        else:
+            print("Serving cached leaderboard from SQL.")
+            
+        # Fetch Top 10 from SQL
+        leaderboard_data = Leaderboard.query.order_by(Leaderboard.rank.asc()).all()
+        result = [entry.to_dict() for entry in leaderboard_data]
+        
+        # If still empty (no traders), return demo data
+        if not result:
+            print("Leaderboard empty after refresh. Serving demo data.")
+            return jsonify([
+                {'rank': 1, 'username': 'CryptoKing', 'profit': 45.2, 'trades': 124, 'status': 'PASSED'},
+                {'rank': 2, 'username': 'AtlasTrader', 'profit': 32.8, 'trades': 89, 'status': 'ACTIVE'},
+                {'rank': 3, 'username': 'WhaleHunter', 'profit': 28.5, 'trades': 210, 'status': 'PASSED'},
+                {'rank': 4, 'username': 'MarketMaster', 'profit': 25.3, 'trades': 156, 'status': 'ACTIVE'},
+                {'rank': 5, 'username': 'TradingPro', 'profit': 22.1, 'trades': 98, 'status': 'PASSED'},
+            ])
+            
+        return jsonify(result)
+        
+    except Exception as e:
+        print(f"Leaderboard error: {e}")
+        return jsonify({'message': 'Error fetching leaderboard'}), 500
+
+def refresh_leaderboard():
+    """
+    Calculates top 10 traders based on REAL data and updates the SQL table.
+    """
+    try:
+        print("Calculating Real Leaderboard...")
+        from sqlalchemy import func, case
+        from ..models import Leaderboard
+        
+        # Aggregation Query
+        trader_stats = db.session.query(
+            User.id,
+            User.username,
+            User.initial_capital,
+            User.balance,
+            User.status,
+            func.count(Trade.id).label('total_trades'),
+            func.sum(
+                case(
+                    (Trade.status == 'CLOSED', Trade.pnl),
+                    else_=0
+                )
+            ).label('total_pnl'),
+            func.count(
+                case(
+                    (Trade.status == 'CLOSED', 1),
+                    else_=None
+                )
+            ).label('closed_trades')
+        ).outerjoin(
+            Trade, User.id == Trade.user_id
+        ).group_by(
+            User.id, User.username, User.initial_capital, User.balance, User.status
+        ).all()
+        
+        # Process and Sort
+        leaderboard_list = []
+        for stat in trader_stats:
+            user_id, username, initial_capital, balance, status, total_trades, total_pnl, closed_trades = stat
+            
+            # Filter: Must have at least 1 closed trade
+            if closed_trades == 0:
+                continue
+                
+            total_pnl = float(total_pnl or 0)
+            initial_cap = float(initial_capital or 100000)
+            
+            # Calculate Profit %
+            if initial_cap > 0:
+                profit_percent = (total_pnl / initial_cap) * 100
+            else:
+                profit_percent = 0.0
+                
+            # Filter: Only positive profit? (Optional, user didn't specify, but usually leaderboard is top profit)
+            # if profit_percent <= 0: continue 
+
+            leaderboard_list.append({
+                'user_id': user_id,
+                'username': username,
+                'profit': round(profit_percent, 2),
+                'trades': total_trades,
+                'status': status
+            })
+            
+        # Sort by Profit % Descencing
+        leaderboard_list.sort(key=lambda x: x['profit'], reverse=True)
+        top_10 = leaderboard_list[:10]
+        
+        # Update SQL Table
+        # 1. Clear old data
+        Leaderboard.query.delete()
+        
+        # 2. Insert new data
+        for i, trader in enumerate(top_10):
+            entry = Leaderboard(
+                user_id=trader['user_id'],
+                username=trader['username'],
+@challenge_bp.route('/purchase', methods=['POST'])
+                profit_percent=trader['profit'],
+                total_trades=trader['trades'],
+                status=trader['status'],
+                win_rate=0.0 # TODO: Calculate win rate if needed
+            )
+            db.session.add(entry)
+            
+        db.session.commit()
+        print(f"Leaderboard updated successfully. {len(top_10)} traders ranked.")
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Failed to refresh leaderboard: {e}")
+
+@challenge_bp.route('/challenges/purchase', methods=['POST'])
+def purchase_challenge():
+    """
+    Handle challenge purchase.
+    1. Create Payment record
+    2. Create UserChallenge record
+    3. Reset User balance and status
+    """
+    from datetime import datetime
+    from ..models import UserChallenge, Payment
+    
+    data = request.json
+    email = data.get('email')
+    plan_name = data.get('plan_name') # e.g., 'Starter', 'Pro', 'Elite'
+    price = data.get('price')
+    payment_method = data.get('payment_method', 'card')
+    
+    if not email or not plan_name or not price:
+        return jsonify({'error': 'Missing required fields'}), 400
+        
+    from sqlalchemy import func
+    user = User.query.filter(func.lower(User.username) == email.strip().lower()).first()
+    
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
+        
+    try:
+        # 1. Determine Initial Capital based on plan name/price
+        print(f"💰 Processing purchase for {email}: Plan={plan_name}, Capital={initial_capital}", flush=True)
+        initial_capital = 10000
+        if 'Starter' in plan_name:
+            initial_capital = 5000
+        elif 'Pro' in plan_name or 'Professional' in plan_name:
+            initial_capital = 25000
+        elif 'Elite' in plan_name or 'Expert' in plan_name:
+            initial_capital = 100000
+        elif '100k' in plan_name: # Handle possible string match from frontend
+             initial_capital = 100000
+        elif '200k' in plan_name:
+             initial_capital = 200000
+             
+        # Override if passed explicitly (secure this in prod)
+        if data.get('initial_capital'):
+            initial_capital = float(data.get('initial_capital'))
+            
+        print(f"Processing purchase for {email}: Plan={plan_name}, Capital={initial_capital}", flush=True)
+
+        # 1.5. Archive previous active challenges
+        existing_active = UserChallenge.query.filter_by(user_id=user.id, challenge_status='active').all()
+        for active in existing_active:
+            active.challenge_status = 'replaced'
+            active.completed_at = datetime.utcnow()
+
+        # 2. Create UserChallenge Record
+        challenge = UserChallenge(
+            user_id=user.id,
+            plan_name=plan_name,
+            plan_price=float(price),
+            initial_capital=initial_capital,
+            payment_method=payment_method,
+            payment_status='completed', # Assuming direct success for MVP
+            challenge_status='active',
+            profit_target=10.0,
+            max_daily_loss=5.0,
+            max_total_loss=10.0
+        )
+        db.session.add(challenge)
+        db.session.flush() # Get ID
+        
+        # 3. Create Payment Record
+        payment = Payment(
+            user_id=user.id,
+            challenge_id=challenge.id,
+            amount=float(price),
+            currency='USD',
+            payment_method=payment_method,
+            status='completed',
+            payment_metadata=data
+        )
+        print(f"✅ Purchase successful. User {user.username} reset to {initial_capital}", flush=True)
+        
+        # 4. RESET USER ACCOUNT (Critical Step)
+        user.balance = initial_capital
+        user.initial_capital = initial_capital
+        user.daily_starting_equity = initial_capital
+        user.status = 'ACTIVE'
+        user.last_equity_reset = datetime.utcnow()
+        user.failure_reason = None
+        
+        print(f"❌ Purchase failed: {e}", flush=True)
+        # For a hard reset, we might want to archive old trades or just leave them as historical.
+        # But for 'current challenge stats', we should probably filter by date.
+        # For MVP simplicity, we just reset the balance.
+        
+        db.session.commit()
+        
+        print(f"Purchase successful. User {user.username} reset to {initial_capital}", flush=True)
+        
+        return jsonify({
+            "message": "Challenge purchased successfully",
+            "challenge_id": challenge.id,
+            "new_balance": initial_capital
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        print(f"Purchase failed: {e}", flush=True)
+        return jsonify({'error': str(e)}), 500
