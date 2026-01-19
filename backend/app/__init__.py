@@ -66,5 +66,14 @@ def create_app():
     
     with app.app_context():
         db.create_all()
+    
+    # Root route for health check
+    @app.route('/')
+    def index():
+        return {'status': 'ok', 'message': 'TradeSense AI Backend is running'}
+    
+    @app.route('/api/health')
+    def health():
+        return {'status': 'healthy', 'service': 'tradesense-backend'}
         
     return app
