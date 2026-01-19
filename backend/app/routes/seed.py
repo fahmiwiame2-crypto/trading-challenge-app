@@ -21,6 +21,11 @@ def seed_courses():
             }), 400
         
         if force:
+            # Delete in order of dependence to avoid foreign key violations
+            Question.query.delete()
+            Quiz.query.delete()
+            Lesson.query.delete()
+            Module.query.delete()
             Course.query.delete()
             db.session.commit()
         
