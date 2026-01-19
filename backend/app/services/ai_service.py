@@ -356,6 +356,20 @@ Que souhaitez-vous savoir ? 😊"""
             
         confidence = random.randint(60, 95)
         
+        # Risk level and quality score based on confidence
+        if confidence >= 80:
+            risk_level = "low"
+            risk_message = "Conditions favorables. Risque modéré."
+            quality_score = confidence
+        elif confidence >= 65:
+            risk_level = "medium"
+            risk_message = "Volatilité modérée détectée. Ajustez vos stop-loss."
+            quality_score = confidence - 10
+        else:
+            risk_level = "high"
+            risk_message = "Forte volatilité ! Évitez ce trade ou réduisez votre exposition."
+            quality_score = confidence - 20
+        
         return {
             "symbol": symbol,
             "signal": signal_type,
@@ -364,5 +378,8 @@ Que souhaitez-vous savoir ? 😊"""
             "take_profit": take_profit,
             "confidence": confidence,
             "reason": reason,
-            "timestamp": "Maintenant"
+            "timestamp": "Maintenant",
+            "risk_level": risk_level,
+            "risk_message": risk_message,
+            "quality_score": quality_score
         }
