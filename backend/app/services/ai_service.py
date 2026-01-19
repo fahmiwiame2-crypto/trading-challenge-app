@@ -158,48 +158,100 @@ Réponds toujours en français."""
         print("[DEBUG] Groq failed or unavailable")
         
         # Fallback to rule-based responses if both AI fail
-        print("[DEBUG] AI APIs unavailable, using fallback responses")
+        print("[DEBUG] AI APIs unavailable, using intelligent fallback responses")
         
+        # Enhanced fallback with risk analysis
+        if "risque" in message_lower or "risk" in message_lower:
+            return """📊 **Analyse des Risques de Trading**
+
+Les principaux risques aujourd'hui sont :
+
+1. **Risque de Marché** 📉
+   - Volatilité accrue sur les indices
+   - Surveillez le niveau de support clé
+
+2. **Risque de Liquidité** 💧
+   - Volume faible = spreads plus larges
+   - Évitez de trader pendant les périodes creuses
+
+3. **Risque de Sur-Trading** ⚠️
+   - Ne dépassez pas 2-3% de risque par trade
+   - Respectez votre plan de trading
+
+**Conseil** : Utilisez toujours un Stop Loss et ne risquez jamais plus de 1-2% de votre capital par position."""
         
         # Intents
         if "bonjour" in message_lower or "salut" in message_lower or "hello" in message_lower:
-            return "Bonjour ! Je suis votre assistant TradeSense Copilot. Je peux analyser le marché BVC et Crypto pour vous. Que souhaitez-vous savoir ?"
+            return "Bonjour ! Je suis votre assistant TradeSense Copilot 🤖\n\nJe peux vous aider avec :\n• Analyse du marché BVC 📊\n• Conseils de gestion des risques ⚠️\n• Dernières actualités 📰\n• Stratégies de trading 💡\n\nQue souhaitez-vous savoir ?"
             
         if "tendance" in message_lower or "marché" in message_lower or "market" in message_lower:
             if bvc_data:
                 positive_count = sum(1 for stock in bvc_data if stock['change'] > 0)
                 total = len(bvc_data)
-                sentiment = "haussier" if positive_count > total / 2 else "baissier"
+                sentiment = "haussier 📈" if positive_count > total / 2 else "baissier 📉"
                 iam_price = next((s['price'] for s in bvc_data if s['symbol'] == 'IAM'), 'N/A')
-                return f"Le marché BVC semble globalement {sentiment} aujourd'hui. {positive_count} actions sont en hausse sur {total} surveillées. L'action IAM est actuellement à {iam_price} MAD."
-            return "Je ne peux pas accéder aux données du marché pour le moment."
+                return f"**Analyse de Marché BVC**\n\nLe marché semble globalement {sentiment} aujourd'hui.\n\n• {positive_count} actions en hausse sur {total} surveillées\n• IAM (Maroc Telecom) : {iam_price} MAD\n• Sentiment général : {sentiment.replace('📈', '').replace('📉', '')}\n\n💡 Surveillez les cassures de support/résistance pour vos entrées."
+            return "📊 Impossible d'accéder aux données de marché actuellement. Vérifiez votre connexion."
 
         if "iam" in message_lower or "maroc telecom" in message_lower:
             stock = next((s for s in bvc_data if s['symbol'] == 'IAM'), None)
             if stock:
-                trend = "hausse" if stock['change'] > 0 else "baisse"
-                return f"Maroc Telecom (IAM) est coté à {stock['price']} MAD, en {trend} de {stock['change']}%. Volume: {stock.get('volume', 'N/A')}."
-            return "Je ne trouve pas de données pour IAM pour le moment."
+                trend = "hausse 📈" if stock['change'] > 0 else "baisse 📉"
+                return f"**Maroc Telecom (IAM)**\n\n💰 Prix : {stock['price']} MAD\n📊 Variation : {stock['change']:+.2f}%\n📈 Tendance : {trend}\n📦 Volume : {stock.get('volume', 'N/A')}\n\n💡 IAM est une valeur défensive du MASI."
+            return "❌ Données IAM temporairement indisponibles."
             
         if "atw" in message_lower or "attijari" in message_lower:
             stock = next((s for s in bvc_data if s['symbol'] == 'ATW'), None)
             if stock:
-                return f"Attijariwafa Bank (ATW) s'échange à {stock['price']} MAD ({stock['change']}%). C'est une valeur clé du MASI."
-            return "Je ne trouve pas de données pour ATW pour le moment."
+                return f"**Attijariwafa Bank (ATW)**\n\n💰 {stock['price']} MAD ({stock['change']:+.2f}%)\n🏦 Leader bancaire marocain\n📊 Poids important dans le MASI"
+            return "❌ Données ATW temporairement indisponibles."
             
         if "crypto" in message_lower or "btc" in message_lower or "bitcoin" in message_lower:
-            return "Le marché crypto est très volatil. Le Bitcoin (BTC) se négocie actuellement autour de 97 000$. Je vous conseille de surveiller les niveaux de support clés et de toujours utiliser un Stop Loss."
+            return """🪙 **Marché Crypto - Analyse Rapide**
 
-        if "conseil" in message_lower or "buy" in message_lower or "sell" in message_lower or "achat" in message_lower:
-            return "En tant qu'IA, je ne donne pas de conseils financiers directs. Cependant, observez le RSI et les volumes. Si le RSI > 70, attention au surachat. Gérez toujours votre risque avec un Stop Loss."
+• **Bitcoin (BTC)** : ~97,000 USD
+• **Ethereum (ETH)** : ~2,850 USD  
+• **Volatilité** : ÉLEVÉE ⚠️
+
+**Conseils Crypto :**
+1. Utilisez TOUJOURS un Stop Loss
+2. Ne tradez que 1-2% de votre capital
+3. Surveillez les niveaux de support : 95k$ pour BTC
+4. Évitez le FOMO (Fear Of Missing Out)
+
+💡 Le marché crypto est 24/7 - gérez votre temps et énergie !"""
+
+        if "conseil" in message_lower or "buy" in message_lower or "sell" in message_lower or "achat" in message_lower or "stratégie" in message_lower:
+            return """💡 **Conseils de Trading Professionnel**
+
+**Règles d'Or :**
+1. **Gestion du Risque** ⚠️
+   - Max 1-2% du capital par trade
+   - Stop Loss OBLIGATOIRE
+
+2. **Analyse Technique** 📊
+   - RSI > 70 : Surachat (prudence)
+   - RSI < 30 : Survente (opportunité ?)
+   - Confirmez avec les volumes
+
+3. **Psychologie** 🧠
+   - Pas de revenge trading
+   - Suivez votre plan
+   - Acceptez les pertes
+
+4. **Timing** ⏰
+   - Évitez les heures creuses
+   - Tradez les breakouts confirmés
+
+⚖️ Je ne donne pas de conseils financiers directs - faites vos propres recherches !"""
         
         # News & Market Summary
         if "nouvelles" in message_lower or "news" in message_lower or "actualité" in message_lower or "infos" in message_lower:
-            news = NewsService.get_market_news()[:3] # Get top 3 news
-            response = "📰 **Dernières Actualités du Marché :**\n\n"
+            news = NewsService.get_market_news()[:3]
+            response = "📰 **Dernières Actualités du Marché**\n\n"
             for item in news:
                 sentiment_emoji = "🟢" if item['sentiment'] == 'POSITIVE' else "🔴" if item['sentiment'] == 'NEGATIVE' else "⚪"
-                response += f"{sentiment_emoji} **{item['source']}**: {item['title']} ({item['time']})\n"
+                response += f"{sentiment_emoji} **{item['source']}**\n{item['title']}\n🕐 {item['time']}\n\n"
             return response
             
         if "résumé" in message_lower or "briefing" in message_lower or "récap" in message_lower:
@@ -207,23 +259,33 @@ Réponds toujours en français."""
             response = f"📑 **{summary['title']}**\n\n"
             for line in summary['content']:
                 response += f"• {line}\n"
-            response += f"\n🏆 Tendance Dominante: {summary['dominant_trend']}"
+            response += f"\n\n🏆 **Tendance Dominante** : {summary['dominant_trend']}"
             return response
 
         # Price queries for BVC
         if "prix" in message_lower or "cours" in message_lower or "cotation" in message_lower or "bvc" in message_lower:
             if bvc_data:
                 top_stocks = bvc_data[:5]
-                response = "📊 Prix BVC en temps réel :\n\n"
+                response = "📊 **Prix BVC en Temps Réel**\n\n"
                 for stock in top_stocks:
                     trend_emoji = "📈" if stock['change'] > 0 else "📉"
-                    response += f"{trend_emoji} {stock['symbol']} : {stock['price']} MAD ({stock['change']:+.2f}%)\n"
-                response += "\nVoulez-vous des détails sur une action spécifique ?"
+                    response += f"{trend_emoji} **{stock['symbol']}** : {stock['price']} MAD ({stock['change']:+.2f}%)\n"
+                response += "\n💬 Demandez-moi des détails sur une action spécifique !"
                 return response
-            return "Je ne peux pas accéder aux données du marché BVC pour le moment."
+            return "❌ Impossible d'accéder aux données BVC actuellement."
 
-        # Fallback
-        return "Je comprends votre question. Je travaille en mode limité pour le moment.\n\nJe peux vous aider avec :\n1. 📊 Les prix BVC (ex: 'Prix IAM')\n2. 📰 Les dernières nouvelles (ex: 'Donne moi les nouvelles')\n3. 📑 Un briefing de marché (ex: 'Résumé marché')"
+        # Generic helpful fallback
+        return """Je suis TradeSense Copilot 🤖, votre assistant trading !
+
+**Je peux vous aider avec :**
+
+1. 📊 **Prix BVC** - "Prix IAM" ou "Cours ATW"
+2. 📰 **Actualités** - "Donne-moi les nouvelles"  
+3. 📑 **Briefing** - "Résumé marché"
+4. ⚠️ **Gestion Risques** - "Quels sont les risques ?"
+5. 💡 **Conseils Trading** - "Donne-moi des conseils"
+
+Que souhaitez-vous savoir ? 😊"""
 
     @staticmethod
     def generate_signal(symbol):
