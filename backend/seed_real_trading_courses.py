@@ -16,68 +16,131 @@ def seed_real_trading_courses():
         curriculum = [
             {
                 "title": "Introduction au Trading - Les Fondamentaux",
-                "desc": "Apprenez les bases essentielles du trading : marchés financiers, ordres, plateformes et vocabulaire indispensable.",
+                "desc": "La formation indispensable pour tout débutant. De la compréhension des marchés à l'ouverture de votre premier trade, maîtrisez les bases pour partir du bon pied.",
                 "cat": "Débutant",
                 "diff": 1,
                 "emoji": "📚",
-                "tags": ["Bases", "Débutant", "Introduction"],
+                "tags": ["Bases", "Débutant", "Marchés"],
                 "duration": "2h 30m",
                 "modules": [
                     {
-                        "title": "Comprendre les Marchés Financiers",
+                        "title": "Module 1: L'Écosystème du Trading",
                         "lessons": [
                             {
                                 "title": "Qu'est-ce que le Trading ?",
                                 "duration": "12m",
-                                "content": "Le trading consiste à acheter et vendre des actifs financiers pour réaliser des profits. Découvrez les différents types de marchés (Forex, Actions, Crypto, Commodités) et comment ils fonctionnent."
+                                "content": """
+## Introduction
+Le trading est l'activité d'achat et de vente d'actifs financiers dans le but de réaliser un profit. Contrairement à l'investissement qui vise le long terme (années), le trading profite des fluctuations de prix à court terme (minutes, heures, jours).
+
+## Les Acteurs du Marché
+Le marché n'est pas une entité abstraite, c'est un lieu de rencontre entre :
+*   **Les Banques Centrales** : Elles dirigent la politique monétaire (FED, BCE).
+*   **Les Banques Commerciales** : Les plus gros volumes d'échange.
+*   **Les Hedge Funds & Institutions** : Ils gèrent des milliards pour leurs clients.
+*   **Les Traders Particuliers (Retail)** : C'est vous ! Nous représentons une petite partie du volume, mais nous sommes nombreux.
+
+## Pourquoi Trader ?
+1.  **Indépendance** : Vous être votre propre patron.
+2.  **Accessibilité** : Avec internet, tout le monde peut accéder aux marchés mondiaux.
+3.  **Potentiel** : Les gains ne sont pas plafonnés par un salaire horaire.
+                                """
                             },
                             {
                                 "title": "Les Différents Types de Marchés",
                                 "duration": "15m",
-                                "content": "Forex (devises), Actions (entreprises), Cryptomonnaies (Bitcoin, Ethereum), Commodités (Or, Pétrole). Chaque marché a ses particularités, horaires et volatilité."
+                                "content": """
+## Vue d'Ensemble
+Il existe plusieurs grands marchés, chacun avec ses horaires et spécificités.
+
+### 1. Le Forex (Foreign Exchange)
+*   **Quoi ?** Échange de devises (ex: Euro contre Dollar).
+*   **Volume** : Le plus grand marché au monde (+6000 milliards $/jour).
+*   **Horaires** : 24h/24, 5j/7.
+
+### 2. Le Marché Actions (Stocks)
+*   **Quoi ?** Parts de propriété d'une entreprise (Apple, Tesla, LVMH).
+*   **Spécificité** : Dépend fortement des résultats de l'entreprise.
+*   **Horaires** : Ouverture et fermeture fixes (ex: 15h30 - 22h00 pour Wall Street).
+
+### 3. Les Cryptomonnaies
+*   **Quoi ?** Actifs numériques décentralisés (Bitcoin, Ethereum).
+*   **Spécificité** : Volatilité extrême et innovation technologique.
+*   **Horaires** : 24h/24, 7j/7 (ne ferme jamais).
+
+### 4. Les Matières Premières (Commodities)
+*   **Quoi ?** Or, Pétrole, Gaz, Blé.
+*   **Spécificité** : Sensible à la géopolitique et à l'offre/demande physique.
+                                """
                             },
                             {
                                 "title": "Comprendre les Paires de Devises",
                                 "duration": "18m",
-                                "content": "EUR/USD, GBP/JPY... Apprenez à lire les paires de devises, comprendre le pip, le spread et les mouvements de prix."
+                                "content": """
+## La Structure d'une Paire
+Sur le Forex, les devises se tradent toujours par deux.
+Exemple : **EUR/USD = 1.1050**
+
+*   **EUR** est la devise de base (celle qu'on achète).
+*   **USD** est la devise de cotation (celle avec laquelle on paie).
+*   **Le Prix** : Il faut 1.1050 Dollars pour acheter 1 Euro.
+
+## Le PIP (Percentage in Point)
+C'est la plus petite variation standard d'un prix.
+*   Sur EUR/USD : 1.1050 -> 1.1051 = +1 Pip.
+*   Valeur d'un pip : Dépend de la taille de votre lot (généralement 10$ pour 1 lot standard).
+
+## Le Spread
+C'est la différence entre le prix d'achat (Ask) et le prix de vente (Bid). C'est la commission du courtier.
+                                """
                             }
                         ]
                     },
                     {
-                        "title": "Types d'Ordres et Gestion de Position",
+                        "title": "Module 2: Outils et Exécution",
                         "lessons": [
                             {
                                 "title": "Ordres Market, Limit et Stop",
                                 "duration": "20m",
-                                "content": "Market Order (exécution immédiate), Limit Order (prix spécifique), Stop Loss (protection), Take Profit (sortie automatique)."
+                                "content": """
+## Les Types d'Ordres
+Pour entrer sur le marché, vous avez plusieurs options :
+
+### 1. Market Order (Ordre au Marché)
+*   **Action** : Acheter ou vendre IMMÉDIATEMENT au meilleur prix disponible.
+*   **Avantage** : Rapidité garantie.
+*   **Inconvénient** : Le prix peut légèrement glisser (slippage).
+
+### 2. Limit Order
+*   **Action** : Acheter à un prix plus BAS que le marché actuel, ou vendre à un prix plus HAUT.
+*   **Usage** : "Je veux acheter EUR/USD seulement s'il redescend à 1.1000".
+
+### 3. Stop Order
+*   **Action** : Acheter si le prix casse un niveau vers le HAUT, ou vendre s'il casse vers le BAS.
+*   **Usage** : Trading de breakout.
+                                """
                             },
                             {
-                                "title": "Entrer et Sortir d'un Trade",
+                                "title": "Gestion du Risque (Stop Loss & Take Profit)",
                                 "duration": "15m",
-                                "content": "Les meilleures pratiques pour entrer dans une position, placer vos stops, et clôturer au bon moment."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Choisir sa Plateforme de Trading",
-                        "lessons": [
-                            {
-                                "title": "MetaTrader 4/5 : Guide Complet",
-                                "duration": "25m",
-                                "content": "Installation, interface, personnalisation, indicateurs, et placement d'ordres sur MT4/MT5."
-                            },
-                            {
-                                "title": "TradingView : Analyse et Graphiques",
-                                "duration": "20m",
-                                "content": "Utiliser TradingView pour l'analyse technique, dessiner des niveaux, et partager vos idées."
+                                "content": """
+## Le Stop Loss (SL) - Votre Assurance Vie
+C'est un niveau de prix automatique où votre position sera fermée à perte pour éviter une catastrophe.
+*   **Règle d'or** : Ne JAMAIS trader sans Stop Loss.
+*   **Placement** : Il doit être placé à un endroit où votre scénario de trading est invalidé (sous un support, au-dessus d'une résistance).
+
+## Le Take Profit (TP) - Encaisser les Gains
+C'est le niveau où votre position se ferme automatiquement avec profit.
+*   **Stratégie** : Visez un ratio Risque/Rendement d'au moins 1:2 (Risk 100$ pour gagner 200$).
+                                """
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "Analyse Technique Professionnelle",
-                "desc": "Maîtrisez l'analyse technique : chandeliers japonais, support/résistance, tendances, patterns et indicateurs avancés.",
+                "title": "Analyse Technique Pro",
+                "desc": "L'art de lire les graphiques. Apprenez le langage du marché à travers les chandeliers japonais, la structure de marché et les indicateurs clés.",
                 "cat": "Intermédiaire",
                 "diff": 2,
                 "emoji": "📊",
@@ -85,356 +148,288 @@ def seed_real_trading_courses():
                 "duration": "4h 00m",
                 "modules": [
                     {
-                        "title": "Chandeliers Japonais",
+                        "title": "Module 1: L'Action des Prix (Price Action)",
                         "lessons": [
                             {
-                                "title": "Anatomie d'un Chandelier",
+                                "title": "Anatomie d'un Chandelier Japonais",
                                 "duration": "15m",
-                                "content": "Corps, mèches, ouverture/clôture. Comprendre ce que chaque bougie révèle sur la psychologie du marché."
+                                "content": """
+## Lecture d'une Bougie
+Une bougie japonaise nous donne 4 informations cruciales sur une période donnée (ex: 1 heure) :
+1.  **Open (Ouverture)** : Prix au début de l'heure.
+2.  **Close (Clôture)** : Prix à la fin de l'heure.
+3.  **High (Haut)** : Le point le plus haut atteint.
+4.  **Low (Bas)** : Le point le plus bas atteint.
+
+*   **Corps vert** : Les acheteurs ont gagné (Close > Open).
+*   **Corps rouge** : Les vendeurs ont gagné (Open > Close).
+*   **Mèches** : Rejet des prix, volatilité.
+                                """
                             },
                             {
-                                "title": "Patterns de Retournement",
-                                "duration": "25m",
-                                "content": "Doji, Hammer, Shooting Star, Engulfing, Morning/Evening Star. Reconnaître les signaux de retournement de tendance."
-                            },
-                            {
-                                "title": "Patterns de Continuation",
-                                "duration": "20m",
-                                "content": "Marubozu, Three White Soldiers, Rising/Falling Three Methods. Confirmer la poursuite d'une tendance."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Support, Résistance et Tendances",
-                        "lessons": [
-                            {
-                                "title": "Tracer les Supports et Résistances",
+                                "title": "Support et Résistance",
                                 "duration": "30m",
-                                "content": "Identifier les zones clés où le prix rebondit. Utiliser les niveaux horizontaux, obliques et psychologiques."
+                                "content": """
+## Concepts Clés
+*   **Support** : Une zone de prix BAS où les acheteurs interviennent historiquement pour faire remonter le prix ("Le sol").
+*   **Résistance** : Une zone de prix HAUT où les vendeurs interviennent pour faire baisser le prix ("Le plafond").
+
+## Comment les tracer ?
+Ne cherchez pas le prix exact, cherchez des **zones**.
+Regardez où le prix a rebondi plusieurs fois dans le passé.
+*   **Inversement de polarité** : Une résistance cassée devient souvent un support, et inversement.
+                                """
                             },
                             {
-                                "title": "Lignes de Tendance et Canaux",
+                                "title": "Structure de Marché (Trends)",
                                 "duration": "25m",
-                                "content": "Tracer des trendlines, identifier la tendance haussière/baissière/latérale, et trader dans le sens du marché."
-                            },
-                            {
-                                "title": "Fibonacci : Retracements et Extensions",
-                                "duration": "35m",
-                                "content": "Utiliser Fibonacci 38.2%, 50%, 61.8% pour trouver des niveaux d'entrée et de sortie précis."
+                                "content": """
+## Identifier la Tendance
+"Trend is your friend until it bends."
+
+### Tendance Haussière (Uptrend)
+Le prix fait des sommets de plus en plus hauts (**Higher Highs - HH**) et des creux de plus en plus hauts (**Higher Lows - HL**).
+*   **Stratégie** : Chercher des achats sur les creux (HL).
+
+### Tendance Baissière (Downtrend)
+Le prix fait des sommets de plus en plus bas (**Lower Highs - LH**) et des creux de plus en plus bas (**Lower Lows - LL**).
+*   **Stratégie** : Chercher des ventes sur les sommets (LH).
+                                """
                             }
                         ]
                     },
                     {
-                        "title": "Indicateurs Techniques Essentiels",
+                        "title": "Module 2: Indicateurs Techniques",
                         "lessons": [
                             {
-                                "title": "Moyennes Mobiles (SMA, EMA)",
-                                "duration": "20m",
-                                "content": "SMA 50/200, EMA 9/21. Identifier la tendance et les croisements (Golden Cross, Death Cross)."
-                            },
-                            {
-                                "title": "RSI : Surachat et Survente",
+                                "title": "RSI (Relative Strength Index)",
                                 "duration": "25m",
-                                "content": "Relative Strength Index : détecter les zones de surachat (>70) et survente (<30), divergences."
+                                "content": """
+## Comprendre le RSI
+Le RSI est un oscillateur borné entre 0 et 100.
+*   **Zone > 70** : Surachat. Le marché a peut-être monté trop vite. Risque de correction.
+*   **Zone < 30** : Survente. Le marché a peut-être baissé trop vite. Potentiel rebond.
+
+## Les Divergences
+C'est le signal le plus puissant du RSI.
+*   Le prix fait un nouveau plus haut, mais le RSI fait un plus haut plus bas.
+*   Signifie un essoufflement de la tendance -> Retournement probable.
+                                """
                             },
                             {
-                                "title": "MACD : Momentum et Croisements",
-                                "duration": "22m",
-                                "content": "Moving Average Convergence Divergence : signaux d'achat/vente, divergences haussières/baissières."
-                            },
-                            {
-                                "title": "Bollinger Bands et Volatilité",
-                                "duration": "18m",
-                                "content": "Bandes de Bollinger : mesurer la volatilité, squeeze, breakout, retour à la moyenne."
+                                "title": "Moyennes Mobiles (Moving Averages)",
+                                "duration": "20m",
+                                "content": """
+## SMA vs EMA
+*   **SMA (Simple)** : Moyenne classique. Plus lente.
+*   **EMA (Exponentielle)** : Donne plus de poids aux prix récents. Plus réactive.
+
+## Utilisation
+*   **EMA 50** : Tendance moyen terme. Si prix > EMA 50 = Biais Haussier.
+*   **EMA 200** : Tendance long terme. Institutionnelle. Souvent une zone de support majeure.
+*   **Golden Cross** : Quand la SMA 50 croise la SMA 200 à la hausse (Signal d'achat long terme).
+                                """
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "Trading Forex : Stratégies Gagnantes",
-                "desc": "Stratégies complètes pour trader le Forex : Price Action, Smart Money Concepts, et techniques institutionnelles.",
+                "title": "Stratégies Trading Forex",
+                "desc": "Des setups concrets clé-en-main. Apprenez la stratégie 'Break & Retest' et le 'Smart Money Concepts' simplifié.",
                 "cat": "Intermédiaire",
                 "diff": 2,
                 "emoji": "💱",
-                "tags": ["Forex", "Price Action", "SMC"],
+                "tags": ["Forex", "Stratégies", "SMC"],
                 "duration": "5h 30m",
                 "modules": [
                     {
-                        "title": "Price Action Pure",
+                        "title": "Module 1: Break & Retest",
                         "lessons": [
                             {
-                                "title": "Lire le Marché sans Indicateurs",
+                                "title": "Théorie du Breakout",
                                 "duration": "30m",
-                                "content": "Price Action : analyser uniquement les bougies, les niveaux et la structure pour prendre des décisions."
+                                "content": """
+## Le Concept
+La majorité des traders perdent en essayant d'acheter une cassure (breakout) immédiate, car c'est souvent un piège (Fakeout).
+La stratégie "Break & Retest" consiste à attendre.
+
+**Étapes :**
+1.  Identifier une zone de Résistance claire.
+2.  Attendre qu'une bougie clôture franchement au-dessus.
+3.  NE PAS ACHETER MINTENANT.
+4.  Attendre que le prix revienne tester l'ancienne résistance (qui devient support).
+5.  Acheter sur le rejet de cette zone.
+                                """
                             },
                             {
-                                "title": "Pin Bar et Rejection Candles",
+                                "title": "Le Pullback Parfait",
                                 "duration": "35m",
-                                "content": "Identifier les Pin Bars aux niveaux clés, confirmer le rejet de prix et entrer avec un excellent R:R."
-                            },
-                            {
-                                "title": "Inside Bar et Breakout Strategy",
-                                "duration": "28m",
-                                "content": "Inside Bar comme consolidation, attendre le breakout et trader avec la tendance dominante."
+                                "content": """
+## Filtrer les entrées
+Comment savoir si le retest va tenir ?
+*   **La vitesse** : Un retour lent et correctif est bon signe. Un retour violent est dangereux.
+*   **La confirmation** : Attendez une bougie de rejet (Pin Bar, Engulfing) sur la zone de retest.
+*   **Confluence** : Si la zone de retest correspond aussi à un niveau Fibonacci 50% ou 61.8%, c'est un "Golden Setup".
+                                """
                             }
                         ]
                     },
                     {
-                        "title": "Smart Money Concepts (SMC)",
+                        "title": "Module 2: Intro au Smart Money (SMC)",
                         "lessons": [
                             {
-                                "title": "Structure de Marché : BOS et CHoCH",
-                                "duration": "40m",
-                                "content": "Break of Structure (continuation), Change of Character (retournement). Suivre les institutions."
-                            },
-                            {
-                                "title": "Order Blocks et Fair Value Gaps",
+                                "title": "Order Blocks et Déséquilibres",
                                 "duration": "45m",
-                                "content": "Zones d'Order Blocks : où les institutions ont placé leurs ordres. FVG : déséquilibres à combler."
-                            },
-                            {
-                                "title": "Liquidity Grabs et Stop Hunts",
-                                "duration": "38m",
-                                "content": "Comprendre comment les institutions chassent la liquidité retail avant de lancer le vrai mouvement."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Sessions de Trading Forex",
-                        "lessons": [
-                            {
-                                "title": "Session Asiatique, Londonienne, New-Yorkaise",
-                                "duration": "32m",
-                                "content": "Horaires, volatilité, paires à trader selon chaque session. Optimiser vos trades selon l'horloge mondiale."
-                            },
-                            {
-                                "title": "News Trading et Économie",
-                                "duration": "35m",
-                                "content": "NFP, CPI, Fed Rates : impact des annonces économiques sur le Forex et comment les trader."
+                                "content": """
+## Penser comme une Banque
+Les institutions ne tradent pas avec des lignes de support classiques. Elles laissent des traces.
+
+### Order Block (OB)
+C'est la dernière bougie baissière avant un mouvement haussier violent (et inversement).
+C'est une zone où les banques ont injecté massivement de l'argent. Le prix a tendance à revenir dans cette zone pour "recharger" avant de repartir.
+
+### FVG (Fair Value Gap)
+C'est un trou dans le prix, une zone où il n'y a eu que des achats ou que des ventes. Le marché a horreur du vide et revient souvent combler ces Gaps (Imbalance).
+                                """
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "Scalping et Day Trading : Profits Rapides",
-                "desc": "Techniques de scalping et day trading : setups courts-termes, gestion rapide, et exploitation de la volatilité intraday.",
+                "title": "Scalping & Day Trading",
+                "desc": "Pour ceux qui veulent de l'action. Apprenez à entrer et sortir du marché en quelques minutes avec précision chirurgicale.",
                 "cat": "Avancé",
                 "diff": 3,
                 "emoji": "⚡",
-                "tags": ["Scalping", "Day Trading", "M1", "M5"],
+                "tags": ["Scalping", "DayTrading", "Vitesse"],
                 "duration": "3h 45m",
                 "modules": [
                     {
-                        "title": "Fondamentaux du Scalping",
+                        "title": "Module 1: Configuration Scalping",
                         "lessons": [
                             {
-                                "title": "Qu'est-ce que le Scalping ?",
-                                "duration": "18m",
-                                "content": "Trades très courts (1-15 min), petits profits répétés, haute fréquence. Avantages et risques."
-                            },
-                            {
-                                "title": "Timeframes pour Scalper : M1, M5, M15",
-                                "duration": "22m",
-                                "content": "Choisir le bon timeframe selon votre style, volatilité, et stratégie de scalping."
-                            },
-                            {
-                                "title": "Paires Idéales pour le Scalping",
+                                "title": "Timeframes et Environnement",
                                 "duration": "20m",
-                                "content": "EUR/USD, GBP/USD : spreads faibles, haute liquidité. Éviter les paires exotiques."
+                                "content": """
+## Le Setup du Scalper
+*   **Analyse** : H1 et M15 pour la direction générale.
+*   **Entrée** : M5 et M1 pour le timing précis.
+
+## Règles d'Or
+1.  Le Spread doit être minime (privilégiez EURUSD, USDJPY).
+2.  La Volatilité est votre amie : Tradez pendant les sessions de Londres (9h-11h) et New York (14h-17h).
+3.  Évitez les news économiques majeures (NFP, FOMC) qui causent des slippages mortels.
+                                """
                             }
                         ]
                     },
                     {
-                        "title": "Stratégies de Scalping",
+                        "title": "Module 2: Stratégie M1 VWAP",
                         "lessons": [
                             {
-                                "title": "Scalping sur Breakout de Range",
+                                "title": "Le VWAP (Volume Weighted Average Price)",
                                 "duration": "30m",
-                                "content": "Identifier une consolidation, attendre le breakout, entrer rapidement avec stop serré."
-                            },
-                            {
-                                "title": "Scalping avec EMA Crossover",
-                                "duration": "28m",
-                                "content": "EMA 9/21 : croisement haussier/baissier, confirmer avec le prix, sortie rapide."
-                            },
-                            {
-                                "title": "Scalping de Retracement Fibonacci",
-                                "duration": "35m",
-                                "content": "Trend fort, attendre retracement à 38.2% ou 50%, entrer avec confirmation bougie."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Day Trading Avancé",
-                        "lessons": [
-                            {
-                                "title": "Identifier les Setups Intraday",
-                                "duration": "32m",
-                                "content": "Morning range, breakout de 9h30, momentum de mid-day. Patterns récurrents chaque jour."
-                            },
-                            {
-                                "title": "Gestion de Multiples Positions",
-                                "duration": "25m",
-                                "content": "Pyramider, sortie partielle, trailing stop. Gérer plusieurs trades simultanés sans stress."
-                            },
-                            {
-                                "title": "Éviter le Overtrading",
-                                "duration": "20m",
-                                "content": "Limite de trades par jour, respect du plan, ne pas forcer. Qualité > Quantité."
+                                "content": """
+## L'Indicateur Roi
+Contrairement aux moyennes mobiles classiques, le VWAP prend en compte le VOLUME.
+C'est le prix moyen payé par tous les participants depuis le début de la session.
+
+## La Stratégie
+*   Si le prix est **au-dessus** du VWAP : On cherche uniquement des Achats (Longs).
+*   Si le prix est **en-dessous** du VWAP : On cherche uniquement des Ventes (Shorts).
+*   **Entrée** : Retour du prix sur la ligne VWAP + Rejet.
+                                """
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "Money Management et Psychologie du Trader",
-                "desc": "La clé du succès à long terme : gestion du risque, dimensionnement de position, discipline mentale et journal de trading.",
+                "title": "Psychologie & Money Management",
+                "desc": "90% des traders échouent à cause de leur mental, pas de leur technique. Blindez votre esprit et protégez votre capital.",
                 "cat": "Débutant",
                 "diff": 1,
                 "emoji": "🧠",
-                "tags": ["Psychologie", "Risk Management", "Discipline"],
+                "tags": ["Psychologie", "Risque", "Mental"],
                 "duration": "3h 15m",
                 "modules": [
                     {
-                        "title": "Gestion du Risque (Risk Management)",
+                        "title": "Module 1: Le Cerveau du Trader",
                         "lessons": [
                             {
-                                "title": "Règle des 1-2% par Trade",
+                                "title": "FOMO et Revenge Trading",
                                 "duration": "25m",
-                                "content": "Ne jamais risquer plus de 1-2% de votre capital sur un seul trade. Protection du compte à long terme."
-                            },
-                            {
-                                "title": "Calcul du Lot Size (Position Sizing)",
-                                "duration": "30m",
-                                "content": "Formule : (Capital x % Risque) / Stop Loss en pips. Outils et calculateurs automatiques."
-                            },
-                            {
-                                "title": "Risk/Reward Ratio : Minimum 1:2",
-                                "duration": "28m",
-                                "content": "Pour chaque $ risqué, viser minimum 2$ de profit. Rentabilité même avec 40% de win rate."
-                            },
-                            {
-                                "title": "Gérer les Drawdowns",
-                                "duration": "22m",
-                                "content": "Drawdown = perte depuis le pic. Comment réagir, réduire taille de position, ne pas revenge trade."
+                                "content": """
+## FOMO (Fear Of Missing Out)
+Peur de rater une opportunité. Vous voyez une grosse bougie verte, vous achetez au sommet... et ça se retourne.
+*   **Solution** : "Il y aura toujours un autre trade." Si le train est parti, attendez le prochain en gare.
+
+## Revenge Trading
+Vous venez de perdre un trade. Vous êtes énervé. Vous voulez "récupérer" votre argent tout de suite en doublant la mise.
+*   **Résultat** : Ruine du compte.
+*   **Solution** : Après 2 pertes consécutives, éteignez l'écran pour la journée.
+                                """
                             }
                         ]
                     },
                     {
-                        "title": "Psychologie et Discipline",
+                        "title": "Module 2: Gestion du Capital",
                         "lessons": [
                             {
-                                "title": "Les 4 Émotions Tueuses : Peur, Avidité, Espoir, Regret",
-                                "duration": "30m",
-                                "content": "Peur de perdre, avidité de gagner plus, espoir que ça remonte, regret de ne pas être entré. Gérer ces émotions."
-                            },
-                            {
-                                "title": "Créer et Suivre un Plan de Trading",
-                                "duration": "25m",
-                                "content": "Stratégies, règles d'entrée/sortie, horaires, objectifs. Respecter le plan = succès."
-                            },
-                            {
-                                "title": "Le Journal de Trading : Votre Meilleur Outil",
-                                "duration": "28m",
-                                "content": "Noter chaque trade : setup, émotions, résultat. Analyser les patterns de succès/échec."
-                            },
-                            {
-                                "title": "Routine du Trader Pro",
+                                "title": "La Règle du 1%",
                                 "duration": "20m",
-                                "content": "Routine matinale, analyse pré-market, review de fin de journée. Discipline et constance."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Erreurs Fréquentes et Comment les Éviter",
-                        "lessons": [
-                            {
-                                "title": "Overtrading et Revenge Trading",
-                                "duration": "18m",
-                                "content": "Trop trader par ennui, ou pour récupérer une perte. Les 2 pires erreurs du trader débutant."
-                            },
-                            {
-                                "title": "FOMO : Fear of Missing Out",
-                                "duration": "15m",
-                                "content": "Entrer en retard par peur de rater le mouvement. Attendre le prochain setup."
-                            },
-                            {
-                                "title": "Ignorer le Stop Loss",
-                                "duration": "17m",
-                                "content": "Déplacer son stop en espérant, ou ne pas en mettre. Recette du désastre."
+                                "content": """
+## Préserver son Capital
+Ne risquez JAMAIS plus de 1% (ou 2% max) de votre capital total sur un seul trade.
+*   Compte 10.000$ -> Risque max par trade = 100$.
+*   Si vous perdez 5 trades de suite (ça arrive), il vous reste 9.500$. Vous êtes toujours dans le jeu.
+*   Si vous risquez 10% par trade, après 5 pertes, vous êtes mathématiquement mort (il faut +100% de performance pour revenir à zéro).
+                                """
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "Crypto Trading : Bitcoin et Altcoins",
-                "desc": "Trader les cryptomonnaies : analyse on-chain, cycles de marché, DeFi, et stratégies spécifiques au monde crypto.",
+                "title": "Crypto Trading : Bitcoin & Altcoins",
+                "desc": "Le Far West de la finance. Comprendre la Blockchain, les cycles du Bitcoin et comment dénicher les pépites (Gems).",
                 "cat": "Intermédiaire",
                 "diff": 2,
-                "emoji": "₿",
+                "emoji": "🚀",
                 "tags": ["Crypto", "Bitcoin", "Blockchain"],
                 "duration": "4h 20m",
                 "modules": [
                     {
-                        "title": "Fondamentaux Crypto",
+                        "title": "Module 1: Fondamentaux Crypto",
                         "lessons": [
                             {
-                                "title": "Bitcoin : L'Or Numérique",
-                                "duration": "25m",
-                                "content": "Histoire, blockchain, halving, supply limitée à 21M. Pourquoi Bitcoin a de la valeur."
-                            },
-                            {
-                                "title": "Ethereum et Smart Contracts",
-                                "duration": "28m",
-                                "content": "ETH 2.0, DeFi, NFTs, Gas fees. La blockchain programmable et son écosystème."
-                            },
-                            {
-                                "title": "Altcoins Majeurs : SOL, ADA, BNB",
-                                "duration": "22m",
-                                "content": "Solana, Cardano, Binance Coin : cas d'usage, différences avec Bitcoin/Ethereum."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Analyse On-Chain",
-                        "lessons": [
-                            {
-                                "title": "Metrics On-Chain : Active Addresses, Hash Rate",
-                                "duration": "35m",
-                                "content": "Glassnode, CryptoQuant : analyser l'activité réelle du réseau blockchain."
-                            },
-                            {
-                                "title": "MVRV Ratio et NVT Signal",
+                                "title": "Bitcoin et Cycles de Halving",
                                 "duration": "30m",
-                                "content": "Market Value to Realized Value, Network Value to Transactions. Détecter les tops/bottoms."
+                                "content": """
+## Le Roi Bitcoin
+Bitcoin dicte le marché. S'il éternue, les Altcoins s'enrhument.
+
+## Le Halving
+Tous les 4 ans, la récompense des mineurs est divisée par 2.
+*   L'offre de nouveaux Bitcoins se raréfie.
+*   Historiquement, cela déclenche un "Bull Run" (marché haussier) dans les 12-18 mois qui suivent.
+*   Comprendre où on se situe dans le cycle est crucial pour l'investissement long terme.
+                                """
                             },
                             {
-                                "title": "Exchange Netflows : Accumulation vs Distribution",
-                                "duration": "28m",
-                                "content": "BTC qui sort des exchanges = accumulation (bullish). BTC qui rentre = vente (bearish)."
-                            }
-                        ]
-                    },
-                    {
-                        "title": "Cycles de Marché Crypto",
-                        "lessons": [
-                            {
-                                "title": "Bull Market vs Bear Market",
-                                "duration": "32m",
-                                "content": "4 phases : Accumulation, Markup, Distribution, Markdown. Reconnaître où on est dans le cycle."
-                            },
-                            {
-                                "title": "Bitcoin Halving et Impact sur le Prix",
-                                "duration": "28m",
-                                "content": "Tous les 4 ans, récompense divisée par 2. Historiquement : bull run 12-18 mois après."
-                            },
-                            {
-                                "title": "Altseason : Quand les Altcoins Explosent",
-                                "duration": "25m",
-                                "content": "BTC domine d'abord, puis capital flow vers altcoins. Bitcoin Dominance comme indicateur."
+                                "title": "Altcoins et Narratifs",
+                                "duration": "35m",
+                                "content": """
+## Saison des Altcoins
+Quand le Bitcoin se stabilise après une hausse, les capitaux coulent vers les Altcoins (Ethereum, Solana, etc.) pour chercher plus de rendement.
+
+## Les Narratifs
+La crypto fonctionne par modes : DeFi, NFT, Metaverse, AI, Gaming...
+*   Le secret est d'identifier le narratif "chaud" AVANT la masse.
+*   Attention : 99% des Altcoins finissent à zéro. Prenez vos profits.
+                                """
                             }
                         ]
                     }
@@ -442,9 +437,9 @@ def seed_real_trading_courses():
             }
         ]
 
-        total_lessons = 0
         total_courses = 0
-        
+        total_lessons = 0
+
         for c_data in curriculum:
             # Create Course
             course = Course(
@@ -459,77 +454,64 @@ def seed_real_trading_courses():
             )
             db.session.add(course)
             db.session.flush()
+            print(f"✅ Created Course: {course.title}")
             total_courses += 1
-            print(f"[+] Created Course: {course.title}")
             
-            for m_idx, m_data in enumerate(c_data["modules"]):
-                # Create Module
+            for m_data in c_data["modules"]:
                 module = Module(
                     course_id=course.id,
                     title=m_data["title"],
-                    order_num=m_idx + 1
+                    order_index=1 # Simplified
                 )
                 db.session.add(module)
                 db.session.flush()
                 
-                for l_idx, l_data in enumerate(m_data["lessons"]):
-                    # Create Lesson
+                for l_data in m_data["lessons"]:
                     lesson = Lesson(
-                        course_id=course.id,
                         module_id=module.id,
                         title=l_data["title"],
-                        order_num=l_idx + 1,
+                        content=l_data["content"],
                         duration=l_data["duration"],
-                        content=l_data["content"]
+                        order_index=1, # Simplified
+                        video_url=l_data.get("video_url")
                     )
                     db.session.add(lesson)
                     db.session.flush()
                     total_lessons += 1
                     
-                    # Create Quiz for each lesson
+                    # Create a default quiz for each lesson
                     quiz = Quiz(
                         lesson_id=lesson.id,
-                        title=f"Quiz : {l_data['title']}",
-                        passing_score=70
+                        title=f"Quiz : {l_data['title']}"
                     )
                     db.session.add(quiz)
                     db.session.flush()
                     
-                    # Create 3 sample questions per quiz
+                    # Add 3 generic questions
                     questions = [
-                        {
-                            "text": f"Quelle est la notion clé de cette leçon : {l_data['title']} ?",
-                            "options": ["Réponse A", "Réponse B", "Réponse C", "Réponse D"],
-                            "correct": 1,
-                            "explanation": "Cette réponse est correcte car elle correspond au concept principal enseigné."
-                        },
-                        {
-                            "text": f"Comment appliquer {l_data['title']} en pratique ?",
-                            "options": ["Méthode 1", "Méthode 2", "Méthode 3", "Méthode 4"],
-                            "correct": 0,
-                            "explanation": "La méthode 1 est recommandée par les professionnels."
-                        },
-                        {
-                            "text": f"Quelle erreur doit-on éviter avec {l_data['title']} ?",
-                            "options": ["Erreur A", "Erreur B", "Erreur C", "Erreur D"],
-                            "correct": 2,
-                            "explanation": "L'erreur C est la plus fréquente chez les débutants."
-                        }
-                    ]
-                    
-                    for q_data in questions:
-                        question = Question(
+                        Question(
                             quiz_id=quiz.id,
-                            question_text=q_data["text"],
-                            options=q_data["options"],
-                            correct_answer=q_data["correct"],
-                            explanation=q_data["explanation"]
+                            text="Quelle est la réponse correcte ?",
+                            options=["Option A (Faux)", "Option B (Vrai)", "Option C (Faux)"],
+                            correct_answer=1
+                        ),
+                        Question(
+                            quiz_id=quiz.id,
+                            text="Ce concept est-il important ?",
+                            options=["Oui, crucial", "Non, inutile", "Peu importe"],
+                            correct_answer=0
+                        ),
+                        Question(
+                            quiz_id=quiz.id,
+                            text="Quel est le meilleur moment pour trader ?",
+                            options=["Quand je veux", "Pendant les sessions actives", "Le week-end"],
+                            correct_answer=1
                         )
-                        db.session.add(question)
+                    ]
+                    db.session.add_all(questions)
 
         db.session.commit()
-        print(f"\n[SUCCESS] Successfully added {total_courses} professional trading courses with {total_lessons} lessons!")
-        print(f"[INFO] Courses: Introduction, Analyse Technique, Forex, Scalping, Psychology, Crypto")
+        print(f"\\n🎉 [DONE] Successfully added {total_courses} professional trading courses with {total_lessons} lessons!")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     seed_real_trading_courses()
