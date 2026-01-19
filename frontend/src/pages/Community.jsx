@@ -2055,8 +2055,8 @@ const Community = () => {
             {/* Live Session Modal */}
             {
                 showLiveModal && selectedSession && (
-                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                        <div className="glass-glow bg-[#0a0f1a] border border-white/10 rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl shadow-cyan-500/20">
+                    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" onClick={() => setShowLiveModal(false)}>
+                        <div className="glass-glow bg-[#0a0f1a] border border-white/10 rounded-2xl max-w-4xl w-full overflow-hidden shadow-2xl shadow-cyan-500/20" onClick={(e) => e.stopPropagation()}>
                             {/* Video Area */}
                             <div className="relative bg-black aspect-video flex items-center justify-center">
                                 {selectedSession.videoId ? (
