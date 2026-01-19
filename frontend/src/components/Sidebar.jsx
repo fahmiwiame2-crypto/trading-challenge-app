@@ -14,7 +14,8 @@ import {
     Settings,
     User,
     Users,
-    Newspaper
+    Newspaper,
+    ShieldAlert
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -32,6 +33,7 @@ const Sidebar = () => {
         { icon: DollarSign, label: t('sidebar_get_funded'), path: '/pricing', color: 'text-emerald-400' },
         { icon: GraduationCap, label: t('sidebar_academy'), path: '/academy', color: 'text-blue-400' },
         { icon: Settings, label: t('sidebar_settings'), path: '/settings', color: 'text-slate-400' },
+        { icon: ShieldAlert, label: 'Admin Panel', path: '/admin', color: 'text-red-400' },
     ];
 
     return (
