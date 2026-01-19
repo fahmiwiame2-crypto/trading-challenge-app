@@ -40,6 +40,12 @@ const Community = () => {
     const [selectedGroupChat, setSelectedGroupChat] = useState(null);
     const [groupChatMessages, setGroupChatMessages] = useState([]);
     const [groupChatInput, setGroupChatInput] = useState('');
+    const [newGroup, setNewGroup] = useState({
+        name: '',
+        desc: '',
+        icon: '👥',
+        color: 'from-cyan-500 to-blue-600'
+    });
 
     // Available groups data
     const availableGroups = [
@@ -1416,7 +1422,7 @@ const Community = () => {
                                                 <span>👥 Groupes de Trading</span>
                                             </h2>
                                             <button
-                                                onClick={() => toast.info('Fonctionnalité création de groupe à venir !')}
+                                                onClick={() => setShowCreateGroupModal(true)}
                                                 className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-cyan-500/20 transition-all"
                                             >
                                                 + Créer un groupe
@@ -2534,6 +2540,155 @@ const Community = () => {
                     </div>
                 )
             }
+
+            {/* Create Group Modal */}
+            {showCreateGroupModal && (
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <div className="glass-glow bg-[#0a0f1a] border border-white/10 rounded-2xl max-w-md w-full overflow-hidden shadow-2xl shadow-cyan-500/20">
+                        <div className="bg-gradient-to-r from-cyan-600 to-blue-600 p-6 relative">
+                            <button
+                                onClick={() => {
+                                    setShowCreateGroupModal(false);
+                                    setNewGroup({ name: '', desc: '', icon: '👥', color: 'from-cyan-500 to-blue-600' });
+                                }}
+                                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                            <div className="flex items-center space-x-3">
+                                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-2xl">
+                                    {newGroup.icon}
+                                </div>
+                                <div>
+                                    <h2 className="text-xl font-bold text-white">Créer un Groupe</h2>
+                                    <p className="text-white/70 text-sm">Rassemblez votre communauté</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="p-6 space-y-4">
+                            <div>
+                                <label className="block text-slate-400 text-sm mb-2">Nom du groupe *</label>
+                                <input
+                                    type="text"
+                                    value={newGroup.name}
+                                    onChange={(e) => setNewGroup({ ...newGroup, name: e.target.value })}
+                                    className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50"
+                                    placeholder="Ex: Trading Champions"
+                                    maxLength={30}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-slate-400 text-sm mb-2">Description *</label>
+                                <textarea
+                                    value={newGroup.desc}
+                                    onChange={(e) => setNewGroup({ ...newGroup, desc: e.target.value })}
+                                    className="w-full bg-white/[0.02] border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500/50 resize-none h-20"
+                                    placeholder="Décrivez votre groupe..."
+                                    maxLength={100}
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-slate-400 text-sm mb-2">Choisissez une icône</label>
+                                <div className="grid grid-cols-6 gap-2">
+                                    {['👥', '💹', '🪙', '🥇', '📊', '🏆', '🎯', '💰', '📈', '🚀', '💎', '⚡'].map((icon) => (
+                                        <button
+                                            key={icon}
+                                            onClick={() => setNewGroup({ ...newGroup, icon })}
+                                            className={`p-3 rounded-xl border-2 text-2xl transition-all ${newGroup.icon === icon
+                                                ? 'border-cyan-500 bg-cyan-500/20 scale-110'
+                                                : 'border-white/10 hover:border-cyan-500/30'
+                                                }`}
+                                        >
+                                            {icon}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-slate-400 text-sm mb-2">Couleur du thème</label>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {[
+                                        { name: 'Cyan-Blue', value: 'from-cyan-500 to-blue-600' },
+                                        { name: 'Orange-Amber', value: 'from-orange-500 to-amber-600' },
+                                        { name: 'Emerald-Teal', value: 'from-emerald-500 to-teal-600' },
+                                        { name: 'Purple-Indigo', value: 'from-purple-500 to-indigo-600' },
+                                        { name: 'Pink-Rose', value: 'from-pink-500 to-rose-600' },
+                                        { name: 'Yellow-Amber', value: 'from-yellow-500 to-amber-500' },
+                                    ].map((color) => (
+                                        <button
+                                            key={color.value}
+                                            onClick={() => setNewGroup({ ...newGroup, color: color.value })}
+                                            className={`h-12 rounded-xl bg-gradient-to-r ${color.value} border-2 transition-all ${newGroup.color === color.value
+                                                ? 'border-white scale-105'
+                                                : 'border-white/10 hover:scale-105'
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                                <p className="text-xs text-slate-400 mb-2">Aperçu</p>
+                                <div className="flex items-center space-x-3">
+                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${newGroup.color} flex items-center justify-center text-2xl`}>
+                                        {newGroup.icon}
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-white">{newGroup.name || 'Nom du groupe'}</p>
+                                        <p className="text-xs text-slate-400">{newGroup.desc || 'Description du groupe'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="flex space-x-3">
+                                <button
+                                    onClick={() => {
+                                        setShowCreateGroupModal(false);
+                                        setNewGroup({ name: '', desc: '', icon: '👥', color: 'from-cyan-500 to-blue-600' });
+                                    }}
+                                    className="flex-1 py-3 border border-slate-700 rounded-xl font-bold text-slate-400 hover:text-white hover:border-slate-600 transition-all"
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        if (!newGroup.name.trim() || !newGroup.desc.trim()) {
+                                            toast.error('Veuillez remplir tous les champs');
+                                            return;
+                                        }
+
+                                        const createdGroup = {
+                                            id: Date.now(),
+                                            name: newGroup.name,
+                                            desc: newGroup.desc,
+                                            icon: newGroup.icon,
+                                            color: newGroup.color,
+                                            members: 1
+                                        };
+
+                                        handleJoinNewGroup(createdGroup);
+
+                                        toast.success(`Groupe "${newGroup.name}" créé avec succès ! 🎉`);
+                                        setShowCreateGroupModal(false);
+                                        setNewGroup({ name: '', desc: '', icon: '👥', color: 'from-cyan-500 to-blue-600' });
+                                    }}
+                                    disabled={!newGroup.name.trim() || !newGroup.desc.trim()}
+                                    className={`flex-1 py-3 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all ${!newGroup.name.trim() || !newGroup.desc.trim()
+                                        ? 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:shadow-lg hover:shadow-cyan-500/30'
+                                        }`}
+                                >
+                                    <span>Créer le Groupe</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div >
     );
 };
