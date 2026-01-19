@@ -13,7 +13,7 @@ import { User, Mail, Phone, Lock, Bell, Globe, Shield, CreditCard, LogOut, Save,
 const Settings = () => {
     const { user, logout, updateUser } = useAuth();
     const { theme, setTheme } = useTheme();
-    const { language, setLanguage } = useLanguage();
+    const { language, setLanguage, t } = useLanguage();
     const { currency, setCurrency, CURRENCIES: CONTEXT_CURRENCIES } = useCurrency();
     const { timezone, setTimezone, timezones } = useTimezone();
     const { settings: notificationSettings, updateSettings: updateNotifications } = useNotifications();
@@ -54,12 +54,12 @@ const Settings = () => {
             if (response.data.avatar_url) {
                 // Update local user context
                 updateUser({ ...user, avatar_url: response.data.avatar_url });
-                alert("Avatar mis à jour avec succès !");
+                alert(t('settings_alert_avatar_success'));
             }
         } catch (error) {
             console.error("Upload error:", error);
-            const msg = error.response?.data?.error || error.message || "Erreur inconnue";
-            alert("Erreur upload: " + msg);
+            const msg = error.response?.data?.error || error.message || "Unknown error";
+            alert(t('settings_alert_avatar_error') + msg);
         }
     };
 
@@ -84,16 +84,16 @@ const Settings = () => {
 
     const handleSaveProfile = () => {
         console.log('Saving profile:', formData);
-        alert('Profil mis à jour avec succès!');
+        alert(t('settings_alert_profile_success'));
     };
 
     const handleChangePassword = () => {
         if (formData.newPassword !== formData.confirmPassword) {
-            alert('Les mots de passe ne correspondent pas!');
+            alert(t('settings_alert_password_mismatch'));
             return;
         }
         console.log('Changing password');
-        alert('Mot de passe changé avec succès!');
+        alert(t('settings_alert_password_success'));
     };
 
     const handleDeleteAccount = async () => {
@@ -134,15 +134,15 @@ const Settings = () => {
             logout();
         } catch (error) {
             console.error("Impossible de supprimer le compte:", error);
-            alert("Une erreur est survenue lors de la suppression.");
+            alert(t('settings_alert_delete_error'));
         }
     };
 
     const tabs = [
-        { id: 'profile', label: 'Profil', icon: User },
-        { id: 'security', label: 'Sécurité', icon: Shield },
-        { id: 'notifications', label: 'Notifications', icon: Bell },
-        { id: 'preferences', label: 'Préférences', icon: Globe },
+        { id: 'profile', labelKey: 'settings_tab_profile', icon: User },
+        { id: 'security', labelKey: 'settings_tab_security', icon: Shield },
+        { id: 'notifications', labelKey: 'settings_tab_notifications', icon: Bell },
+        { id: 'preferences', labelKey: 'settings_tab_preferences', icon: Globe },
     ];
 
     return (
@@ -162,9 +162,9 @@ const Settings = () => {
                                 </div>
                                 <div>
                                     <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                                        Paramètres du Compte
+                                        {t('settings_title')}
                                     </h1>
-                                    <p className="text-slate-400 text-sm">Gérez vos informations personnelles et préférences</p>
+                                    <p className="text-slate-400 text-sm">{t('settings_subtitle')}</p>
                                 </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@ const Settings = () => {
                                             }`}
                                     >
                                         <Icon className="w-4 h-4 mr-2" />
-                                        {tab.label}
+                                        {t(tab.labelKey)}
                                     </button>
                                 );
                             })}
@@ -199,7 +199,7 @@ const Settings = () => {
                                 <div className="space-y-6 relative z-10">
                                     <div className="flex items-center gap-2 mb-6">
                                         <User className="w-5 h-5 text-cyan-400" />
-                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">Informations du Profil</h2>
+                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">{t('settings_profile_title')}</h2>
                                     </div>
 
                                     {/* Avatar */}
@@ -223,16 +223,16 @@ const Settings = () => {
                                                 onClick={handleAvatarClick}
                                                 className="px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold text-sm transition-all shadow-lg shadow-cyan-900/20"
                                             >
-                                                Changer l'avatar
+                                                {t('settings_profile_avatar')}
                                             </button>
-                                            <p className="text-slate-400 text-xs mt-2">JPG, PNG ou GIF. Max 2MB.</p>
+                                            <p className="text-slate-400 text-xs mt-2">{t('settings_profile_avatar_hint')}</p>
                                         </div>
                                     </div>
 
                                     {/* Form Fields */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
-                                            <label className="block text-slate-400 text-sm mb-2">Nom d'utilisateur</label>
+                                            <label className="block text-slate-400 text-sm mb-2">{t('settings_profile_username')}</label>
                                             <div className="relative">
                                                 <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                 <input
@@ -246,7 +246,7 @@ const Settings = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-slate-400 text-sm mb-2">Email</label>
+                                            <label className="block text-slate-400 text-sm mb-2">{t('settings_profile_email')}</label>
                                             <div className="relative">
                                                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                 <input
@@ -260,7 +260,7 @@ const Settings = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-slate-400 text-sm mb-2">Téléphone</label>
+                                            <label className="block text-slate-400 text-sm mb-2">{t('settings_profile_phone')}</label>
                                             <div className="relative">
                                                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                 <input
@@ -275,7 +275,7 @@ const Settings = () => {
                                         </div>
 
                                         <div>
-                                            <label className="block text-slate-400 text-sm mb-2">Pays</label>
+                                            <label className="block text-slate-400 text-sm mb-2">{t('settings_profile_country')}</label>
                                             <select className="w-full bg-white/[0.02] border border-white/5 rounded-lg px-4 py-3 text-white focus:border-cyan-500/50 focus:outline-none transition-colors">
                                                 <option className="bg-slate-900">Maroc</option>
                                                 <option className="bg-slate-900">France</option>
@@ -290,7 +290,7 @@ const Settings = () => {
                                         className="flex items-center px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold shadow-lg shadow-cyan-900/20 transition-all active:scale-95"
                                     >
                                         <Save className="w-5 h-5 mr-2" />
-                                        Enregistrer les modifications
+                                        {t('settings_profile_save')}
                                     </button>
                                 </div>
                             )}
@@ -300,15 +300,15 @@ const Settings = () => {
                                 <div className="space-y-6 relative z-10">
                                     <div className="flex items-center gap-2 mb-6">
                                         <Shield className="w-5 h-5 text-cyan-400" />
-                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">Sécurité</h2>
+                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">{t('settings_security_title')}</h2>
                                     </div>
 
                                     {/* Change Password */}
                                     <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-6 mb-6">
-                                        <h3 className="text-lg font-bold text-white mb-4">Changer le mot de passe</h3>
+                                        <h3 className="text-lg font-bold text-white mb-4">{t('settings_security_change_password')}</h3>
                                         <div className="space-y-4">
                                             <div>
-                                                <label className="block text-slate-400 text-sm mb-2">Mot de passe actuel</label>
+                                                <label className="block text-slate-400 text-sm mb-2">{t('settings_security_current_password')}</label>
                                                 <div className="relative">
                                                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                     <input
@@ -322,7 +322,7 @@ const Settings = () => {
                                             </div>
 
                                             <div>
-                                                <label className="block text-slate-400 text-sm mb-2">Nouveau mot de passe</label>
+                                                <label className="block text-slate-400 text-sm mb-2">{t('settings_security_new_password')}</label>
                                                 <div className="relative">
                                                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                     <input
@@ -336,7 +336,7 @@ const Settings = () => {
                                             </div>
 
                                             <div>
-                                                <label className="block text-slate-400 text-sm mb-2">Confirmer le mot de passe</label>
+                                                <label className="block text-slate-400 text-sm mb-2">{t('settings_security_confirm_password')}</label>
                                                 <div className="relative">
                                                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-cyan-500/50" />
                                                     <input
@@ -353,7 +353,7 @@ const Settings = () => {
                                                 onClick={handleChangePassword}
                                                 className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-lg font-bold transition-all shadow-lg shadow-cyan-900/20 active:scale-95"
                                             >
-                                                Changer le mot de passe
+                                                {t('settings_security_change_password')}
                                             </button>
                                         </div>
                                     </div>
@@ -362,8 +362,8 @@ const Settings = () => {
                                     <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
                                         <div className="flex items-center justify-between">
                                             <div>
-                                                <h3 className="text-lg font-bold text-white mb-2">Authentification à deux facteurs</h3>
-                                                <p className="text-slate-400 text-sm">Ajoutez une couche de sécurité supplémentaire</p>
+                                                <h3 className="text-lg font-bold text-white mb-2">{t('settings_security_2fa_title')}</h3>
+                                                <p className="text-slate-400 text-sm">{t('settings_security_2fa_desc')}</p>
                                             </div>
                                             <label className="relative inline-flex items-center cursor-pointer">
                                                 <input
@@ -385,14 +385,14 @@ const Settings = () => {
                                 <div className="space-y-6 relative z-10">
                                     <div className="flex items-center gap-2 mb-6">
                                         <Bell className="w-5 h-5 text-cyan-400" />
-                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">Notifications</h2>
+                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">{t('settings_notifications_title')}</h2>
                                     </div>
 
                                     <div className="space-y-4">
                                         <div className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 rounded-xl">
                                             <div>
-                                                <h3 className="text-white font-bold mb-1">Notifications par email</h3>
-                                                <p className="text-slate-400 text-sm">Recevoir les mises à jour par email</p>
+                                                <h3 className="text-white font-bold mb-1">{t('settings_notifications_email')}</h3>
+                                                <p className="text-slate-400 text-sm">{t('settings_notifications_email_desc')}</p>
                                             </div>
                                             <label className="relative inline-flex items-center cursor-pointer">
                                                 <input
@@ -408,8 +408,8 @@ const Settings = () => {
 
                                         <div className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 rounded-xl">
                                             <div>
-                                                <h3 className="text-white font-bold mb-1">Alertes de trading</h3>
-                                                <p className="text-slate-400 text-sm">Notifications pour vos trades</p>
+                                                <h3 className="text-white font-bold mb-1">{t('settings_notifications_trades')}</h3>
+                                                <p className="text-slate-400 text-sm">{t('settings_notifications_trades_desc')}</p>
                                             </div>
                                             <label className="relative inline-flex items-center cursor-pointer">
                                                 <input
@@ -425,8 +425,8 @@ const Settings = () => {
 
                                         <div className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 rounded-xl">
                                             <div>
-                                                <h3 className="text-white font-bold mb-1">Actualités du marché</h3>
-                                                <p className="text-slate-400 text-sm">Flash infos et analyses</p>
+                                                <h3 className="text-white font-bold mb-1">{t('settings_notifications_news')}</h3>
+                                                <p className="text-slate-400 text-sm">{t('settings_notifications_news_desc')}</p>
                                             </div>
                                             <label className="relative inline-flex items-center cursor-pointer">
                                                 <input
@@ -448,7 +448,7 @@ const Settings = () => {
                                 <div className="space-y-6 relative z-10">
                                     <div className="flex items-center gap-2 mb-6">
                                         <Globe className="w-5 h-5 text-cyan-400" />
-                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">Préférences & Thème</h2>
+                                        <h2 className="text-lg font-bold uppercase tracking-wide text-white">{t('settings_preferences_title')}</h2>
                                     </div>
 
                                     <div className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 rounded-xl">
@@ -473,7 +473,7 @@ const Settings = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-slate-400 text-sm mb-2">Langue</label>
+                                        <label className="block text-slate-400 text-sm mb-2">{t('settings_preferences_language')}</label>
                                         <select
                                             name="language"
                                             value={language} // Use global language state
@@ -487,7 +487,7 @@ const Settings = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-slate-400 text-sm mb-2">Fuseau horaire</label>
+                                        <label className="block text-slate-400 text-sm mb-2">{t('settings_preferences_timezone')}</label>
                                         <select
                                             className="w-full bg-white/[0.02] border border-white/5 rounded-lg px-4 py-3 text-white focus:border-cyan-500/50 focus:outline-none transition-colors"
                                             value={timezone}
@@ -500,7 +500,7 @@ const Settings = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-slate-400 text-sm mb-2">Devise</label>
+                                        <label className="block text-slate-400 text-sm mb-2">{t('settings_preferences_currency')}</label>
                                         <select
                                             className="w-full bg-white/[0.02] border border-white/5 rounded-lg px-4 py-3 text-white focus:border-cyan-500/50 focus:outline-none transition-colors"
                                             value={currency.code}
@@ -520,27 +520,27 @@ const Settings = () => {
 
                         {/* Danger Zone - Keep red/pink for danger indication */}
                         <div className="mt-8 glass-glow bg-red-500/5 border border-red-500/20 rounded-2xl p-6">
-                            <h3 className="text-xl font-bold text-red-400 mb-4">Zone de danger</h3>
+                            <h3 className="text-xl font-bold text-red-400 mb-4">{t('settings_danger_zone')}</h3>
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-white font-bold mb-1">Supprimer le compte</p>
-                                    <p className="text-slate-400 text-sm">Cette action est irréversible</p>
+                                    <p className="text-white font-bold mb-1">{t('settings_danger_delete')}</p>
+                                    <p className="text-slate-400 text-sm">{t('settings_danger_delete_desc')}</p>
                                 </div>
                                 <div className="flex items-center">
                                     {showDeleteConfirm ? (
                                         <div className="flex items-center space-x-3 animate-in fade-in slide-in-from-right-4">
-                                            <span className="text-white font-bold text-sm">Êtes-vous sûr ?</span>
+                                            <span className="text-white font-bold text-sm">{t('settings_danger_confirm')}</span>
                                             <button
                                                 onClick={confirmDelete}
                                                 className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-sm transition-all"
                                             >
-                                                Oui
+                                                {t('settings_danger_yes')}
                                             </button>
                                             <button
                                                 onClick={() => setShowDeleteConfirm(false)}
                                                 className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold text-sm transition-all"
                                             >
-                                                Non
+                                                {t('settings_danger_no')}
                                             </button>
                                         </div>
                                     ) : (
@@ -548,7 +548,7 @@ const Settings = () => {
                                             onClick={() => setShowDeleteConfirm(true)}
                                             className="px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-bold transition-all text-white"
                                         >
-                                            Supprimer
+                                            {t('settings_danger_btn')}
                                         </button>
                                     )}
                                 </div>

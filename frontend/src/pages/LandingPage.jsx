@@ -9,10 +9,10 @@ const LandingPage = () => {
     const { t } = useLanguage();
 
     const stats = [
-        { value: '$2.1M+', label: 'Funded Capital', icon: DollarSign },
-        { value: '1,200+', label: 'Active Traders', icon: Users },
-        { value: '89%', label: 'Success Rate', icon: Target },
-        { value: '24/7', label: 'Support', icon: Shield },
+        { value: '$2.1M+', labelKey: 'landing_stats_capital', icon: DollarSign },
+        { value: '1,200+', labelKey: 'landing_stats_traders', icon: Users },
+        { value: '89%', labelKey: 'landing_stats_success', icon: Target },
+        { value: '24/7', labelKey: 'landing_stats_support', icon: Shield },
     ];
 
     return (
@@ -32,7 +32,7 @@ const LandingPage = () => {
                         {/* Badge */}
                         <div className="inline-flex items-center px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-8 backdrop-blur-sm">
                             <Zap className="w-4 h-4 text-cyan-400 mr-2" />
-                            <span className="text-sm text-cyan-300 font-medium">Powered by AI Trading Algorithms</span>
+                            <span className="text-sm text-cyan-300 font-medium">{t('landing_badge')}</span>
                         </div>
 
                         {/* Main Heading */}
@@ -43,7 +43,7 @@ const LandingPage = () => {
                         </h1>
 
                         <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-                            La plateforme de trading nouvelle génération. Combinez analyses IA en temps réel, outils intelligents et interaction communautaire pour un parcours plus sûr et plus intelligent.
+                            {t('landing_subtitle')}
                         </p>
 
                         {/* CTA Buttons */}
@@ -53,7 +53,7 @@ const LandingPage = () => {
                                 className="group relative px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full font-bold text-lg transition-all transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 overflow-hidden"
                             >
                                 <span className="relative z-10 flex items-center justify-center">
-                                    Commencer l'Aventure
+                                    {t('landing_cta_start')}
                                     <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -62,7 +62,7 @@ const LandingPage = () => {
                                 to="/leaderboard"
                                 className="px-8 py-4 bg-slate-800/50 backdrop-blur-sm border border-cyan-500/20 rounded-full font-bold text-lg transition-all hover:bg-slate-800/80 hover:border-cyan-500/40"
                             >
-                                Voir les Traders
+                                {t('landing_cta_view')}
                             </Link>
                         </div>
 
@@ -74,7 +74,7 @@ const LandingPage = () => {
                                     <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 mb-1">
                                         {stat.value}
                                     </div>
-                                    <div className="text-sm text-slate-400">{stat.label}</div>
+                                    <div className="text-sm text-slate-400">{t(stat.labelKey)}</div>
                                 </TiltCard>
                             ))}
                         </div>
@@ -87,9 +87,9 @@ const LandingPage = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                            L'Écosystème TradeSense
+                            {t('landing_features_title')}
                         </h2>
-                        <p className="text-slate-400 text-lg">Une technologie conçue pour guider les traders de tous niveaux.</p>
+                        <p className="text-slate-400 text-lg">{t('landing_features_subtitle')}</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -100,12 +100,12 @@ const LandingPage = () => {
                                 <div className="w-16 h-16 bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                     <Zap className="w-8 h-8 text-cyan-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-4 text-white">Assistance Propulsée par l'IA</h3>
+                                <h3 className="text-2xl font-bold mb-4 text-white">{t('landing_feature_ai_title')}</h3>
                                 <ul className="text-slate-400 space-y-2 text-sm text-left list-disc pl-4">
-                                    <li>Signaux Achat/Vente/Stop en temps réel.</li>
-                                    <li>Plans de Trade IA personnalisés.</li>
-                                    <li>Tri intelligent des opportunités.</li>
-                                    <li>Détection automatique des risques.</li>
+                                    <li>{t('landing_feature_ai_1')}</li>
+                                    <li>{t('landing_feature_ai_2')}</li>
+                                    <li>{t('landing_feature_ai_3')}</li>
+                                    <li>{t('landing_feature_ai_4')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -117,12 +117,12 @@ const LandingPage = () => {
                                 <div className="w-16 h-16 bg-gradient-to-br from-emerald-600/20 to-teal-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                     <BookOpen className="w-8 h-8 text-emerald-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-4 text-white">Hub d'Actualités en Direct</h3>
+                                <h3 className="text-2xl font-bold mb-4 text-white">{t('landing_feature_news_title')}</h3>
                                 <ul className="text-slate-400 space-y-2 text-sm text-left list-disc pl-4">
-                                    <li>Actualités financières en temps réel.</li>
-                                    <li>Résumés de marché créés par l'IA.</li>
-                                    <li>Alertes d'événements économiques.</li>
-                                    <li>Gardez toujours une longueur d'avance.</li>
+                                    <li>{t('landing_feature_news_1')}</li>
+                                    <li>{t('landing_feature_news_2')}</li>
+                                    <li>{t('landing_feature_news_3')}</li>
+                                    <li>{t('landing_feature_news_4')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -134,12 +134,12 @@ const LandingPage = () => {
                                 <div className="w-16 h-16 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                     <Users className="w-8 h-8 text-blue-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-4 text-white">Zone Communautaire</h3>
+                                <h3 className="text-2xl font-bold mb-4 text-white">{t('landing_feature_community_title')}</h3>
                                 <ul className="text-slate-400 space-y-2 text-sm text-left list-disc pl-4">
-                                    <li>Discutez et rencontrez de nouveaux traders.</li>
-                                    <li>Partagez des stratégies gagnantes.</li>
-                                    <li>Éducation MasterClass Premium.</li>
-                                    <li>Construisez un réseau solide.</li>
+                                    <li>{t('landing_feature_community_1')}</li>
+                                    <li>{t('landing_feature_community_2')}</li>
+                                    <li>{t('landing_feature_community_3')}</li>
+                                    <li>{t('landing_feature_community_4')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -153,16 +153,16 @@ const LandingPage = () => {
                 <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                     <Award className="w-16 h-16 text-cyan-400 mx-auto mb-6" />
                     <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                        Prêt à changer de vie ?
+                        {t('landing_cta_ready')}
                     </h2>
                     <p className="text-xl text-slate-300 mb-10">
-                        Rejoignez des milliers de traders qui ont déjà transformé leur passion en profession.
+                        {t('landing_cta_join')}
                     </p>
                     <Link
                         to="/register"
                         className="inline-flex items-center bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold py-5 px-12 rounded-full text-xl hover:shadow-2xl hover:shadow-cyan-500/50 transition-all transform hover:scale-105"
                     >
-                        Créer mon compte
+                        {t('landing_cta_create')}
                         <ChevronRight className="ml-2 w-6 h-6" />
                     </Link>
                 </div>
@@ -172,3 +172,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

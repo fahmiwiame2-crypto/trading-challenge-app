@@ -14,6 +14,7 @@ import AIChatbot from '../components/AIChatbot';
 import MarketHeatmap from '../components/MarketHeatmap';
 import TabbedPositions from '../components/TabbedPositions';
 import EditLayoutModal from '../components/EditLayoutModal';
+import { useLanguage } from '../context/LanguageContext';
 import { Menu, Search, ChevronDown, Maximize2, Minimize2, GripVertical, Layout } from 'lucide-react';
 
 const defaultLayouts = {
@@ -42,6 +43,7 @@ const Dashboard = () => {
     const [ticker, setTicker] = useState('BTC-USD');
     const { user } = useAuth();
     const { currency, formatPrice } = useCurrency();
+    const { t } = useLanguage();
     const { toast } = useToast();
     const [stats, setStats] = useState(null);
     const [openPositions, setOpenPositions] = useState([]);
@@ -126,8 +128,8 @@ const Dashboard = () => {
     const handleTradeComplete = (trade) => {
         fetchData();
         toast({
-            title: trade.side === 'BUY' ? "Ordre d'Achat Exécuté" : "Ordre de Vente Exécuté",
-            description: `${trade.amount} de ${trade.ticker} au prix de ${trade.entry_price}`,
+            title: trade.side === 'BUY' ? t('dashboard_toast_buy') : t('dashboard_toast_sell'),
+            description: `${trade.amount} ${trade.ticker} @ ${trade.entry_price}`,
             variant: "default",
             className: "bg-cyan-900 border-cyan-500 text-white"
         });
@@ -142,15 +144,15 @@ const Dashboard = () => {
             });
 
             toast({
-                title: "Position Clôturée",
+                title: t('dashboard_toast_position_closed'),
                 description: `P&L: ${formatPrice(response.data.pnl)}`,
                 variant: response.data.pnl >= 0 ? "default" : "destructive",
             });
             fetchData();
         } catch (error) {
             toast({
-                title: "Erreur",
-                description: "Impossible de clôturer la position",
+                title: t('dashboard_toast_error'),
+                description: t('dashboard_toast_close_error'),
                 variant: "destructive",
             });
         }
@@ -200,7 +202,7 @@ const Dashboard = () => {
                             </button>
                             <div>
                                 <h1 className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
-                                    {new Date().getHours() < 18 ? 'Bonjour' : 'Bonsoir'}, {user?.username}
+                                    {new Date().getHours() < 18 ? t('dashboard_greeting_morning') : t('dashboard_greeting_evening')}, {user?.username}
                                 </h1>
                                 <p className="text-xs text-muted-foreground font-mono tracking-wide">
                                     TradeSense Pro Terminal <span className="text-cyan-500">v2.4.0</span>
@@ -272,12 +274,12 @@ const Dashboard = () => {
                         <div className="flex items-center text-red-400">
                             <span className="text-2xl mr-3">💀</span>
                             <div>
-                                <h3 className="font-bold">Challenge Échoué</h3>
-                                <p className="text-sm opacity-80">La limite de perte a été atteinte. Réessayez un nouveau challenge.</p>
+                                <h3 className="font-bold">{t('dashboard_challenge_failed')}</h3>
+                                <p className="text-sm opacity-80">{t('dashboard_challenge_failed_desc')}</p>
                             </div>
                         </div>
                         <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-lg shadow-red-900/20">
-                            Reset Account
+                            {t('dashboard_reset_account')}
                         </button>
                     </div>
                 )}
@@ -298,7 +300,7 @@ const Dashboard = () => {
                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${zenMode ? 'bg-cyan-500 text-white border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
                             >
                                 {zenMode ? <Minimize2 className="w-3 h-3" /> : <Maximize2 className="w-3 h-3" />}
-                                {zenMode ? 'Quitter Mode Zen' : 'Mode Zen'}
+                                {zenMode ? t('dashboard_exit_zen') : t('dashboard_zen_mode')}
                             </button>
                         </div>
 

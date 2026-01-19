@@ -1,6 +1,7 @@
 ﻿import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import Navbar from '../components/Navbar';
 
 const Register = () => {
@@ -9,6 +10,7 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const { register } = useAuth();
+    const { t } = useLanguage();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -32,7 +34,7 @@ const Register = () => {
             <div className="flex-1 flex items-center justify-center px-4 py-12 relative z-10">
                 <div className="max-w-md w-full bg-[#0a0f1a]/60 backdrop-blur-xl border border-cyan-500/20 p-8 rounded-2xl shadow-2xl">
                     <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-                        Créer un compte
+                        {t('register_title')}
                     </h2>
 
                     {error && (
@@ -44,29 +46,29 @@ const Register = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="space-y-2">
-                            <label className="block text-sm font-medium text-slate-300 ml-1">Nom d'utilisateur</label>
+                            <label className="block text-sm font-medium text-slate-300 ml-1">{t('register_username')}</label>
                             <input
                                 type="text"
                                 required
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 className="w-full bg-[#0a0f1a]/80 border border-cyan-500/20 rounded-xl py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all font-medium"
-                                placeholder="Entrez votre nom d'utilisateur"
+                                placeholder={t('register_placeholder_username')}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="block text-sm font-medium text-slate-300 ml-1">Email</label>
+                            <label className="block text-sm font-medium text-slate-300 ml-1">{t('register_email')}</label>
                             <input
                                 type="email"
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full bg-[#0a0f1a]/80 border border-cyan-500/20 rounded-xl py-3 px-4 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/50 transition-all font-medium"
-                                placeholder="nom@exemple.com"
+                                placeholder={t('register_placeholder_email')}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="block text-sm font-medium text-slate-300 ml-1">Mot de passe</label>
+                            <label className="block text-sm font-medium text-slate-300 ml-1">{t('register_password')}</label>
                             <input
                                 type="password"
                                 required
@@ -80,12 +82,12 @@ const Register = () => {
                             type="submit"
                             className="w-full py-3.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl shadow-lg shadow-cyan-600/20 transition-all transform hover:scale-[1.02] mt-4"
                         >
-                            S'inscrire
+                            {t('register_submit')}
                         </button>
                     </form>
 
                     <p className="mt-8 text-center text-sm text-slate-400">
-                        Déjà un compte ? <Link to="/login" className="text-cyan-400 hover:text-cyan-300 font-bold hover:underline transition-colors">Se connecter</Link>
+                        {t('register_has_account')} <Link to="/login" className="text-cyan-400 hover:text-cyan-300 font-bold hover:underline transition-colors">{t('register_login_link')}</Link>
                     </p>
                 </div>
             </div>
@@ -94,3 +96,4 @@ const Register = () => {
 };
 
 export default Register;
+
