@@ -560,60 +560,7 @@ const Community = () => {
                 }
             ]
         },
-        {
-            id: 3,
-            title: 'Psychologie & Mindset',
-            expert: 'Alex_Trade',
-            avatar: 'AT',
-            duration: '5h',
-            lessons: 1,
-            students: 1560,
-            rating: 4.9,
-            level: 'Tous niveaux',
-            price: 'Premium',
-            description: '90% du trading est mental. Domptez vos émotions pour devenir rentable.',
-            lessonsList: [
-                {
-                    title: 'Penser en probabilités',
-                    videoId: 'TTFmIDnidkc',
-                    duration: '45:00',
-                    summary: 'La leçon fondamentale de Mark Douglas sur la psychologie du trading.',
-                    keyPoints: ["L'issue aléatoire", "La série de trades", "Éliminer les attentes"],
-                    writtenContent: {
-                        introduction: "Mark Douglas, dans son livre légendaire 'Trading in the Zone', révèle la vérité que 90% des traders refusent d'accepter : chaque trade individuel a une issue ALÉATOIRE. Vous ne pouvez JAMAIS savoir avec certitude si le prochain trade sera gagnant ou perdant. Cette leçon va transformer votre psychologie de trading.",
-                        sections: [
-                            {
-                                title: "L'issue aléatoire : La vérité qui libère",
-                                content: "Vous avez un setup parfait : 5 confluences, RR de 1:3, tendance claire. Vous entrez. Le trade perd. Pourquoi ? Parce que le marché est PROBABILISTE, pas déterministe.\n\nMême avec un setup à 80% de probabilité de succès, 2 trades sur 10 perdront. Et vous ne savez PAS lesquels. Le prochain trade pourrait être dans les 80% gagnants ou les 20% perdants. C'est ALÉATOIRE.\n\nPourquoi c'est libérateur ? Parce que ça signifie qu'une perte ne veut PAS dire que vous êtes mauvais, que votre stratégie est nulle, ou que vous devez tout changer. Ça veut juste dire que vous êtes tombé dans les 20%. C'est statistiquement NORMAL.\n\nL'erreur fatale : Les traders perdants pensent 'Ce trade DOIT gagner'. Quand il perd, ils sont dévastés, en colère, et font du revenge trading. Les traders gagnants pensent 'Ce trade a X% de chance de gagner. Si ça perd, c'est juste la variance. Next trade.' Zéro émotion, zéro attachement.\n\nAcceptez l'incertitude : Vous ne contrôlez PAS le marché. Vous contrôlez uniquement votre entrée, votre stop, votre target, et votre taille de position. Le reste est hors de votre contrôf4le. Acceptez-le."
-                            },
-                            {
-                                title: "La série de trades : Pensez en échantillon",
-                                content: "Un trade individuel ne signifie RIEN. C'est la SÉRIE de 100 trades qui détermine si vous êtes rentable ou non.\n\nAnalog ie du casino : Un casino ne s'inquiète pas si un joueur gagne $10,000 au blackjack. Pourquoi ? Parce qu'ils savent qu'avec 10,000 joueurs, leur edge mathématique (probabilité) va les rendre rentables. Ils pensent en VOLUME, pas en résultat individuel.\n\nVous devez faire pareil : Votre stratégie a un edge (disons 60% de taux de réussite avec RR 1:2). Sur 100 trades : 60 gagnants à +20 pips = +1200 pips. 40 perdants à -10 pips = -400 pips. NET = +800 pips. Vous êtes RENTABLE.\n\nMais dans ces 100 trades, vous aurez des séries de 5 pertes consécutives. C'est NORMAL statistiquement. Si vous paniquez et changez de stratégie après 3 pertes, vous ne laissez jamais votre edge se manifester.\n\nLa règle d'or : Exécutez votre stratégie sur MINIMUM 100 trades avant de juger si elle fonctionne. 10 trades ne suffisent pas. 50 trades ne suffisent pas. 100 trades minimum. C'est là que la probabilité se révèle."
-                            },
-                            {
-                                title: "Éliminer les attentes : Le secret de la sérénité",
-                                content: "Les attentes créent la souffrance. 'Ce trade DOIT gagner pour que je récupère mes pertes.' 'J'AI BESOIN de $500 aujourd'hui pour payer mon loyer.' Ces pensées TUENT votre trading.\n\nPourquoi ? Parce qu'elles créent une pression émotionnelle. Vous allez sur-trader, forcer des setups médiocres, déplacer vos stops, et violer votre plan. Résultat : pertes massives.\n\nLa mentalité gagnante : 'Je vais exécuter mon plan parfaitement sur ce trade. Je ne sais pas s'il va gagner ou perdre, et je m'en fiche. Mon job est l'EXÉCUTION, pas le résultat. Si j'exécute bien sur 100 trades, les probabilités feront le reste.'\n\nDétachement du résultat : Avant d'entrer, acceptez mentalement la perte. 'Si ce trade perd -10 pips, c'est OK. C'est le coût du business. Je vais l'accepter sans émotion et passer au suivant.' Cette acceptation AVANT le trade élimine 90% du stress.\n\nFocus sur le processus : Votre objectif n'est PAS 'gagner ce trade'. Votre objectif est 'exécuter mon plan à la perfection'. Si vous faites ça sur 100 trades, l'argent suivra automatiquement. Focus sur le processus, pas sur le profit."
-                            }
-                        ],
-                        examples: "**Scénario réel :** Vous avez une stratégie avec 65% de taux de réussite. Vous prenez 5 trades consécutifs, tous perdent. Trader perdant : 'Ma stratégie est nulle ! Je dois trouver une nouvelle stratégie !' Il abandonne. Trader gagnant : 'Statistiquement, avec 65% de réussite, j'aurai des séries de 5 pertes. C'est dans la variance normale. Je continue.' Il exécute 95 trades supplémentaires. Résultat final : 65 gagnants, 35 perdants. Il est RENTABLE. La différence ? La pensée probabiliste.",
-                        mistakes: [
-                            "Juger votre stratégie sur 5-10 trades - c'est bien trop petit comme échantillon statistique",
-                            "Penser 'Ce trade DOIT gagner' - vous créez une pression émotionnelle destructrice",
-                            "Changer de stratégie après une série de pertes - vous ne laissez jamais votre edge se manifester",
-                            "Trader avec des attentes financières ('J'ai besoin de $X aujourd'hui') - recette pour le désastre",
-                            "S'attacher émotionnellement au résultat d'un trade - un trade = une pièce jetée, rien de plus"
-                        ],
-                        actionSteps: [
-                            "Calculez le taux de réussite et le RR moyen de votre stratégie sur vos 50 derniers trades (si vous en avez)",
-                            "Créez une règle : 'Je juge ma stratégie uniquement après 100 trades minimum, jamais avant'",
-                            "Avant chaque trade, répétez : 'L'issue de ce trade est aléatoire. Je ne contrôle que mon exécution.'",
-                            "Tenez un journal : Pour chaque trade, notez 'Ai-je respecté mon plan ? Oui/Non' (pas 'Ai-je gagné ?')",
-                            "Lisez 'Trading in the Zone' de Mark Douglas - c'est la bible de la psychologie du trading"
-                        ]
-                    }
-                }
-            ]
-        },
+
     ];
 
     const handleOpenCourse = (course) => {
