@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, AlertTriangle, AlertCircle, Shield, Filter } from 'lucide-react';
 import api, { getAiSignal } from '../api/api';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const SignalPanel = ({ ticker }) => {
     const { t } = useLanguage();
