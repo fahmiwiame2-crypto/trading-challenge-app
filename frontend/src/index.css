@@ -228,18 +228,9 @@
     background-color: hsl(210 40% 98%);
   }
 
-  /* Light mode - Override dark backgrounds */
-  .light .bg-\\[\\#0a0f1a\\],
-  .light .bg-\\[\\#0a0f1a\\]\\/40,
-  .light .bg-\\[\\#0a0f1a\\]\\/60,
-  .light .bg-\\[\\#0a0f1a\\]\\/80 {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border-color: hsl(214 32% 88%) !important;
-  }
-
-  /* Light mode - Dark slate backgrounds */
-  .light .bg-slate-900,
-  .light .bg-slate-900\\/50 {
+  /* Light mode - Override dark backgrounds - using attribute selectors */
+  .light [class*="bg-slate-900"],
+  .light [class*="bg-slate-800"] {
     background-color: hsl(210 40% 98%) !important;
   }
 
@@ -274,29 +265,14 @@
   }
 
   /* Light mode - Border overrides */
-  .light .border-cyan-500\\/10,
-  .light .border-cyan-500\\/20,
-  .light .border-cyan-500\\/30 {
+  .light [class*="border-cyan"] {
     border-color: hsl(195 85% 85%) !important;
   }
 
-  /* Light mode - Background gradients */
-  .light .from-cyan-500\\/10,
-  .light .from-cyan-500\\/5 {
-    --tw-gradient-from: hsl(195 85% 95%) !important;
-  }
-
-  .light .to-blue-500\\/10,
-  .light .to-transparent {
-    --tw-gradient-to: transparent !important;
-  }
-
   /* Light mode - Shadow overrides */
-  .light .shadow-cyan-500\\/20,
-  .light .shadow-cyan-600\\/20,
-  .light .shadow-cyan-600\\/30 {
+  .light [class*="shadow-cyan"],
+  .light [class*="shadow-blue"] {
     --tw-shadow-color: hsl(195 85% 85% / 0.3);
-    --tw-shadow: var(--tw-shadow-colored);
   }
 
   /* Light mode - Muted text */
