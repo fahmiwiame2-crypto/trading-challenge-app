@@ -2566,7 +2566,7 @@ const Community = () => {
                             </div>
                         </div>
 
-                        <div className="p-6 space-y-4">
+                        <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                             <div>
                                 <label className="block text-slate-400 text-sm mb-2">Nom du groupe *</label>
                                 <input
