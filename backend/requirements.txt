@@ -9,3 +9,4 @@ python-dotenv
 cryptography
 gunicorn
 feedparser
+psycopg2-binary
