@@ -1,7 +1,92 @@
 from flask import Blueprint, jsonify, request
-from app.models import Course, Module, Lesson, Quiz, Question, db
+from app.models import Course, Module, Lesson, Quiz, Question, User, Trade, db
+from datetime import datetime, timedelta
+import random
 
 seed_bp = Blueprint('seed', __name__)
+
+@seed_bp.route('/seed-top-traders', methods=['GET', 'POST'])
+def seed_top_traders():
+    """Seed Top 10 Demo Traders for Leaderboard - accessible via URL"""
+    try:
+        secret = request.args.get('secret') or (request.json or {}).get('secret')
+        
+        if secret != "seed-2026":
+            return jsonify({"error": "Secret incorrect. Use ?secret=seed-2026"}), 403
+        
+        # Top 10 Demo Traders with realistic performance
+        demo_traders = [
+            {"username": "CryptoKing", "email": "cryptoking@demo.com", "profit_pct": 45.2, "trades": 124},
+            {"username": "AtlasTrader", "email": "atlastrader@demo.com", "profit_pct": 32.8, "trades": 89},
+            {"username": "WhaleHunter", "email": "whalehunter@demo.com", "profit_pct": 28.5, "trades": 210},
+            {"username": "MarketMaster", "email": "marketmaster@demo.com", "profit_pct": 25.3, "trades": 156},
+            {"username": "TradingPro", "email": "tradingpro@demo.com", "profit_pct": 22.1, "trades": 98},
+            {"username": "BullRun", "email": "bullrun@demo.com", "profit_pct": 19.8, "trades": 134},
+            {"username": "DiamondHands", "email": "diamondhands@demo.com", "profit_pct": 17.5, "trades": 87},
+            {"username": "MoonShot", "email": "moonshot@demo.com", "profit_pct": 15.2, "trades": 112},
+            {"username": "ChartWizard", "email": "chartwizard@demo.com", "profit_pct": 13.9, "trades": 145},
+            {"username": "AlphaSeeker", "email": "alphaseeker@demo.com", "profit_pct": 12.4, "trades": 76},
+        ]
+        
+        results = []
+        
+        for trader_data in demo_traders:
+            existing = User.query.filter_by(username=trader_data["username"]).first()
+            
+            if existing:
+                # Update existing user
+                existing.initial_capital = 100000.0
+                existing.balance = 100000.0 * (1 + trader_data["profit_pct"] / 100)
+                existing.status = random.choice(['ACTIVE', 'ACTIVE', 'PASSED'])
+                results.append({"username": trader_data["username"], "action": "updated"})
+            else:
+                # Create new user
+                initial_capital = 100000.0
+                balance = initial_capital * (1 + trader_data["profit_pct"] / 100)
+                
+                user = User(
+                    username=trader_data["username"],
+                    email=trader_data["email"],
+                    password_hash="demo_password_hash",
+                    role="USER",
+                    status=random.choice(['ACTIVE', 'ACTIVE', 'PASSED']),
+                    initial_capital=initial_capital,
+                    balance=balance,
+                    daily_starting_equity=balance
+                )
+                db.session.add(user)
+                db.session.flush()
+                
+                # Create demo trades
+                symbols = ['BTC/USD', 'ETH/USD', 'AAPL', 'TSLA', 'GOOGL', 'EUR/USD', 'XAU/USD']
+                for i in range(trader_data["trades"]):
+                    trade = Trade(
+                        user_id=user.id,
+                        symbol=random.choice(symbols),
+                        quantity=round(random.uniform(0.1, 10.0), 2),
+                        price=round(random.uniform(100, 50000), 2),
+                        type=random.choice(['BUY', 'SELL']),
+                        status='CLOSED',
+                        pnl=round(random.uniform(-500, 1500), 2),
+                        timestamp=datetime.now() - timedelta(days=random.randint(1, 30))
+                    )
+                    db.session.add(trade)
+                
+                results.append({"username": trader_data["username"], "action": "created", "trades": trader_data["trades"]})
+        
+        db.session.commit()
+        
+        return jsonify({
+            "success": True,
+            "message": "Top 10 Demo Traders seeded successfully!",
+            "traders": results
+        })
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 @seed_bp.route('/seed-courses', methods=['POST'])
 def seed_courses():
