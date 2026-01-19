@@ -566,7 +566,7 @@ const Community = () => {
             expert: 'Alex_Trade',
             avatar: 'AT',
             duration: '5h',
-            lessons: 15,
+            lessons: 1,
             students: 1560,
             rating: 4.9,
             level: 'Tous niveaux',
@@ -609,82 +609,6 @@ const Community = () => {
                             "Avant chaque trade, répétez : 'L'issue de ce trade est aléatoire. Je ne contrôle que mon exécution.'",
                             "Tenez un journal : Pour chaque trade, notez 'Ai-je respecté mon plan ? Oui/Non' (pas 'Ai-je gagné ?')",
                             "Lisez 'Trading in the Zone' de Mark Douglas - c'est la bible de la psychologie du trading"
-                        ]
-                    }
-                },
-                {
-                    title: 'Vaincre le FOMO',
-                    videoId: '8CAZ0o7x8eA',
-                    keyPoints: ["Signes physiques du FOMO", "La patience comme avantage", "Journaling émotionnel"],
-                    writtenContent: {
-                        introduction: "Le FOMO (Fear Of Missing Out) est le tueur silencieux des comptes de trading. C'est cette voix dans votre tête qui dit 'Le prix monte ! Entre MAINTENANT ou tu vas rater le mouvement !' Cette émotion pousse les traders à violer leur plan, entrer sans setup, et perdre de l'argent. Cette leçon va vous apprendre à maîtriser le FOMO.",
-                        sections: [
-                            {
-                                title: "Signes physiques du FOMO : Reconnais l'ennemi",
-                                content: "Le FOMO n'est pas juste mental, il est PHYSIQUE. Votre corps vous envoie des signaux d'alerte :\n\n- **Accélération cardiaque** : Votre cœur bat plus vite quand vous voyez le prix bouger sans vous.\n- **Tension musculaire** : Vos épaules se crispent, votre mâchoire se serre.\n- **Respiration rapide** : Vous respirez plus vite, plus superficiellement.\n- **Impulsion d'action** : Vos doigts sont sur le bouton 'BUY', prêts à cliquer sans réfléchir.\n\nCes signaux sont votre système d'alerte. Quand vous les ressentez, STOP. Ne cliquez PAS. Respirez profondément 3 fois. Demandez-vous : 'Est-ce que ce trade respecte mon plan ? Ai-je toutes mes confluences ?'\n\nDans 90% des cas, la réponse est NON. Le FOMO vous pousse à entrer sur un setup médiocre. Résultat : perte garantie.\n\nLa règle : Si vous ressentez ces signaux physiques, c'est que vous êtes en mode ÉMOTIONNEL, pas RATIONNEL. Ne tradez JAMAIS en mode émotionnel. Attendez que le calme revienne."
-                            },
-                            {
-                                title: "La patience comme avantage compétitif",
-                                content: "Le marché sera là demain. Et après-demain. Et dans 10 ans. Il y aura TOUJOURS des opportunités. Vous n'avez pas besoin de trader CETTE bougie, MAINTENANT.\n\nLes traders perdants : Ils tradent par ennui, par FOMO, par impatience. Ils prennent 20 trades par jour, dont 15 sont des setups médiocres. Taux de réussite : 30%. Ils perdent.\n\nLes traders gagnants : Ils attendent comme des SNIPERS. Ils laissent passer 10 opportunités médiocres. Puis le setup PARFAIT apparaît : 5 confluences, RR 1:3, tendance claire. Ils entrent. Taux de réussite : 70%. Ils gagnent.\n\nLa patience est votre EDGE. Pendant que les autres traders paniquent et entrent n'importe comment, vous attendez calmement. Vous êtes le prédateur patient, pas la proie désespérée.\n\nMantra : 'Il y a 10,000 opportunités par an. Je n'ai besoin que de 100 bonnes pour être riche. Je peux me permettre de laisser passer les 9,900 autres.' Cette mentalité élimine le FOMO."
-                            },
-                            {
-                                title: "Journaling émotionnel : Traquez le FOMO",
-                                content: "Vous ne pouvez pas vaincre ce que vous ne mesurez pas. Tenez un journal émotionnel pour identifier vos patterns de FOMO.\n\nAprès CHAQUE trade (gagnant ou perdant), notez :\n- **Émotion avant l'entrée** : Calme, excité, anxieux, FOMO ?\n- **Respect du plan** : Oui/Non. Aviez-vous toutes vos confluences ?\n- **Signaux physiques** : Avez-vous ressenti accélération cardiaque, tension, impulsion ?\n- **Résultat** : Gain/Perte\n\nAprès 50 trades, analysez : Combien de trades 'FOMO' avez-vous pris ? Quel est leur taux de réussite ? (Spoiler : probablement 20-30%, bien en-dessous de votre stratégie normale).\n\nPrise de conscience : Quand vous VOYEZ noir sur blanc que vos trades FOMO perdent 70% du temps, votre cerveau commence à associer FOMO = PERTE. Progressivement, l'impulsion diminue.\n\nExercice quotidien : Avant chaque session, écrivez : 'Aujourd'hui, je ne traderai que les setups qui respectent 100% de mon plan. Si je ressens du FOMO, je ferme la plateforme et je vais marcher 10 minutes.' Cet engagement écrit renforce la discipline."
-                            }
-                        ],
-                        examples: "**Situation réelle :** EUR/USD explose de 1.0850 à 1.0920 en 30 minutes. Vous n'étiez pas en position. FOMO intense : 'Je dois entrer MAINTENANT !' Trader perdant : Entre à 1.0920 sans setup. Le prix fait un pullback à 1.0880. Il perd -40 pips. Trader gagnant : Ressent le FOMO, reconnaît les signaux physiques, respire, et attend. Le prix pullback à 1.0880 (niveau S/R + EMA 21). Une pinbar haussière se forme. Setup parfait. Il entre à 1.0885, stop à 1.0875, target à 1.0920. Gagne +35 pips. La patience paie.",
-                        mistakes: [
-                            "Entrer sur un trade juste parce que 'le prix bouge' - c'est du FOMO, pas du trading",
-                            "Ignorer les signaux physiques (cœur qui bat, tension) - votre corps vous dit que vous êtes émotionnel",
-                            "Penser 'Si je rate ce trade, je ne serai jamais rentable' - mentalité de pénurie destructrice",
-                            "Ne pas tenir de journal émotionnel - vous ne voyez pas vos patterns de FOMO",
-                            "Rester devant l'écran quand vous ressentez du FOMO - éloignez-vous physiquement"
-                        ],
-                        actionSteps: [
-                            "Créez un journal émotionnel : Notez pour chaque trade 'Calme ou FOMO ?' avant l'entrée",
-                            "Identifiez VOS signaux physiques de FOMO (cœur, respiration, tension, etc.)",
-                            "Règle : Si vous ressentez du FOMO, fermez la plateforme et allez marcher 10 minutes. Pas d'exception.",
-                            "Analysez vos 20 derniers trades : Combien étaient motivés par FOMO ? Quel est leur taux de réussite ?",
-                            "Mantra quotidien : 'Écrivez et répétez : 'La patience est mon avantage. Je suis un sniper, pas un mitrailleur.'"
-                        ]
-                    }
-                },
-                {
-                    title: 'La discipline du Plan',
-                    videoId: 'UptRP2p9Qfg',
-                    duration: '18:50',
-                    summary: "Pourquoi nous brisons nos règles et comment créer des habitudes de fer.",
-                    keyPoints: ["Routine pré-session", "Checklist d'exécution", "Revue post-session"],
-                    writtenContent: {
-                        introduction: "Vous avez un plan de trading. Vous savez ce qu'il faut faire. Mais vous le brisez. Encore et encore. Pourquoi ? Parce que la discipline ne vient pas de la volonté, elle vient des HABITUDES et des SYSTÈMES. Cette leçon va vous montrer comment créer une discipline de fer.",
-                        sections: [
-                            {
-                                title: "Routine pré-session : Préparez votre mental",
-                                content: "Les traders perdants ouvrent leur plateforme et commencent à trader immédiatement. Les traders gagnants ont une ROUTINE pré-session qui les met dans le bon état mental.\n\n**Routine en 5 étapes (15 minutes) :**\n\n1. **Revue du plan** (3 min) : Relisez votre plan de trading. Quels sont vos setups ? Vos règles d'entrée ? Votre RR minimum ? Votre risque maximum par trade ? Rafraîchissez votre mémoire.\n\n2. **Analyse multi-timeframe** (5 min) : Vérifiez Daily, H4, H1. Quelle est la tendance générale ? Où sont les niveaux S/R majeurs ? Y a-t-il des news économiques importantes aujourd'hui ?\n\n3. **Définir les zones d'intérêt** (3 min) : Tracez 2-3 zones où vous POURRIEZ avoir un setup aujourd'hui. Pas d'entrée maintenant, juste identification.\n\n4. **Engagement mental** (2 min) : Écrivez (oui, écrivez physiquement) : 'Aujourd'hui, je respecte mon plan à 100%. Je ne trade que les setups avec toutes mes confluences. Je coupe mes pertes sans hésitation. Je suis discipliné.'\n\n5. **Respiration** (2 min) : Fermez les yeux. Respirez profondément 10 fois. Visualisez-vous exécutant votre plan parfaitement, avec calme et confiance.\n\nCette routine ANCRE votre discipline. Sans elle, vous êtes en mode réactif/émotionnel. Avec elle, vous êtes en mode proactif/rationnel."
-                            },
-                            {
-                                title: "Checklist d'exécution : Éliminez les erreurs",
-                                content: "Les pilotes d'avion utilisent des checklists pour éviter les erreurs fatales. Vous devez faire pareil. Avant CHAQUE entrée, vérifiez votre checklist.\n\n**Checklist d'entrée (exemple) :**\n\n☐ Tendance H4/Daily alignée avec ma direction ?\n☐ Niveau S/R majeur présent ?\n☐ Zone Fibonacci 50/61.8/78.6% ?\n☐ Structure de marché valide (HH/HL ou LH/LL) ?\n☐ Pattern de chandelier (pinbar, engulfing, etc.) ?\n☐ Risk/Reward minimum 1:2 ?\n☐ Taille de position = 1% de risque maximum ?\n☐ Stop loss défini AVANT l'entrée ?\n☐ Take profit défini AVANT l'entrée ?\n☐ Pas de FOMO, pas d'émotion, mental calme ?\n\nSi UNE SEULE case n'est pas cochée, vous NE TRADEZ PAS. Aucune exception. Aucune justification.\n\nImprimez cette checklist. Collez-la à côté de votre écran. Avant chaque trade, lisez-la à voix haute et cochez mentalement. Cette simple action élimine 80% des trades impulsifs."
-                            },
-                            {
-                                title: "Revue post-session : Apprenez de chaque jour",
-                                content: "La discipline se renforce par la RÉFLEXION. Chaque jour, après votre session, prenez 10 minutes pour une revue.\n\n**Questions de revue :**\n\n1. **Combien de trades ai-je pris ?** (Si plus de 5 en day trading, vous sur-tradez probablement)\n\n2. **Ai-je respecté mon plan sur chaque trade ?** Oui/Non pour chaque trade. Calculez votre 'taux de discipline' (ex: 4/5 = 80%)\n\n3. **Quels trades ont violé mon plan ?** Pourquoi ? FOMO ? Revenge trading ? Ennui ? Identifiez le pattern.\n\n4. **Qu'ai-je bien fait aujourd'hui ?** Célébrez vos victoires, même petites. 'J'ai attendu le pullback au lieu d'entrer au breakout.'\n\n5. **Qu'est-ce que je vais améliorer demain ?** Un seul point à la fois. 'Demain, je vérifie TOUJOURS le H4 avant d'entrer.'\n\n**Journal de trading :** Notez tout dans un fichier Excel ou un carnet. Avec le temps, vous verrez vos patterns : 'Je viole mon plan surtout le vendredi après-midi' ou 'Mes meilleurs trades sont quand j'attends le retest'. Cette data est de l'OR.\n\nLa revue quotidienne transforme les erreurs en leçons. Sans elle, vous répétez les mêmes erreurs pendant des années."
-                            }
-                        ],
-                        examples: "**Transformation réelle :** Trader A ne suit aucune routine. Il ouvre MT4, voit un mouvement, entre impulsivement. Résultat : 15 trades/jour, 30% de taux de réussite, compte en perte. Après 3 mois, il implémente : Routine pré-session (15 min), Checklist d'entrée (10 cases), Revue post-session (10 min). Résultat après 2 mois : 3-5 trades/jour, 65% de taux de réussite, compte en profit. La différence ? Les SYSTÈMES, pas la volonté.",
-                        mistakes: [
-                            "Trader sans routine pré-session - vous êtes en mode réactif/émotionnel dès le départ",
-                            "Ne pas utiliser de checklist - vous laissez les émotions décider, pas la logique",
-                            "Sauter la revue post-session - vous ne transformez jamais vos erreurs en leçons",
-                            "Compter sur la 'volonté' pour être discipliné - la volonté s'épuise, les systèmes durent",
-                            "Ne pas tenir de journal de trading - vous n'avez aucune data pour vous améliorer"
-                        ],
-                        actionSteps: [
-                            "Créez VOTRE routine pré-session (15 min) : Revue du plan, analyse multi-TF, engagement écrit, respiration",
-                            "Créez VOTRE checklist d'entrée (minimum 8 points) et imprimez-la à côté de votre écran",
-                            "Créez un fichier Excel 'Journal de Trading' avec colonnes : Date, Paire, Entrée, Stop, TP, RR, Résultat, Respect du plan (Oui/Non), Émotion, Leçon",
-                            "Pendant 7 jours, faites la routine pré-session + checklist + revue post-session SANS EXCEPTION",
-                            "Après 7 jours, calculez votre 'taux de discipline' : Combien de trades ont respecté 100% de votre plan ?"
                         ]
                     }
                 }
