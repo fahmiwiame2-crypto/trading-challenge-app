@@ -575,7 +575,7 @@ const Community = () => {
             lessonsList: [
                 {
                     title: 'Penser en probabilités',
-                    videoId: 'nLnjnJpNoxM',
+                    videoId: 'QgaTlTfQdzM',
                     duration: '45:00',
                     summary: "La leçon fondamentale de Mark Douglas. Accepter l'incertitude de chaque trade.",
                     keyPoints: ["L'issue aléatoire", "La série de trades", "Éliminer les attentes"],
@@ -614,7 +614,7 @@ const Community = () => {
                 },
                 {
                     title: 'Vaincre le FOMO',
-                    videoId: 'osAObnlRMFI',
+                    videoId: 'Y6X4X8r3yC4',
                     duration: '20:15',
                     summary: "La peur de manquer une opportunité est votre pire ennemi. Voici comment la neutraliser.",
                     keyPoints: ["Signes physiques du FOMO", "La patience comme avantage", "Journaling émotionnel"],
@@ -653,7 +653,7 @@ const Community = () => {
                 },
                 {
                     title: 'La discipline du Plan',
-                    videoId: 's7IwRqKI2BU',
+                    videoId: 'UptRP2p9Qfg',
                     duration: '18:50',
                     summary: "Pourquoi nous brisons nos règles et comment créer des habitudes de fer.",
                     keyPoints: ["Routine pré-session", "Checklist d'exécution", "Revue post-session"],
