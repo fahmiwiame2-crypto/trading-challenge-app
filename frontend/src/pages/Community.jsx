@@ -575,9 +575,9 @@ const Community = () => {
             lessonsList: [
                 {
                     title: 'Penser en probabilités',
-                    videoId: 'QgaTlTfQdzM',
+                    videoId: 'TTFmIDnidkc',
                     duration: '45:00',
-                    summary: "La leçon fondamentale de Mark Douglas. Accepter l'incertitude de chaque trade.",
+                    summary: 'La leçon fondamentale de Mark Douglas sur la psychologie du trading.',
                     keyPoints: ["L'issue aléatoire", "La série de trades", "Éliminer les attentes"],
                     writtenContent: {
                         introduction: "Mark Douglas, dans son livre légendaire 'Trading in the Zone', révèle la vérité que 90% des traders refusent d'accepter : chaque trade individuel a une issue ALÉATOIRE. Vous ne pouvez JAMAIS savoir avec certitude si le prochain trade sera gagnant ou perdant. Cette leçon va transformer votre psychologie de trading.",
@@ -614,9 +614,7 @@ const Community = () => {
                 },
                 {
                     title: 'Vaincre le FOMO',
-                    videoId: 'Y6X4X8r3yC4',
-                    duration: '20:15',
-                    summary: "La peur de manquer une opportunité est votre pire ennemi. Voici comment la neutraliser.",
+                    videoId: '8CAZ0o7x8eA',
                     keyPoints: ["Signes physiques du FOMO", "La patience comme avantage", "Journaling émotionnel"],
                     writtenContent: {
                         introduction: "Le FOMO (Fear Of Missing Out) est le tueur silencieux des comptes de trading. C'est cette voix dans votre tête qui dit 'Le prix monte ! Entre MAINTENANT ou tu vas rater le mouvement !' Cette émotion pousse les traders à violer leur plan, entrer sans setup, et perdre de l'argent. Cette leçon va vous apprendre à maîtriser le FOMO.",
