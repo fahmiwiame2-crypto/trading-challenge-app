@@ -70,12 +70,20 @@ const AdminPanel = () => {
     };
 
     const seedDatabase = async () => {
+        if (!window.confirm("⚠️ ATTENTION : Cela va supprimer tous les cours existants et les recréer.\n\nVoulez-vous continuer ?")) return;
+
         try {
-            await api.post('/api/seed');
-            fetchUsers();
-            alert("Base de données initialisée avec succès !");
+            setLoading(true);
+            const res = await api.post('/api/seed/seed-courses', {
+                secret: 'seed-courses-2026',
+                force: true
+            });
+            alert("✅ Succès ! " + (res.data.message || "Cours ajoutés avec succès."));
         } catch (error) {
-            alert("Erreur lors du seeding");
+            console.error("Seed error:", error);
+            alert("❌ Erreur : " + (error.response?.data?.error || error.message || "Erreur inconnue"));
+        } finally {
+            setLoading(false);
         }
     };
 
