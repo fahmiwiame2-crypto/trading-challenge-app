@@ -140,13 +140,14 @@
 
   .light .bg-slate-700,
   .light .bg-slate-700\/50 {
-    background-color: hsl(210 40% 90%) !important;
+    background-color: hsl(210 40% 92%) !important;
   }
 
-  .light .text-white {
+  .light .text-white:not(button *, .bg-gradient-to-r *, .from-cyan-600 *, .nav-link.active *) {
     color: hsl(222 47% 11%) !important;
   }
 
+  .light .text-slate-200,
   .light .text-slate-300,
   .light .text-slate-400,
   .light .text-slate-500 {
@@ -156,35 +157,36 @@
   .light .border-white\/5,
   .light .border-white\/10,
   .light .border-slate-700,
-  .light .border-slate-700\/50 {
-    border-color: hsl(214 32% 85%) !important;
+  .light .border-slate-700\/50,
+  .light .border-slate-800 {
+    border-color: hsl(214 32% 90%) !important;
   }
 
   .light .glass-glow {
-    background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.9),
-        rgba(248, 250, 252, 0.8)) !important;
-    border-color: hsl(214 32% 85%) !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-color: hsl(214 32% 91%) !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05) !important;
   }
 
   .light .glass-glow:hover {
-    border-color: hsl(195 85% 41% / 0.5) !important;
-    box-shadow:
-      0 0 40px -10px hsl(195 85% 41% / 0.3),
-      0 25px 50px -20px rgba(0, 0, 0, 0.1) !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-color: hsl(195 85% 41% / 0.3) !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
   }
 
   .light .bg-card\/40,
   .light .bg-card\/60,
-  .light .bg-card\/80 {
-    background-color: rgba(255, 255, 255, 0.95) !important;
+  .light .bg-card\/80,
+  .light .bg-white\/5,
+  .light .bg-white\/10 {
+    background-color: rgba(255, 255, 255, 0.7) !important;
   }
 
   /* Light mode sidebar */
   .light aside,
   .light .sidebar {
-    background: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 40% 96%) 100%) !important;
-    border-color: hsl(214 32% 91%) !important;
+    background: #ffffff !important;
+    border-right: 1px solid hsl(214 32% 91%) !important;
   }
 
   /* Light mode navbar */
@@ -192,14 +194,15 @@
   .light header {
     background: rgba(255, 255, 255, 0.8) !important;
     backdrop-filter: blur(12px);
+    border-bottom: 1px solid hsl(214 32% 91%) !important;
   }
 
   /* Light mode inputs */
   .light input,
   .light select,
   .light textarea {
-    background-color: hsl(0 0% 100%) !important;
-    border-color: hsl(214 32% 85%) !important;
+    background-color: #ffffff !important;
+    border: 1px solid hsl(214 32% 85%) !important;
     color: hsl(222 47% 11%) !important;
   }
 
@@ -208,156 +211,85 @@
     color: hsl(215 16% 60%) !important;
   }
 
-  /* Light mode gradients */
-  .light .from-purple-600,
-  .light .from-cyan-600 {
-    --tw-gradient-from: hsl(195 85% 45%);
-  }
-
-  .light .to-pink-600,
-  .light .to-blue-600 {
-    --tw-gradient-to: hsl(220 70% 55%);
-  }
-
-  /* Light mode scrollbar */
-  .light ::-webkit-scrollbar-thumb {
-    background-color: hsl(215 16% 75%);
-  }
-
-  .light ::-webkit-scrollbar-track {
-    background-color: hsl(210 40% 98%);
-  }
-
-  /* Light mode - Override dark backgrounds - using attribute selectors */
-  .light [class*="bg-slate-900"],
-  .light [class*="bg-slate-800"] {
-    background-color: hsl(210 40% 98%) !important;
-  }
-
-  /* Light mode - Body background */
-  .light body {
-    background-color: hsl(210 40% 96%) !important;
-  }
-
   /* Light mode - Cyan/Blue text colors */
   .light .text-cyan-400,
-  .light .text-cyan-300 {
-    color: hsl(195 85% 35%) !important;
+  .light .text-cyan-300,
+  .light .text-cyan-500 {
+    color: hsl(195 85% 41%) !important;
   }
 
-  .light .text-blue-400 {
-    color: hsl(220 70% 45%) !important;
+  .light .text-blue-400,
+  .light .text-blue-500 {
+    color: hsl(220 70% 50%) !important;
   }
 
-  /* Light mode - Emerald text */
-  .light .text-emerald-400 {
-    color: hsl(142 71% 35%) !important;
+  .light .text-emerald-400,
+  .light .text-emerald-500 {
+    color: hsl(142 71% 40%) !important;
   }
 
-  /* Light mode - Red text */
-  .light .text-red-400 {
-    color: hsl(0 84% 50%) !important;
+  .light .text-red-400,
+  .light .text-red-500 {
+    color: hsl(0 84% 55%) !important;
   }
 
-  /* Light mode - Amber text */
-  .light .text-amber-400 {
-    color: hsl(38 92% 45%) !important;
-  }
-
-  /* Light mode - Border overrides */
-  .light [class*="border-cyan"] {
-    border-color: hsl(195 85% 85%) !important;
-  }
-
-  /* Light mode - Shadow overrides */
-  .light [class*="shadow-cyan"],
-  .light [class*="shadow-blue"] {
-    --tw-shadow-color: hsl(195 85% 85% / 0.3);
-  }
-
-  /* Light mode - Muted text */
   .light .text-muted-foreground {
-    color: hsl(215 16% 40%) !important;
+    color: hsl(215 16% 45%) !important;
   }
 
-  /* Light mode - Card backgrounds */
-  .light .bg-card {
-    background-color: hsl(0 0% 100%) !important;
+  /* Navigation Links in Light Mode */
+  .light .nav-link {
+    color: hsl(215 16% 47%) !important;
   }
 
-  /* Light mode - Backdrop blur containers */
-  .light .backdrop-blur-xl {
-    background-color: rgba(255, 255, 255, 0.85) !important;
-  }
-
-  /* Light mode - Transparent backgrounds */
-  .light .bg-transparent {
+  .light .nav-link:hover {
     background-color: hsl(210 40% 96%) !important;
-  }
-
-  /* ===== AGGRESSIVE OVERRIDES FOR LIGHT MODE ===== */
-
-  /* Force all main containers to be light */
-  .light .flex.h-screen,
-  .light div[class*="bg-transparent"] {
-    background-color: hsl(210 40% 96%) !important;
-  }
-
-  /* Force sidebar to be white */
-  .light aside[class*="bg"],
-  .light div[class*="sidebar"],
-  .light .ml-64 {
-    background-color: hsl(0 0% 100%) !important;
-  }
-
-  /* Force gradient backgrounds to be light */
-  .light .bg-gradient-to-br,
-  .light .bg-gradient-to-r,
-  .light .bg-gradient-to-b {
-    background: linear-gradient(to bottom right, hsl(210 40% 98%), hsl(210 40% 96%)) !important;
-  }
-
-  /* Override any dark blue/purple backgrounds */
-  .light [style*="background"],
-  .light div[class*="from-purple"],
-  .light div[class*="from-blue"],
-  .light div[class*="to-indigo"] {
-    background: hsl(0 0% 100%) !important;
-  }
-
-  /* Nav link active state in light mode */
-  .light .nav-link.active {
-    background: linear-gradient(to right, hsl(195 85% 45%), hsl(220 70% 50%)) !important;
-    color: white !important;
-  }
-
-  /* Ensure all text is dark in light mode */
-  .light,
-  .light * {
     color: hsl(222 47% 11%) !important;
   }
 
-  /* But keep specific colored text */
-  .light .text-cyan-400,
-  .light .text-cyan-300,
-  .light .text-blue-400,
-  .light .text-emerald-400,
-  .light .text-red-400,
-  .light .text-amber-400,
-  .light [class*="text-cyan"],
-  .light [class*="text-blue"],
-  .light [class*="text-emerald"],
-  .light [class*="text-red"],
-  .light [class*="text-amber"],
-  .light .gradient-text {
-    color: hsl(195 85% 35%) !important;
+  .light .nav-link.active {
+    background: linear-gradient(135deg, hsl(195 85% 45%) 0%, hsl(220 70% 55%) 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px hsl(195 85% 45% / 0.2) !important;
   }
 
-  /* White text stays white only on colored backgrounds */
-  .light .bg-gradient-to-r .text-white,
-  .light button .text-white,
-  .light .from-cyan-600 .text-white {
-    color: white !important;
+  /* Gradient Text in Light Mode */
+  .light .bg-clip-text {
+    /* Don't override color for clipped text! */
+    color: transparent !important;
+  }
+
+  .light .gradient-text {
+    background-image: linear-gradient(135deg, hsl(195 85% 45%) 0%, hsl(220 70% 55%) 100%) !important;
+  }
+
+  /* Fix for greeting and dashboard titles */
+  .light .from-cyan-400 {
+    --tw-gradient-from: hsl(195 85% 45%) !important;
+  }
+
+  .light .to-blue-500 {
+    --tw-gradient-to: hsl(220 70% 55%) !important;
+  }
+
+  .light .from-purple-400 {
+    --tw-gradient-from: hsl(262 83% 58%) !important;
+  }
+
+  /* Fix for buttons with gradient backgrounds */
+  .light .bg-gradient-to-r {
+    /* Preserve actual gradients but maybe slightly darken for visibility */
+  }
+
+  /* Fix for cards on light mode */
+  .light .bg-[#0a0f1a] {
+    background-color: #ffffff !important;
+  }
+
+  .light .bg-[#0a0f1a]\/60,
+  .light .bg-[#0a0f1a]\/40,
+  .light .bg-[#0a0f1a]\/20 {
+    background-color: rgba(255, 255, 255, 0.7) !important;
   }
 
   * {
@@ -543,76 +475,102 @@
     @apply font-medium tabular-nums;
   }
 
-  /* Status Colors */
-  .text-success {
-    color: hsl(var(--success));
+  /* Comprehensive Light mode adjustments */
+  .light [class*="border-cyan-900"],
+  .light [class*="border-white/5"],
+  .light [class*="border-white/10"] {
+    border-color: hsl(214 32% 91%) !important;
   }
 
-  .text-destructive {
-    color: hsl(var(--destructive));
+  .light [class*="bg-cyan-500/5"],
+  .light [class*="bg-cyan-500/10"],
+  .light [class*="bg-white/5"],
+  .light [class*="bg-white/10"] {
+    background-color: hsl(210 40% 96%) !important;
+    border-color: hsl(214 32% 91%) !important;
   }
 
-  .text-warning {
-    color: hsl(var(--warning));
+  .light .text-foreground {
+    color: hsl(222 47% 11%) !important;
   }
 
-  .text-primary {
-    color: hsl(var(--primary));
+  /* Robust text-white exclusions - keep white only on dark/colored backgrounds */
+  .light .text-white:not(button *,
+    .bg-gradient-to-r *,
+    .bg-gradient-to-br *,
+    .bg-gradient-to-tr *,
+    .bg-gradient-to-b *,
+    .from-cyan-600 *,
+    .from-blue-600 *,
+    .from-emerald-600 *,
+    .from-pink-600 *,
+    .nav-link.active *,
+    .btn-primary *) {
+    color: hsl(222 47% 11%) !important;
   }
 
-  .bg-success-soft {
-    background-color: hsl(142 71% 45% / 0.15);
-    color: hsl(142 71% 45%);
+  /* Specific fixes for items that should remain white on their gradients */
+  .light [class*="bg-gradient-to-br"] .text-white,
+  .light [class*="bg-gradient-to-r"] .text-white {
+    color: white !important;
   }
 
-  .bg-destructive-soft {
-    background-color: hsl(0 84% 60% / 0.15);
-    color: hsl(0 84% 60%);
+  /* Academy and Marketplace header colors */
+  .light h1.text-white,
+  .light h2.text-white,
+  .light h3.text-white {
+    color: hsl(222 47% 11%) !important;
   }
 
-  .bg-warning-soft {
-    background-color: hsl(38 92% 50% / 0.15);
-    color: hsl(38 92% 50%);
+  .light .text-cyan-300,
+  .light .text-cyan-200 {
+    color: hsl(195 85% 35%) !important;
   }
 
-  .bg-primary-soft {
-    background-color: hsl(243 75% 59% / 0.15);
-    color: hsl(243 75% 59%);
+  /* Heatmap adjustments */
+  .light .from-emerald-600\/20 {
+    --tw-gradient-from: hsl(142 71% 45% / 0.1) !important;
   }
 
-  /* Navigation Links */
-  .nav-link {
-    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-muted-foreground transition-all hover:text-foreground hover:bg-white/5;
+  .light .to-emerald-900\/40 {
+    --tw-gradient-to: hsl(142 71% 45% / 0.2) !important;
   }
 
-  .nav-link.active {
-    @apply bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/25;
+  .light .from-pink-600\/20 {
+    --tw-gradient-from: hsl(340 75% 55% / 0.1) !important;
   }
 
-  /* Button Styles */
-  .btn-primary {
-    @apply bg-primary text-white hover:opacity-90 transition-opacity rounded-lg px-4 py-2 font-medium shadow-lg shadow-primary/20;
+  .light .to-pink-900\/40 {
+    --tw-gradient-to: hsl(340 75% 55% / 0.2) !important;
   }
 
-  .btn-secondary {
-    @apply bg-muted text-foreground hover:bg-muted/80 transition-colors rounded-lg px-4 py-2 font-medium;
+  /* Navigation Links in Light Mode */
+  .light .nav-link {
+    color: hsl(215 16% 47%) !important;
   }
 
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  /* Ensure lucide icons in the sidebar/nav are visible */
+  .light .nav-link .lucide:not(.text-cyan-400, .text-blue-400, .text-emerald-400, .text-red-400) {
+    color: hsl(215 16% 40%) !important;
   }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+  .light .nav-link.active .lucide {
+    color: white !important;
   }
 
-  ::-webkit-scrollbar-thumb {
-    @apply bg-muted rounded-full;
+  /* Fix for sidebar active item */
+  .light .nav-link.active {
+    background: linear-gradient(135deg, hsl(195 85% 45%) 0%, hsl(220 70% 55%) 100%) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px hsl(195 85% 45% / 0.2) !important;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground;
+  /* Background Blob contrast in light mode */
+  .light .bg-cyan-600\/5 {
+    background-color: hsl(195 85% 41% / 0.05) !important;
+  }
+
+  .light .bg-cyan-600\/10 {
+    background-color: hsl(195 85% 41% / 0.1) !important;
   }
 }
