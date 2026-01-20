@@ -422,6 +422,7 @@ export const translations = {
         home_cta_start: "Start Challenge",
         home_cta_view_traders: "View Traders",
         home_cta_demo: "Free Demo",
+        sidebar_news_hub: "News",
         sidebar_candidate_level: "Candidate Level",
 
         // Community Page
@@ -819,6 +820,7 @@ export const translations = {
         home_cta_start: "ابدأ التحدي",
         home_cta_view_traders: "شاهد المتداولين",
         home_cta_demo: "تجربة مجانية",
+        sidebar_news_hub: "الأخبار",
         sidebar_candidate_level: "مستوى المرشح",
 
         // Community Page
