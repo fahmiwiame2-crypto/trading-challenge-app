@@ -57,24 +57,24 @@ const ChallengeStats = ({ stats: propStats }) => {
             {/* Ambient Glow */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-600/20 rounded-full blur-3xl group-hover:bg-cyan-600/30 transition-all duration-700"></div>
 
-            <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-200 mb-6 relative z-10">Statistiques Challenge</h3>
+            <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-200 mb-6 relative z-10">{t('stats_title')}</h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
                 {/* Balance */}
                 <div className="bg-[#0a0f1a]/60 p-4 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group/card">
-                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">Solde (Balance)</p>
+                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">{t('stats_balance')}</p>
                     <p className="text-2xl font-mono font-bold text-white tracking-tight">{formatPrice(data.balance)}</p>
                 </div>
 
                 {/* Equity */}
                 <div className="bg-[#0a0f1a]/60 p-4 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group/card">
-                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">Capitaux (Equity)</p>
+                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">{t('stats_equity')}</p>
                     <p className="text-2xl font-mono font-bold text-white tracking-tight">{formatPrice(data.equity)}</p>
                 </div>
 
                 {/* Profit */}
                 <div className="bg-[#0a0f1a]/60 p-4 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group/card">
-                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">Profit</p>
+                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">{t('stats_profit')}</p>
                     <p className={`text-xl font-bold flex items-center ${data.profit_percent >= 0 ? 'text-emerald-400' : 'text-red-500'}`}>
                         {data.profit_percent >= 0 ? '+' : ''}{typeof data.profit_percent === 'number' ? data.profit_percent.toFixed(2) : data.profit_percent}%
                     </p>
@@ -82,22 +82,23 @@ const ChallengeStats = ({ stats: propStats }) => {
 
                 {/* Drawdown */}
                 <div className="bg-[#0a0f1a]/60 p-4 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all group/card">
-                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">Perte Max (DD)</p>
+                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest mb-1 group-hover/card:text-cyan-300 transition-colors">{t('stats_drawdown')}</p>
                     <p className="text-xl font-bold text-red-500">-{data.drawdown}%</p>
                 </div>
             </div>
 
             <div className="mt-6 relative z-10 bg-[#0a0f1a]/40 p-3 rounded-xl border border-cyan-500/10">
                 <div className="flex items-center justify-between mb-2">
-                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest px-1">Statut du Compte</p>
+                    <p className="text-cyan-300/60 text-[10px] font-bold uppercase tracking-widest px-1">{t('stats_account_status')}</p>
                     <div className={`px-3 py-0.5 rounded text-[10px] font-bold border ${data.status === 'ACTIVE' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
                         data.status === 'FAILED' ? 'bg-red-500/10 border-red-500/30 text-red-500' :
                             'bg-cyan-500/10 border-cyan-500/30 text-cyan-400'
                         }`}>
-                        {data.status === 'ACTIVE' ? 'ACTIF' :
-                            data.status === 'FAILED' ? 'ÉCHOUÉ' :
-                                data.status === 'PASSED' ? 'RÉUSSI' :
-                                    data.status}
+                        {data.status === 'ACTIVE' ? t('status_active') :
+                            data.status === 'FAILED' ? t('status_failed') :
+                                data.status === 'PASSED' ? t('status_passed') :
+                                    data.status === 'PENDING' ? t('status_pending') :
+                                        data.status}
                     </div>
                 </div>
                 {/* Progress Bar Visual */}

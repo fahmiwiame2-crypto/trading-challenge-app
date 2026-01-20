@@ -5,9 +5,11 @@ import Sidebar from '../components/Sidebar';
 import TiltCard from '../components/ui/TiltCard';
 import { GraduationCap, Play, Clock, Star, BookOpen, TrendingUp, Award, CheckCircle } from 'lucide-react';
 import { getAcademyCourses } from '../api/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const PropAcademy = () => {
     const navigate = useNavigate();
+    const { t } = useLanguage();
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('Tous');
@@ -70,15 +72,20 @@ const PropAcademy = () => {
                             <div className="flex items-center mb-4">
                                 <GraduationCap className="w-10 h-10 text-cyan-400 mr-3" />
                                 <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-                                    Prop Academy
+                                    {t('academy_title')}
                                 </h1>
                             </div>
-                            <p className="text-muted-foreground text-lg">Maîtrisez le prop trading avec nos cours complets et structurés</p>
+                            <p className="text-muted-foreground text-lg">{t('academy_subtitle')}</p>
                         </div>
 
                         {/* Stats */}
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                            {stats.map((stat, index) => (
+                            {[
+                                { label: t('academy_stats_finished'), value: '1', icon: Award, color: 'text-cyan-400' },
+                                { label: t('academy_stats_hours'), value: '12.5', icon: Clock, color: 'text-blue-400' },
+                                { label: t('academy_stats_certificates'), value: '1', icon: Star, color: 'text-cyan-400' },
+                                { label: t('academy_stats_streak'), value: '7 jours', icon: TrendingUp, color: 'text-emerald-400' },
+                            ].map((stat, index) => (
                                 <TiltCard key={index} className="glass-glow p-6 group transition-all rounded-xl" tiltAmount={10} scale={1.03}>
                                     <div className="flex items-center justify-between mb-4">
                                         <div className={`p-3 rounded-xl bg-white/5 group-hover:bg-white/10 transition-colors`}>
@@ -96,7 +103,7 @@ const PropAcademy = () => {
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-2xl font-bold text-white flex items-center">
                                     <BookOpen className="w-6 h-6 mr-3 text-cyan-400" />
-                                    Cours Disponibles ({filteredCourses.length})
+                                    {t('academy_available_courses')} ({filteredCourses.length})
                                 </h2>
                             </div>
 
@@ -106,7 +113,7 @@ const PropAcademy = () => {
                                 <div className="relative">
                                     <input
                                         type="text"
-                                        placeholder="Rechercher un cours, tag..."
+                                        placeholder={t('academy_search_placeholder')}
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
                                         className="w-full bg-[#0a0f1a]/60 backdrop-blur-xl border border-cyan-500/20 rounded-xl px-5 py-3 pl-12 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all"
@@ -116,7 +123,7 @@ const PropAcademy = () => {
 
                                 {/* Category Filters */}
                                 <div className="flex gap-3 flex-wrap">
-                                    {categories.map(category => (
+                                    {['Tous', 'Débutant', 'Intermédiaire', 'Avancé'].map(category => (
                                         <button
                                             key={category}
                                             onClick={() => setSelectedCategory(category)}
@@ -125,7 +132,10 @@ const PropAcademy = () => {
                                                 : 'bg-[#0a0f1a]/40 border border-cyan-500/20 text-slate-300 hover:border-cyan-500/40 hover:bg-[#0a0f1a]/60'
                                                 }`}
                                         >
-                                            {category}
+                                            {category === 'Tous' ? t('academy_categories_all') :
+                                                category === 'Débutant' ? t('academy_categories_beginner') :
+                                                    category === 'Intermédiaire' ? t('academy_categories_intermediate') :
+                                                        t('academy_categories_advanced')}
                                         </button>
                                     ))}
                                 </div>
@@ -147,12 +157,14 @@ const PropAcademy = () => {
                                                     course.level === 'Intermédiaire' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' :
                                                         'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                                                     }`}>
-                                                    {course.level}
+                                                    {course.level === 'Débutant' ? t('academy_categories_beginner') :
+                                                        course.level === 'Intermédiaire' ? t('academy_categories_intermediate') :
+                                                            t('academy_categories_advanced')}
                                                 </span>
                                                 {course.progress === 100 && (
                                                     <div className="flex items-center text-emerald-400 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20">
                                                         <CheckCircle className="w-3 h-3 mr-1" />
-                                                        TERMINÉ
+                                                        {t('academy_finished_badge')}
                                                     </div>
                                                 )}
                                             </div>
@@ -188,7 +200,7 @@ const PropAcademy = () => {
                                                         <div className="w-px h-4 bg-white/10"></div>
                                                         <div className="flex items-center">
                                                             <BookOpen className="w-4 h-4 mr-2 text-blue-400" />
-                                                            {course.lessons} leçons
+                                                            {course.lessons} {t('academy_lesson_count')}
                                                         </div>
                                                     </>
                                                 )}
@@ -198,7 +210,7 @@ const PropAcademy = () => {
                                             {course.progress > 0 && (
                                                 <div className="mb-6">
                                                     <div className="flex items-center justify-between text-xs mb-2">
-                                                        <span className="text-slate-400 font-bold uppercase tracking-wider">Progression</span>
+                                                        <span className="text-slate-400 font-bold uppercase tracking-wider">{t('academy_progression')}</span>
                                                         <span className="text-white font-bold">{course.progress}%</span>
                                                     </div>
                                                     <div className="w-full bg-slate-800 rounded-full h-1.5">
@@ -218,11 +230,11 @@ const PropAcademy = () => {
                                                     : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-lg shadow-cyan-600/20'
                                                     }`}>
                                                 {course.progress === 100 ? (
-                                                    <>Revoir le Cours</>
+                                                    <>{t('academy_btn_review')}</>
                                                 ) : (
                                                     <>
                                                         <Play className="w-4 h-4 mr-2 fill-current" />
-                                                        {course.progress === 0 ? 'Commencer' : 'Reprendre'}
+                                                        {course.progress === 0 ? t('academy_btn_start') : t('academy_btn_resume')}
                                                     </>
                                                 )}
                                             </button>

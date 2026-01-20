@@ -1,15 +1,15 @@
 import React from 'react';
 import { X, Save, BarChart3, LineChart, Briefcase, Bot, FileText, Settings } from 'lucide-react';
 
-const EditLayoutModal = ({ isOpen, onClose, preferences, onToggle }) => {
+const EditLayoutModal = ({ isOpen, onClose, preferences, onToggle, t }) => {
     if (!isOpen) return null;
 
     const items = [
-        { id: 'stats', label: 'Statistiques Challenge', icon: BarChart3, color: 'text-purple-400' },
-        { id: 'chart', label: 'Graphique Trading', icon: LineChart, color: 'text-blue-400' },
-        { id: 'positions', label: 'Positions Ouvertes', icon: Briefcase, color: 'text-orange-400' },
-        { id: 'signals', label: 'Signaux IA', icon: Bot, color: 'text-pink-400' },
-        { id: 'history', label: 'Historique', icon: FileText, color: 'text-yellow-400' },
+        { id: 'stats', label: t('layout_modal_stats'), icon: BarChart3, color: 'text-purple-400' },
+        { id: 'chart', label: t('layout_modal_chart'), icon: LineChart, color: 'text-blue-400' },
+        { id: 'positions', label: t('layout_modal_positions'), icon: Briefcase, color: 'text-orange-400' },
+        { id: 'signals', label: t('layout_modal_signals'), icon: Bot, color: 'text-pink-400' },
+        { id: 'history', label: t('layout_modal_history'), icon: FileText, color: 'text-yellow-400' },
     ];
 
     return (
@@ -19,7 +19,7 @@ const EditLayoutModal = ({ isOpen, onClose, preferences, onToggle }) => {
                 <div className="flex justify-between items-center p-4 border-b border-white/5 bg-white/5">
                     <div className="flex items-center gap-2">
                         <Settings className="w-5 h-5 text-purple-400" />
-                        <h2 className="text-sm font-bold text-white uppercase tracking-wider">Edit Layout</h2>
+                        <h2 className="text-sm font-bold text-white uppercase tracking-wider">{t('layout_modal_title')}</h2>
                     </div>
                     <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-full transition-colors">
                         <X className="w-5 h-5 text-slate-400" />

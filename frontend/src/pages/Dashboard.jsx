@@ -183,6 +183,7 @@ const Dashboard = () => {
                 onClose={() => setShowEditModal(false)}
                 preferences={visibleComponents}
                 onToggle={toggleComponent}
+                t={t}
             />
 
             {/* GLOBAL COMPONENTS */}
@@ -298,7 +299,7 @@ const Dashboard = () => {
                                 className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${showEditModal ? 'bg-cyan-500 text-white border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-white/5 text-slate-400 border-white/10 hover:bg-white/10'}`}
                             >
                                 <Layout className="w-3 h-3" />
-                                Edit Layout
+                                {t('dashboard_edit_layout')}
                             </button>
                             <button
                                 onClick={() => setZenMode(!zenMode)}
@@ -338,7 +339,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
