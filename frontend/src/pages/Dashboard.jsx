@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
@@ -39,6 +40,7 @@ const defaultLayouts = {
 };
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [ticker, setTicker] = useState('BTC-USD');
     const { user } = useAuth();
@@ -278,7 +280,10 @@ const Dashboard = () => {
                                 <p className="text-sm opacity-80">{t('dashboard_challenge_failed_desc')}</p>
                             </div>
                         </div>
-                        <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-lg shadow-red-900/20">
+                        <button
+                            onClick={() => navigate('/pricing')}
+                            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-lg shadow-red-900/20"
+                        >
                             {t('dashboard_reset_account')}
                         </button>
                     </div>

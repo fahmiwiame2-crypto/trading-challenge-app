@@ -73,13 +73,13 @@ const TradePanel = ({ ticker = 'BTC-USD', onTradeComplete, onNewPosition }) => {
                 errorMessage = error.message;
             }
 
-            toast.error("Échec de l'ordre", {
-                description: `${errorMessage} (User: ${user?.username || 'N/A'})`
-            });
-
-            if (errorMessage.includes("FAILED")) {
+            if (error.response?.data?.status === 'FAILED') {
                 toast.error("Compte Bloqué", {
-                    description: "Votre compte est en échec. Veuillez réinitialiser."
+                    description: error.response.data.message || "Votre compte est en échec. Veuillez réinitialiser."
+                });
+            } else {
+                toast.error("Échec de l'ordre", {
+                    description: `${errorMessage} (User: ${user?.username || 'N/A'})`
                 });
             }
         } finally {

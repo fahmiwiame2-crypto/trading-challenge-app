@@ -20,13 +20,24 @@ api.interceptors.request.use(
 );
 
 // Interceptor for 401/403 errors (Token expired or Invalid)
+// Note: 403 with status "FAILED" is a trading block, NOT an auth issue
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login';
+    if (error.response) {
+      const status = error.response.status;
+      const data = error.response.data;
+
+      // Only logout for real auth errors, not trading blocks
+      // 403 with status "FAILED" means account is blocked for trading, not auth failure
+      const isTradingBlock = status === 403 && data?.status === 'FAILED';
+      const isAuthError = status === 401 || (status === 403 && !isTradingBlock);
+
+      if (isAuthError) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
