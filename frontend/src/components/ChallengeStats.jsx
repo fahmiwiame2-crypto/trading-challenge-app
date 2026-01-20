@@ -94,7 +94,10 @@ const ChallengeStats = ({ stats: propStats }) => {
                         data.status === 'FAILED' ? 'bg-red-500/10 border-red-500/30 text-red-500' :
                             'bg-cyan-500/10 border-cyan-500/30 text-cyan-400'
                         }`}>
-                        {data.status === 'ACTIVE' ? 'ACTIF' : data.status === 'FAILED' ? 'ÉCHOUÉ' : data.status}
+                        {data.status === 'ACTIVE' ? 'ACTIF' :
+                            data.status === 'FAILED' ? 'ÉCHOUÉ' :
+                                data.status === 'PASSED' ? 'RÉUSSI' :
+                                    data.status}
                     </div>
                 </div>
                 {/* Progress Bar Visual */}

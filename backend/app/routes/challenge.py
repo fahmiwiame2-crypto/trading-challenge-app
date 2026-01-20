@@ -30,13 +30,13 @@ def get_challenge_stats():
     ).order_by(desc(UserChallenge.created_at)).all()
     past_challenges = [c.to_dict() for c in past_challenges_db]
     
-    # If user has NO active challenge, return $0 balance (must pay first)
+    # If user has NO active challenge, return user status and balance
     if not active_challenge:
         return jsonify({
-            "status": "PENDING",
-            "balance": 0,
-            "initial_capital": 0,
-            "equity": 0,
+            "status": user.status,
+            "balance": round(user.balance, 2) if user.balance else 0,
+            "initial_capital": user.initial_capital if user.initial_capital else 0,
+            "equity": round(user.balance, 2) if user.balance else 0,
             "profit": 0, 
             "profit_percent": 0,
             "drawdown": 0,
