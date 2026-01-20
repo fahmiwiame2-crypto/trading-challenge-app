@@ -392,6 +392,9 @@ export const translations = {
         signal_analyzing: "Analyse en cours...",
         signal_see_more: "Voir plus d'analyses",
         signal_scan: "SCAN...",
+        market_heatmap_title: "Carte Thermique du Marché",
+        market_heatmap_real_time: "Temps Réel",
+        market_heatmap_loading: "Chargement...",
     },
     en: {
         nav_pricing: "Pricing",
@@ -786,6 +789,9 @@ export const translations = {
         signal_analyzing: "Analyzing...",
         signal_see_more: "See more analyses",
         signal_scan: "SCAN...",
+        market_heatmap_title: "Market Heatmap",
+        market_heatmap_real_time: "Real-Time",
+        market_heatmap_loading: "Loading...",
     },
     ar: {
         nav_pricing: "الأسعار",
@@ -1179,5 +1185,8 @@ export const translations = {
         signal_analyzing: "جاري التحليل...",
         signal_see_more: "عرض المزيد من التحليلات",
         signal_scan: "مسح...",
+        market_heatmap_title: "خريطة الحرارة للسوق",
+        market_heatmap_real_time: "الوقت الفعلي",
+        market_heatmap_loading: "جاري التحميل...",
     }
 };

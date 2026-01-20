@@ -1,7 +1,9 @@
 import React from 'react';
 import api from '../api/api';
+import { useLanguage } from '../context/LanguageContext';
 
 const MarketHeatmap = ({ data }) => {
+    const { t } = useLanguage();
     const [heatmapData, setHeatmapData] = React.useState(data || []);
     const [loading, setLoading] = React.useState(!data || (Array.isArray(data) && data.length === 0));
 
@@ -45,7 +47,7 @@ const MarketHeatmap = ({ data }) => {
         return (
             <div className="glass-glow rounded-2xl shadow-xl p-4 flex flex-col h-full items-center justify-center">
                 <div className="w-8 h-8 border-4 border-purple-500/20 border-t-purple-500 rounded-full animate-spin"></div>
-                <span className="text-xs text-slate-400 mt-2">Chargement...</span>
+                <span className="text-xs text-slate-400 mt-2">{t('market_heatmap_loading')}</span>
             </div>
         );
     }
@@ -53,8 +55,8 @@ const MarketHeatmap = ({ data }) => {
     return (
         <div className="glass-glow rounded-2xl shadow-xl p-4 flex flex-col h-full">
             <h3 className="font-bold text-white mb-3 text-sm flex items-center justify-between">
-                <span>Carte Thermique du Marché</span>
-                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">Temps Réel</span>
+                <span>{t('market_heatmap_title')}</span>
+                <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded text-slate-300">{t('market_heatmap_real_time')}</span>
             </h3>
 
             <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-2">

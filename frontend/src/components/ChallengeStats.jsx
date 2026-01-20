@@ -3,10 +3,12 @@ import api from '../api/api';
 import Loader from './Loader';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const ChallengeStats = ({ stats: propStats }) => {
     const { user } = useAuth();
     const { formatPrice } = useCurrency();
+    const { t } = useLanguage();
     const [fetchedStats, setFetchedStats] = useState(null);
     const [loading, setLoading] = useState(!propStats);
 
